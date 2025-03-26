@@ -260,7 +260,7 @@ void WriteEngineInfo(JsonWriter &j) {
             JKV(j, e->info.base_intro.base());
             JKV(j, e->info.lifelength.base());
             JKV(j, e->info.base_life.base());
-            JKV(j, e->info.refit_mask);
+            JKV(j, e->info.refit_mask.base());
             JKV(j, e->info.refit_cost);
             JKV(j, e->info.load_amount);
             j.ks("name", e->info.string_id);
