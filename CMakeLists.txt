@@ -5,7 +5,7 @@ if(NOT BINARY_NAME)
 endif()
 
 project(${BINARY_NAME}
-    VERSION 15.3
+    VERSION 16.0
     LANGUAGES CXX
 )
 
@@ -327,6 +327,7 @@ if(NOT OPTION_DEDICATED)
     link_package(Harfbuzz TARGET harfbuzz::harfbuzz)
     link_package(ICU_I18N TARGET ICU::i18n)
     link_package(ICU_UC TARGET ICU::uc)
+
     link_package(OpusFile TARGET OpusFile::opusfile)
 
     if(SDL2_FOUND AND OPENGL_FOUND AND UNIX)
