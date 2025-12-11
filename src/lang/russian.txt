@@ -3868,6 +3868,7 @@ STR_EDIT_SIGN_CAPTION                                           :{WHITE}Изме
 STR_EDIT_SIGN_LOCATION_TOOLTIP                                  :{BLACK}Показать метку в основном окне. Ctrl+щелчок - показать в дополнительном окне.
 STR_EDIT_SIGN_NEXT_SIGN_TOOLTIP                                 :{BLACK}К следующей табличке
 STR_EDIT_SIGN_PREVIOUS_SIGN_TOOLTIP                             :{BLACK}К предыдущей табличке
+STR_EDIT_SIGN_TEXT_COLOUR_TOOLTIP                               :{BLACK}Цвет текста табличек
 
 STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Введите название таблички
 
