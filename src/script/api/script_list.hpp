@@ -154,6 +154,17 @@ protected:
 	 */
 	void CopyList(const ScriptList *list);
 
+	template <class ValueFilter>
+	void RemoveItems(ValueFilter value_filter)
+	{
+		this->modifications++;
+
+		for (ScriptListMap::iterator next_iter, iter = this->items.begin(); iter != this->items.end(); iter = next_iter) {
+			next_iter = std::next(iter);
+			if (value_filter(iter->first, iter->second)) this->RemoveItem(iter->first);
+		}
+	}
+
 public:
 	using ScriptListSet = std::set<std::pair<SQInteger, SQInteger>>; ///< List per value
 	using ScriptListMap = std::map<SQInteger, SQInteger>; ///< List per item
