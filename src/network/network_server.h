@@ -78,7 +78,7 @@ public:
 	citymania::SavePreset cm_preset; ///< Preset to use for the savegame
 
 	ServerNetworkGameSocketHandler(SOCKET s);
-	~ServerNetworkGameSocketHandler();
+	~ServerNetworkGameSocketHandler() override;
 
 	std::unique_ptr<Packet> ReceivePacket() override;
 	NetworkRecvStatus CloseConnection(NetworkRecvStatus status) override;

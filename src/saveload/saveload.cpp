@@ -2366,7 +2366,7 @@ struct FileReader : LoadFilter {
 	}
 
 	/** Make sure everything is cleaned up. */
-	~FileReader()
+	~FileReader() override
 	{
 		if (this->file.has_value()) {
 			_game_session_stats.savegame_size = ftell(*this->file) - this->begin;
@@ -2403,7 +2403,7 @@ struct FileWriter : SaveFilter {
 	}
 
 	/** Make sure everything is cleaned up. */
-	~FileWriter()
+	~FileWriter() override
 	{
 		this->Finish();
 	}
@@ -2574,7 +2574,7 @@ struct ZlibLoadFilter : LoadFilter {
 	}
 
 	/** Clean everything up. */
-	~ZlibLoadFilter()
+	~ZlibLoadFilter() override
 	{
 		inflateEnd(&this->z);
 	}
@@ -2618,7 +2618,7 @@ struct ZlibSaveFilter : SaveFilter {
 	}
 
 	/** Clean up what we allocated. */
-	~ZlibSaveFilter()
+	~ZlibSaveFilter() override
 	{
 		deflateEnd(&this->z);
 	}
@@ -2701,7 +2701,7 @@ struct LZMALoadFilter : LoadFilter {
 	}
 
 	/** Clean everything up. */
-	~LZMALoadFilter()
+	~LZMALoadFilter() override
 	{
 		lzma_end(&this->lzma);
 	}
@@ -2744,7 +2744,7 @@ struct LZMASaveFilter : SaveFilter {
 	}
 
 	/** Clean up what we allocated. */
-	~LZMASaveFilter()
+	~LZMASaveFilter() override
 	{
 		lzma_end(&this->lzma);
 	}
