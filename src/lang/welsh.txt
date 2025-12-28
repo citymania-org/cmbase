@@ -2090,6 +2090,8 @@ STR_CONFIG_SETTING_LARGER_TOWNS_VALUE                           :1 mewn {COMMA}
 STR_CONFIG_SETTING_LARGER_TOWNS_DISABLED                        :Dim
 STR_CONFIG_SETTING_CITY_SIZE_MULTIPLIER                         :Lluosydd cychwynol maint dinas: {STRING}
 STR_CONFIG_SETTING_CITY_SIZE_MULTIPLIER_HELPTEXT                :Maint cymhedrol dinasoedd o gymharu â threfi arferol ar ddechrau'r gêm
+STR_CONFIG_SETTING_TOWN_MIN_DISTANCE                            :Pellter isafsymol rhwng trefi: {STRING}
+STR_CONFIG_SETTING_TOWN_MIN_DISTANCE_HELPTEXT                   :Gosod y pellter lleiaf mewn teiliau rhwng trefi ar gyfer cynhyrchu map a sefydlu ar hap
 
 STR_CONFIG_SETTING_LINKGRAPH_RECALC_INTERVAL                    :Diweddaru'r graff dosraniad bob {STRING}
 STR_CONFIG_SETTING_LINKGRAPH_RECALC_INTERVAL_HELPTEXT           :Amser rhwng ailgyfrifiadau o'r graff cyswllt. Mae bob ailgyfrifiad yn cyfrifo'r cynlluniau ar gyfer un cydran o'r graff. Mae hyn yn golygu nad yw gwerth o X yn golygu y bydd y graff gyfan yn cael ei ddiweddaru bob X eiliad, dim ond rhyw gydran ohono. Po fyrraf y gwerth y mwyaf o amser prosesydd y bydd ei angen i'w gyfrifo. Yr hiraf y gwerth y mwyaf yr amser cyn y bydd dosbarthiad cargo yn dechrau ar lwybrau newydd
@@ -3693,6 +3695,7 @@ STR_EDIT_SIGN_CAPTION                                           :{WHITE}Golygu a
 STR_EDIT_SIGN_LOCATION_TOOLTIP                                  :{BLACK}Canoli'r brif olygfa ar leoliad yr arwydd. Mae Ctrl+Clic yn agor ffenestr olygfa newydd ar leoliad yr arwydd
 STR_EDIT_SIGN_NEXT_SIGN_TOOLTIP                                 :{BLACK}Mynd i'r arwydd nesaf
 STR_EDIT_SIGN_PREVIOUS_SIGN_TOOLTIP                             :{BLACK}Mynd i'r arwydd blaenorol
+STR_EDIT_SIGN_TEXT_COLOUR_TOOLTIP                               :{BLACK}Lliw testun yr arwydd
 
 STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Rhowch enw ar gyfer yr arwydd
 
