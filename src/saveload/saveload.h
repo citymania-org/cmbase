@@ -459,14 +459,15 @@ enum class CompressionMethod : uint8_t {
 
 /** The format for a reader/writer type of a savegame */
 struct SaveLoadFormat {
-	uint8_t id;                             ///< unique integer id of this savegame format (olny used for networkking so is not guaranteed to be preserved between versions)
-	std::string_view name; ///< name of the compressor/decompressor (debug-only)
-	uint32_t tag;                           ///< the 4-letter tag by which it is identified in the savegame
+	uint8_t cm_id;                             ///< unique integer id of this savegame format (olny used for networkking so is not guaranteed to be preserved between versions)
 
 	std::shared_ptr<LoadFilter> (*init_load)(std::shared_ptr<LoadFilter> chain); ///< Constructor for the load filter.
 	std::shared_ptr<SaveFilter> (*init_write)(std::shared_ptr<SaveFilter> chain, uint8_t compression); ///< Constructor for the save filter.
 
-	CompressionMethod method;             ///< compression method used in this format
+	std::string_view name; ///< name of the compressor/decompressor (debug-only)
+	uint32_t tag;                           ///< the 4-letter tag by which it is identified in the savegame
+
+	CompressionMethod cm_method;             ///< compression method used in this format
 	uint8_t min_compression;                 ///< the minimum compression level of this format
 	uint8_t default_compression;             ///< the default compression level of this format
 	uint8_t max_compression;                 ///< the maximum compression level of this format

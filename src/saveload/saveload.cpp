@@ -2919,20 +2919,20 @@ static const uint32_t SAVEGAME_TAG_ZSTD = TO_BE32('OTTS');
 /** The different saveload formats known/understood by OpenTTD. */
 static const citymania::SaveLoadFormat _saveload_formats[] = {
 	/* Roughly 5 times larger at only 1% of the CPU usage over zlib level 6. */
-	{0, "none", SAVEGAME_TAG_NONE, CreateLoadFilter<NoCompLoadFilter>, CreateSaveFilter<NoCompSaveFilter>, citymania::CompressionMethod::None, 0, 0, 0},
+	{0, CreateLoadFilter<NoCompLoadFilter>, CreateSaveFilter<NoCompSaveFilter>, "none", SAVEGAME_TAG_NONE, citymania::CompressionMethod::None, 0, 0, 0},
 #if defined(WITH_LZO)
 	/* Roughly 75% larger than zlib level 6 at only ~7% of the CPU usage. */
-	{1, "lzo",  SAVEGAME_TAG_LZO, CreateLoadFilter<LZOLoadFilter>,    CreateSaveFilter<LZOSaveFilter>,    citymania::CompressionMethod::LZO, 0, 0, 0},
+	{1, CreateLoadFilter<LZOLoadFilter>, CreateSaveFilter<LZOSaveFilter>, "lzo", SAVEGAME_TAG_LZO, citymania::CompressionMethod::LZO, 0, 0, 0},
 #else
-	{1, "lzo",  SAVEGAME_TAG_LZO, nullptr,                            nullptr,                            citymania::CompressionMethod::LZO, 0, 0, 0},
+	{1, nullptr, nullptr, "lzo", SAVEGAME_TAG_LZO, citymania::CompressionMethod::LZO, 0, 0, 0},
 #endif
 #if defined(WITH_ZLIB)
 	/* After level 6 the speed reduction is significant (1.5x to 2.5x slower per level), but the reduction in filesize is
 	 * fairly insignificant (~1% for each step). Lower levels become ~5-10% bigger by each level than level 6 while level
 	 * 1 is "only" 3 times as fast. Level 0 results in uncompressed savegames at about 8 times the cost of "none". */
-	{2, "zlib", SAVEGAME_TAG_ZLIB, CreateLoadFilter<ZlibLoadFilter>,   CreateSaveFilter<ZlibSaveFilter>,   citymania::CompressionMethod::Zlib, 0, 6, 9},
+	{2, CreateLoadFilter<ZlibLoadFilter>, CreateSaveFilter<ZlibSaveFilter>, "zlib", SAVEGAME_TAG_ZLIB, citymania::CompressionMethod::Zlib, 0, 6, 9},
 #else
-	{2, "zlib", SAVEGAME_TAG_ZLIB, nullptr,                            nullptr,                            citymania::CompressionMethod::Zlib, 0, 0, 0},
+	{2, nullptr, nullptr, "zlib", SAVEGAME_TAG_ZLIB, citymania::CompressionMethod::Zlib, 0, 0, 0},
 #endif
 #if defined(WITH_ZSTD)
 	/* Zstd provides a decent compression rate at a very high compression/decompression speed. Compared to lzma level 2
@@ -2941,9 +2941,9 @@ static const citymania::SaveLoadFormat _saveload_formats[] = {
 	 * (compress + 10 MB/s download + decompress time), about 3x faster than lzma:2 and 1.5x than zlib:2 and lzo.
 	 * As zstd has negative compression levels the values were increased by 100 moving zstd level range -100..22 into
 	 * openttd 0..122. Also note that value 100 mathes zstd level 0 which is a special value for default level 3 (openttd 103) */
-	{3, "zstd", SAVEGAME_TAG_ZSTD, CreateLoadFilter<ZSTDLoadFilter>,   CreateSaveFilter<ZSTDSaveFilter>,   citymania::CompressionMethod::ZSTD, 0, 101, 122},
+	{3, CreateLoadFilter<ZSTDLoadFilter>, CreateSaveFilter<ZSTDSaveFilter>, "zstd", SAVEGAME_TAG_ZSTD, citymania::CompressionMethod::ZSTD, 0, 101, 122},
 #else
-	{3, "zstd", SAVEGAME_TAG_ZSTD, nullptr,                            nullptr,                            citymania::CompressionMethod::ZSTD, 0, 0, 0},
+	{3, nullptr, nullptr, "zstd", SAVEGAME_TAG_ZSTD, citymania::CompressionMethod::ZSTD, 0, 0, 0},
 #endif
 #if defined(WITH_LIBLZMA)
 	/* Level 2 compression is speed wise as fast as zlib level 6 compression (old default), but results in ~10% smaller saves.
@@ -2951,9 +2951,9 @@ static const citymania::SaveLoadFormat _saveload_formats[] = {
 	 * The next significant reduction in file size is at level 4, but that is already 4 times slower. Level 3 is primarily 50%
 	 * slower while not improving the filesize, while level 0 and 1 are faster, but don't reduce savegame size much.
 	 * It's OTTX and not e.g. OTTL because liblzma is part of xz-utils and .tar.xz is preferred over .tar.lzma. */
-	{4, "lzma", SAVEGAME_TAG_LZMA, CreateLoadFilter<LZMALoadFilter>,   CreateSaveFilter<LZMASaveFilter>,   citymania::CompressionMethod::LZMA, 0, 2, 9},
+	{4, CreateLoadFilter<LZMALoadFilter>, CreateSaveFilter<LZMASaveFilter>, "lzma", SAVEGAME_TAG_LZMA, citymania::CompressionMethod::LZMA, 0, 2, 9},
 #else
-	{4, "lzma", SAVEGAME_TAG_LZMA, nullptr,                            nullptr,                            citymania::CompressionMethod::LZMA, 0, 0, 0},
+	{4, nullptr, nullptr, "lzma", SAVEGAME_TAG_LZMA, citymania::CompressionMethod::LZMA, 0, 0, 0},
 #endif
 };
 
@@ -3009,7 +3009,7 @@ std::optional<SavePreset> FindCompatibleSavePreset(const std::string &server_for
     while (std::getline(iss, preset_str, ' ')) {
         auto preset = ParseSavePreset(preset_str);
         if (!preset) continue;
-        if ((client_formats & (1 << preset->format->id)) != 0) return preset;
+        if ((client_formats & (1 << preset->format->cm_id)) != 0) return preset;
     }
     return {};
 }
@@ -3023,7 +3023,7 @@ uint8_t GetAvailableLoadFormats()
     uint8_t res = 0;
     for(auto &slf : _saveload_formats) {
         if (slf.init_load != nullptr) {
-            res |= (1 << slf.id);
+            res |= (1 << slf.cm_id);
         }
     }
     return res;
