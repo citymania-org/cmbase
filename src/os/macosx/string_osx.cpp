@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file string_osx.cpp Functions related to localized text support on OSX. */
@@ -190,9 +190,9 @@ static const CTRunDelegateCallbacks _sprite_font_callback = {
 		}
 		CFAttributedStringSetAttribute(str.get(), CFRangeMake(last, position - last), kCTFontAttributeName, font_handle);
 
-		CGColorRef color = CGColorCreateGenericGray((uint8_t)font->colour / 255.0f, 1.0f); // We don't care about the real colours, just that they are different.
-		CFAttributedStringSetAttribute(str.get(), CFRangeMake(last, position - last), kCTForegroundColorAttributeName, color);
-		CGColorRelease(color);
+		CGColorRef colour = CGColorCreateGenericGray((uint8_t)font->colour / 255.0f, 1.0f); // We don't care about the real colours, just that they are different.
+		CFAttributedStringSetAttribute(str.get(), CFRangeMake(last, position - last), kCTForegroundColorAttributeName, colour);
+		CGColorRelease(colour);
 
 		/* Install a size callback for our special private-use sprite glyphs in case the font does not provide them. */
 		for (ssize_t c = last; c < position; c++) {

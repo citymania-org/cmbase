@@ -15,7 +15,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -2011,7 +2011,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Aonadan àirde: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Nuair a thèid àirde a shealltainn san eadar-aghaidh, seall i leis na h-aonadan a thagh thu
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Impireil (ft)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Meatrach (m)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (m)
@@ -2565,6 +2565,7 @@ STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Tog stè
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :Stèisean bunaiteach
 STR_STATION_CLASS_WAYP                                          :Puingean-turais
 
@@ -2810,7 +2811,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Seòrsa 
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Ainm a' phuirt-adhair: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Ainm leac a' phuirt-adhair: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Carago air a ghabhail ris: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Carago air a ghabhail ris: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Seòrsa an rèile: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_RAIL_SPEED_LIMIT                      :{BLACK}Crìoch-luaiths rèile: {LTBLUE}{VELOCITY}
@@ -3032,6 +3033,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Iar-dhea
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Cruth saor
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Uisge
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Air thuaiream
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Air thuaiream
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}A làimh
 
@@ -3430,14 +3433,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Uabhasach math
 STR_CARGO_RATING_OUTSTANDING                                    :Barraichte
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Meadhanaich am prìomh-shealladh air an stèisean. Fosglaidh Ctrl+briogadh port-seallaidh ùr air ionad an stèisein
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Atharraich ainm an stèisein
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Seall a h-uile trèan is an stèisean seo air a' chlàr-ama aice
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Seall a h-uile carbad-rathaid is an stèisean seo air a' chlàr-ama aige
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Seall a h-uile carbad-adhair is am port-adhair seo air an clàr-ama aige
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Seall a h-uile long is am port seo air a' chlàr-ama aice
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Thoir ainm ùr air an stèisean/ionad-luchdaidh
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Dùin am port-adhair
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Bac carbadan-adhair bho laighe air a' phort-adhair seo
@@ -3445,11 +3446,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Bac carb
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Meadhanaich am prìomh-shealladh air a' phuing-thurais. Fosglaidh Ctrl+briogadh port-seallaidh ùr air ionad na puinge-turais
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Thoir ainm ùr air a' phuing-thurais
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Meadhanaich am prìomh-shealladh air an fhleodrainn. Fosglaidh Ctrl+briogadh port-seallaidh ùr air ionad na fleodrainn
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Atharraich ainm an fhleodrainn
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Deasaich ainm na puinge-turais
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}Maoin aig {COMPANY} {BLACK}{COMPANY_NUM}
@@ -3990,7 +3989,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Seall an
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Carago iomlan
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Seall an carago iomlan aig an trèan, air a roinneadh le seòrsa a' charago
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Tomhas-lìonaidh: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Tomhas-lìonaidh: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Mùthadh)

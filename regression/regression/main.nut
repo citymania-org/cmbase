@@ -461,6 +461,21 @@ function Regression::Company()
 	}
 }
 
+function Regression::CompanyGender()
+{
+	print("");
+	print("--Company Gender--");
+	/* Check gender switching behaviour matches API. */
+	print("  GetPresidentGender():              " + AICompany.GetPresidentGender(AICompany.COMPANY_SELF));
+	print("  SetPresidentGender():              " + AICompany.SetPresidentGender(AICompany.GENDER_MALE));
+	print("  GetPresidentGender():              " + AICompany.GetPresidentGender(AICompany.COMPANY_SELF));
+	print("  SetPresidentGender():              " + AICompany.SetPresidentGender(AICompany.GENDER_FEMALE));
+	print("  GetPresidentGender():              " + AICompany.GetPresidentGender(AICompany.COMPANY_SELF));
+	/* Setting to existing gender should fail. */
+	print("  SetPresidentGender():              " + AICompany.SetPresidentGender(AICompany.GENDER_FEMALE));
+	print("  GetPresidentGender():              " + AICompany.GetPresidentGender(AICompany.COMPANY_SELF));
+}
+
 function Regression::Engine()
 {
 	local j = 0;
@@ -487,6 +502,13 @@ function Regression::Engine()
 		print("    GetRailType():      " + AIEngine.GetRailType(i));
 		print("    GetRoadType():      " + AIEngine.GetRoadType(i));
 		print("    GetPlaneType():     " + AIEngine.GetPlaneType(i));
+		local railtypes = AIEngine.GetAllRailTypes(i);
+		print("    GetAllRailTypes():  " + (railtypes == null ? "null" : "instance"));
+		if (railtypes != null) {
+			foreach(t in railtypes) {
+				print("      " + t);
+			}
+		}
 	}
 	print("  Valid Engines:        " + j);
 }
@@ -2089,6 +2111,7 @@ function Regression::Start()
 	this.Vehicle();
 	/* Order has to be after Vehicle */
 	this.Order();
+	this.CompanyGender();
 	print("");
 	print("  First Subsidy Test");
 	PrintSubsidy(0);

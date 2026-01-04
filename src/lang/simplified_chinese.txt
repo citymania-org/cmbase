@@ -13,7 +13,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -254,6 +254,7 @@ STR_UNITS_FORCE_SI                                              :{DECIMAL}{NBSP}
 STR_UNITS_HEIGHT_IMPERIAL                                       :{DECIMAL}{NBSP}英尺
 STR_UNITS_HEIGHT_METRIC                                         :{DECIMAL}{NBSP}米
 STR_UNITS_HEIGHT_SI                                             :{DECIMAL}{NBSP}米
+STR_UNITS_HEIGHT_GAMEUNITS                                      :{DECIMAL}{NBSP}层
 
 # Time units used in string control characters
 STR_UNITS_DAYS                                                  :{COMMA}{NBSP}日
@@ -311,6 +312,7 @@ STR_SHOW_HIDDEN_ENGINES_VEHICLE_AIRCRAFT_TOOLTIP                :{BLACK}启用�
 STR_BUTTON_DEFAULT                                              :{BLACK}默认
 STR_BUTTON_CANCEL                                               :{BLACK}取消
 STR_BUTTON_OK                                                   :{BLACK}确定
+STR_BUTTON_MOVE                                                 :{BLACK}移动
 
 # On screen keyboard window
 STR_OSK_KEYBOARD_LAYOUT                                         :`1234567890-=\qwertyuiop[]asdfghjkl;'  zxcvbnm,./ .
@@ -1246,7 +1248,7 @@ STR_CONFIG_SETTING_EXPAND_ALL                                   :展开全部
 STR_CONFIG_SETTING_COLLAPSE_ALL                                 :折叠全部
 STR_CONFIG_SETTING_RESET_ALL                                    :重置所有数值
 STR_CONFIG_SETTING_NO_EXPLANATION_AVAILABLE_HELPTEXT            :（没有可用的提示）
-STR_CONFIG_SETTING_VALUE                                        :{PUSH_COLOUR}{ORANGE}{STRING}{POP_COLOUR}
+STR_CONFIG_SETTING_VALUE                                        :{ORANGE}{STRING}
 STR_CONFIG_SETTING_DEFAULT_VALUE                                :{LTBLUE}默认值：{ORANGE}{STRING}
 STR_CONFIG_SETTING_TYPE                                         :{LTBLUE}设置类型：{ORANGE}{STRING}
 STR_CONFIG_SETTING_TYPE_CLIENT                                  :当前客户端设置（不保存，影响所有游戏）
@@ -2158,10 +2160,11 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :国际单位制
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :高度单位：{STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :在界面上以所选择的单位表示高度
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :英制（呎）
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :公制（米）
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :国际单位制（米）
+STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_GAMEUNITS          :游戏单位（层）
 
 STR_CONFIG_SETTING_LOCALISATION                                 :本地化
 STR_CONFIG_SETTING_GRAPHICS                                     :图形
@@ -2404,7 +2407,7 @@ STR_NETWORK_SERVER_LIST_DATE_CAPTION                            :{BLACK}日期
 STR_NETWORK_SERVER_LIST_DATE_CAPTION_TOOLTIP                    :{BLACK}当前日期
 STR_NETWORK_SERVER_LIST_PLAY_TIME_SHORT                         :{BLACK}{NUM}{NBSP}时{NBSP}{NUM}{NBSP}分
 STR_NETWORK_SERVER_LIST_PLAY_TIME_CAPTION                       :游戏时间
-STR_NETWORK_SERVER_LIST_PLAY_TIME_CAPTION_TOOLTIP               :{BLACK}有戏已进行的时间，不计暂停的时间
+STR_NETWORK_SERVER_LIST_PLAY_TIME_CAPTION_TOOLTIP               :{BLACK}游戏已进行的时间，不计暂停的时间
 STR_NETWORK_SERVER_LIST_INFO_ICONS_TOOLTIP                      :{BLACK}服务器兼容性与验证信息
 
 STR_NETWORK_SERVER_LIST_CLICK_GAME_TO_SELECT                    :{BLACK}点击列表中的服务器可以选定它
@@ -2859,15 +2862,15 @@ STR_PICKER_HOUSE_CLASS_TOOLTIP                                  :选择显示的
 STR_PICKER_HOUSE_TYPE_TOOLTIP                                   :选择建造的房屋类型。按住 <Ctrl> 键操作以保存或删除当前项目
 
 STR_HOUSE_PICKER_CAPTION                                        :房屋选择
-STR_HOUSE_PICKER_NAME                                           :{BLACK}名称：{ORANGE}{STRING}
-STR_HOUSE_PICKER_POPULATION                                     :{BLACK}人口：{ORANGE}{NUM}
-STR_HOUSE_PICKER_YEARS                                          :{BLACK}可用年份：{ORANGE}{NUM}-{NUM}
-STR_HOUSE_PICKER_YEARS_ANY                                      :{BLACK}可用年份：{ORANGE}不限
-STR_HOUSE_PICKER_YEARS_FROM                                     :{BLACK}可用年份：{ORANGE}自 {NUM} 年起可用
-STR_HOUSE_PICKER_YEARS_UNTIL                                    :{BLACK}可用年份：{ORANGE}至 {NUM} 年前可用
-STR_HOUSE_PICKER_SIZE                                           :{BLACK}大小：{ORANGE}{NUM}×{NUM} 格
-STR_HOUSE_PICKER_CARGO_ACCEPTED                                 :{BLACK}接受货物：{ORANGE}
-STR_HOUSE_PICKER_CARGO_PRODUCED                                 :{BLACK}产出货物：{ORANGE}{CARGO_LIST}
+STR_HOUSE_PICKER_NAME                                           :{BLACK}名称：{GOLD}{STRING}
+STR_HOUSE_PICKER_POPULATION                                     :{BLACK}人口：{GOLD}{NUM}
+STR_HOUSE_PICKER_YEARS                                          :{BLACK}可用年份：{GOLD}{NUM}-{NUM}
+STR_HOUSE_PICKER_YEARS_ANY                                      :{BLACK}可用年份：{GOLD}不限
+STR_HOUSE_PICKER_YEARS_FROM                                     :{BLACK}可用年份：{GOLD}自 {NUM} 年起可用
+STR_HOUSE_PICKER_YEARS_UNTIL                                    :{BLACK}可用年份：{GOLD}至 {NUM} 年前可用
+STR_HOUSE_PICKER_SIZE                                           :{BLACK}大小：{GOLD}{NUM}×{NUM} 格
+STR_HOUSE_PICKER_CARGO_ACCEPTED                                 :{BLACK}接受货物：{GOLD}{STRING}
+STR_HOUSE_PICKER_CARGO_PRODUCED                                 :{BLACK}产出货物：{GOLD}{CARGO_LIST}
 
 STR_HOUSE_PICKER_CLASS_ZONE1                                    :城镇边缘
 STR_HOUSE_PICKER_CLASS_ZONE2                                    :郊区边缘
@@ -2875,10 +2878,11 @@ STR_HOUSE_PICKER_CLASS_ZONE3                                    :外郊区
 STR_HOUSE_PICKER_CLASS_ZONE4                                    :内郊区
 STR_HOUSE_PICKER_CLASS_ZONE5                                    :城镇中心
 
-STR_HOUSE_PICKER_PROTECT_TITLE                                  :防止升级
+STR_HOUSE_PICKER_PROTECT                                        :阻止重盖建筑
 STR_HOUSE_PICKER_PROTECT_TOOLTIP                                :选择是否保护房屋以防止房屋随着城镇发展被替换
-STR_HOUSE_PICKER_PROTECT_OFF                                    :关闭
-STR_HOUSE_PICKER_PROTECT_ON                                     :开启
+
+STR_HOUSE_PICKER_REPLACE                                        :替换现有建筑
+STR_HOUSE_PICKER_REPLACE_TOOLTIP                                :选择是否自动移除选中格子上已经存在的房屋
 
 STR_STATION_CLASS_DFLT                                          :默认
 STR_STATION_CLASS_DFLT_STATION                                  :默认车站
@@ -3153,7 +3157,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}机场�
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}机场名称：{LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}机场区域名称：{LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF：{LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}接受货物：{LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}接受货物：{LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}铁轨类型：{LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_ROAD_TYPE                             :{BLACK}道路类型：{LTBLUE}{STRING}
@@ -3348,6 +3352,8 @@ STR_SAVELOAD_DETAIL_GRFSTATUS                                   :{SILVER}NewGRF�
 STR_SAVELOAD_FILTER_TITLE                                       :{BLACK}搜索：
 STR_SAVELOAD_OVERWRITE_TITLE                                    :{WHITE}覆盖文件
 STR_SAVELOAD_OVERWRITE_WARNING                                  :{YELLOW}确定覆盖已有文件吗？
+STR_SAVELOAD_DELETE_TITLE                                       :{WHITE}删除文件
+STR_SAVELOAD_DELETE_WARNING                                     :{YELLOW}确定删除文件吗？
 STR_SAVELOAD_DIRECTORY                                          :{STRING}（目录）
 STR_SAVELOAD_PARENT_DIRECTORY                                   :{STRING}（上级目录）
 
@@ -3423,11 +3429,18 @@ STR_MAPGEN_NORTHWEST                                            :{BLACK}西北
 STR_MAPGEN_NORTHEAST                                            :{BLACK}东北
 STR_MAPGEN_SOUTHEAST                                            :{BLACK}东南
 STR_MAPGEN_SOUTHWEST                                            :{BLACK}西南
+STR_MAPGEN_NORTHWEST_TOOLTIP                                    :切换地图西北边为水面或自由边界
+STR_MAPGEN_NORTHEAST_TOOLTIP                                    :切换地图东北边为水面或自由边界
+STR_MAPGEN_SOUTHEAST_TOOLTIP                                    :切换地图东南边为水面或自由边界
+STR_MAPGEN_SOUTHWEST_TOOLTIP                                    :切换地图西南边为水面或自由边界
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}自由形式
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}水面
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}随机
-STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}随机
-STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}手动
+
+###length 3
+STR_MAPGEN_BORDER_RANDOMIZE                                     :随机
+STR_MAPGEN_BORDER_MANUAL                                        :手动
+STR_MAPGEN_BORDER_INFINITE_WATER                                :无尽水域
 
 STR_MAPGEN_HEIGHTMAP_ROTATION                                   :{BLACK}高度图旋转：
 STR_MAPGEN_HEIGHTMAP_NAME                                       :{BLACK}高度图名称：
@@ -3466,7 +3479,8 @@ STR_GENERATION_LANDSCAPE_GENERATION                             :{BLACK}景观�
 STR_GENERATION_RIVER_GENERATION                                 :{BLACK}生成河流
 STR_GENERATION_CLEARING_TILES                                   :{BLACK}生成岩石地貌
 STR_GENERATION_TOWN_GENERATION                                  :{BLACK}城镇生成
-STR_GENERATION_INDUSTRY_GENERATION                              :{BLACK}工业生成
+STR_GENERATION_LAND_INDUSTRY_GENERATION                         :{BLACK}生成陆上工业
+STR_GENERATION_WATER_INDUSTRY_GENERATION                        :{BLACK}生成水上工业
 STR_GENERATION_OBJECT_GENERATION                                :{BLACK}生成固定设施
 STR_GENERATION_TREE_GENERATION                                  :{BLACK}生成树木
 STR_GENERATION_SETTINGUP_GAME                                   :{BLACK}设置游戏
@@ -3642,17 +3656,17 @@ STR_NEWGRF_LIST_COMPATIBLE                                      :{YELLOW}找到�
 STR_NEWGRF_LIST_MISSING                                         :{RED}缺失文件
 
 # NewGRF 'it's broken' warnings
-STR_NEWGRF_BROKEN                                               :{WHITE}NewGRF“{PUSH_COLOUR}{0:STRING}{POP_COLOUR}”的行为可能造成同步错误或崩溃
-STR_NEWGRF_BROKEN_POWERED_WAGON                                 :{WHITE}它于“{PUSH_COLOUR}{1:ENGINE}{POP_COLOUR}”不在车库内时改变了动力车厢状态
-STR_NEWGRF_BROKEN_VEHICLE_LENGTH                                :{WHITE}它于“{PUSH_COLOUR}{1:ENGINE}{POP_COLOUR}”不在车库内时改変了列车长度
-STR_NEWGRF_BROKEN_CAPACITY                                      :{WHITE}它于“{PUSH_COLOUR}{1:ENGINE}{POP_COLOUR}”不在车库内或不在改装时改変了容量
+STR_NEWGRF_BROKEN                                               :{WHITE}NewGRF“{0:STRING}”的行为可能造成同步错误或崩溃
+STR_NEWGRF_BROKEN_POWERED_WAGON                                 :{WHITE}它于“{1:ENGINE}”不在车库内时改变了动力车厢状态
+STR_NEWGRF_BROKEN_VEHICLE_LENGTH                                :{WHITE}它于“{1:ENGINE}”不在车库内时改変了列车长度
+STR_NEWGRF_BROKEN_CAPACITY                                      :{WHITE}它于“{1:ENGINE}”不在车库内或不在改装时改変了容量
 STR_BROKEN_VEHICLE_LENGTH                                       :{WHITE}{1:COMPANY} 所拥有的列车 {0:VEHICLE} 长度无效。这个错误可能是由 NewGRF 导致的。游戏可能会无法同步或崩溃
 
-STR_NEWGRF_BUGGY                                                :{WHITE}NewGRF“{PUSH_COLOUR}{STRING}{POP_COLOUR}”提供了错误的信息
-STR_NEWGRF_BUGGY_ARTICULATED_CARGO                              :{WHITE}购买列表中“{PUSH_COLOUR}{1:ENGINE}{POP_COLOUR}”的货物/改装信息与购买后的信息不同。这可能会导致自动更新或自动替换时无法正确改装此载具
-STR_NEWGRF_BUGGY_ENDLESS_PRODUCTION_CALLBACK                    :{WHITE}“{PUSH_COLOUR}{1:STRING}{POP_COLOUR}”在生产回调函数中产生了一个死循环
+STR_NEWGRF_BUGGY                                                :{WHITE}NewGRF“{STRING}”提供了错误的信息
+STR_NEWGRF_BUGGY_ARTICULATED_CARGO                              :{WHITE}购买列表中“{1:ENGINE}”的货物/改装信息与购买后的信息不同。这可能会导致自动更新或自动替换时无法正确改装此载具
+STR_NEWGRF_BUGGY_ENDLESS_PRODUCTION_CALLBACK                    :{WHITE}“{1:STRING}”在生产回调函数中产生了一个死循环
 STR_NEWGRF_BUGGY_UNKNOWN_CALLBACK_RESULT                        :{WHITE}回调函数 {1:HEX} 返回了一个未知/错误的结果：{2:HEX}
-STR_NEWGRF_BUGGY_INVALID_CARGO_PRODUCTION_CALLBACK              :{WHITE}“{PUSH_COLOUR}{1:STRING}{POP_COLOUR}”返回了错误的货物类型。位于生产回调函数 {2:HEX} 处
+STR_NEWGRF_BUGGY_INVALID_CARGO_PRODUCTION_CALLBACK              :{WHITE}“{1:STRING}”返回了错误的货物类型。位于生产回调函数 {2:HEX} 处
 
 # 'User removed essential NewGRFs'-placeholders for stuff without specs
 STR_NEWGRF_INVALID_CARGO                                        :<无效货物>
@@ -3675,7 +3689,7 @@ STR_SIGN_LIST_MATCH_CASE                                        :{BLACK}符合�
 STR_SIGN_LIST_MATCH_CASE_TOOLTIP                                :{BLACK}显示大小写符合过滤字符串的标志列表
 
 # Sign window
-STR_EDIT_SIGN_CAPTION                                           :{WHITE}标记标志文字
+STR_EDIT_SIGN_CAPTION                                           :{WHITE}编辑标志
 STR_EDIT_SIGN_LOCATION_TOOLTIP                                  :{BLACK}将屏幕中心移动到标志所在的位置。按住 <Ctrl> 单击会在新视点中显示目标位置
 STR_EDIT_SIGN_NEXT_SIGN_TOOLTIP                                 :{BLACK}前往下个标记
 STR_EDIT_SIGN_PREVIOUS_SIGN_TOOLTIP                             :{BLACK}前往上个标记
@@ -3686,7 +3700,7 @@ STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}为标�
 STR_TOWN_DIRECTORY_CAPTION                                      :{WHITE}城镇（{COMMA} 座，共 {COMMA}座）
 STR_TOWN_DIRECTORY_NONE                                         :{ORANGE}- 无 -
 STR_TOWN_DIRECTORY_TOWN                                         :{ORANGE}{TOWN}{BLACK}（{COMMA}）
-STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{YELLOW}（都市）{BLACK}（{COMMA}）
+STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{BLACK}（{COMMA}）{YELLOW}{CITY_ICON}
 STR_TOWN_DIRECTORY_LIST_TOOLTIP                                 :{BLACK} 城镇名称 - 点击名称可以将屏幕中心{}移动到城镇所在的位置。按住 <Ctrl> 点选将会在新视点中显示城镇位置
 STR_TOWN_POPULATION                                             :{BLACK}地图人口总数：{COMMA}
 
@@ -3892,14 +3906,14 @@ STR_CARGO_RATING_EXCELLENT                                      :卓越
 STR_CARGO_RATING_OUTSTANDING                                    :完美（最高评价）
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}将屏幕中心移动到车站所在的位置。按住 <Ctrl> 单击会在新视点中显示目标位置
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}重命名车站
+STR_STATION_VIEW_EDIT_TOOLTIP                                   :{BLACK}重命名车站或移动车站标志
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}显示所有调度计划中含有此车站的列车
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}显示所有调度计划中含有此车站的汽车
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}显示所有调度计划中含有此机场的飞机
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}显示所有调度计划中含有此码头的船只
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :重命名车站
+STR_STATION_VIEW_EDIT_STATION_SIGN                              :{WHITE}编辑车站标志
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}关闭机场
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}禁止飞机降落本场
@@ -3907,11 +3921,11 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}禁止�
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}将屏幕中心移动到路点所在的位置。按住 <Ctrl> 单击会在新视点中显示路点
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}修改路点名
+STR_WAYPOINT_VIEW_EDIT_TOOLTIP                                  :{BLACK}重命名路点或移动路点标志
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}将屏幕中心移动到浮标所在的位置。按住 <Ctrl> 单击会在新视点中显示目标位置
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}修改浮标名
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}编辑路点名称
+STR_WAYPOINT_VIEW_EDIT_WAYPOINT_SIGN                            :{WHITE}编辑路点标志
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}{COMPANY} 财务报表 {BLACK}{COMPANY_NUM}
@@ -4026,12 +4040,12 @@ STR_COMPANY_INFRASTRUCTURE_VIEW_TOTAL_PERIOD                    :{WHITE}{CURRENC
 # Industry directory
 STR_INDUSTRY_DIRECTORY_CAPTION                                  :{WHITE}工业（{COMMA} 座，共 {COMMA} 座）
 STR_INDUSTRY_DIRECTORY_NONE                                     :{ORANGE}- 没有 -
-STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW}（已运输 {COMMA}%）{BLACK}
+STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW}（已运输 {COMMA}%）
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {STRING}、{STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}、{STRING}、{STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {STRING}、{STRING}、{STRING}……（尚有 {NUM} 个未显示）
+STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}、{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}、{STRING}、{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {BLACK}{STRING}、{STRING}、{STRING}……（尚有 {NUM} 个未显示）
 STR_INDUSTRY_DIRECTORY_LIST_TOOLTIP                             :{BLACK}工业名称 - 点选名称以将屏幕中心移动到当前工业的位置。按住 <Ctrl> 键点选会在新视点中显示工业位置
 STR_INDUSTRY_DIRECTORY_ACCEPTED_CARGO_FILTER                    :{BLACK}接受货物：{SILVER}{STRING}
 STR_INDUSTRY_DIRECTORY_PRODUCED_CARGO_FILTER                    :{BLACK}产出货物：{SILVER}{STRING}
@@ -4049,9 +4063,9 @@ STR_INDUSTRY_VIEW_CARGO_GRAPH_TOOLTIP                           :{BLACK}显示�
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}生产等级：{YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}此工业已经宣布即刻停业倒闭！
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}需要：{YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}产出：{YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :，{STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}需要：{YELLOW}{STRING}
+STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}产出：{YELLOW}{STRING}
+STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :{STRING}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}需要：
 STR_INDUSTRY_VIEW_ACCEPT_CARGO_SUFFIX                           :{YELLOW}{0:STRING}{BLACK}{3:STRING}
@@ -4183,6 +4197,7 @@ STR_PURCHASE_INFO_ALL_BUT                                       :所有货物（
 STR_PURCHASE_INFO_MAX_TE                                        :{BLACK}最大牵引力：{GOLD}{FORCE}
 STR_PURCHASE_INFO_AIRCRAFT_RANGE                                :{BLACK}航行距离：{GOLD}{COMMA} 格
 STR_PURCHASE_INFO_AIRCRAFT_TYPE                                 :{BLACK}飞机类型：{GOLD}{STRING}
+STR_PURCHASE_INFO_RAILTYPES                                     :{BLACK}轨道类型：{GOLD}{STRING}
 
 ###length 3
 STR_CARGO_TYPE_FILTER_ALL                                       :所有货物类型
@@ -4366,6 +4381,7 @@ STR_ENGINE_PREVIEW_RUNCOST_YEAR                                 :运行费用：
 STR_ENGINE_PREVIEW_RUNCOST_PERIOD                               :运行费用：{CURRENCY_LONG}/周期
 STR_ENGINE_PREVIEW_CAPACITY                                     :容量：{CARGO_LONG}
 STR_ENGINE_PREVIEW_CAPACITY_2                                   :容量：{CARGO_LONG}、{CARGO_LONG}
+STR_ENGINE_PREVIEW_RAILTYPES                                    :轨道类型：{STRING}
 
 # Autoreplace window
 STR_REPLACE_VEHICLES_WHITE                                      :{WHITE}更新 {STRING} - {STRING}
@@ -4575,7 +4591,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}显示�
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}全部货物
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}显示列车的总容量，依货物分类
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}容量：{LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}容量：{LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE}（改装）
@@ -5123,6 +5139,7 @@ STR_ERROR_TOO_MANY_TRUCK_STOPS                                  :{WHITE}汽车�
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_DOCK                             :{WHITE}距离另一码头过近
 STR_ERROR_TOO_CLOSE_TO_ANOTHER_AIRPORT                          :{WHITE}距离另一机场过近
 STR_ERROR_CAN_T_RENAME_STATION                                  :{WHITE}不能重命名车站……
+STR_ERROR_CAN_T_MOVE_STATION_NAME                               :{WHITE}无法移动车站标志……
 STR_ERROR_DRIVE_THROUGH_ON_TOWN_ROAD                            :{WHITE}……道路由城镇所有
 STR_ERROR_DRIVE_THROUGH_DIRECTION                               :{WHITE}……道路方向不对
 STR_ERROR_DRIVE_THROUGH_CORNER                                  :{WHITE}……途中型车站不能建在转角处
@@ -5154,6 +5171,7 @@ STR_ERROR_CAN_T_BUILD_RAIL_WAYPOINT                             :{WHITE}不能�
 STR_ERROR_CAN_T_BUILD_ROAD_WAYPOINT                             :{WHITE}不能在这里设置路点……
 STR_ERROR_CAN_T_POSITION_BUOY_HERE                              :{WHITE}不能将浮标放置在这里……
 STR_ERROR_CAN_T_CHANGE_WAYPOINT_NAME                            :{WHITE}不能更改路点名称……
+STR_ERROR_CAN_T_MOVE_WAYPOINT_NAME                              :{WHITE}无法移动路点标志……
 
 STR_ERROR_CAN_T_REMOVE_RAIL_WAYPOINT                            :{WHITE}不能拆除此处的铁路路点……
 STR_ERROR_CAN_T_REMOVE_ROAD_WAYPOINT                            :{WHITE}不能拆除此处的道路路点……
@@ -5262,11 +5280,13 @@ STR_ERROR_START_AND_END_MUST_BE_IN                              :{WHITE}起止�
 STR_ERROR_ENDS_OF_BRIDGE_MUST_BOTH                              :{WHITE}……桥梁两端必须都位于地面上
 STR_ERROR_BRIDGE_TOO_LONG                                       :{WHITE}……桥梁太长
 STR_ERROR_BRIDGE_THROUGH_MAP_BORDER                             :{WHITE}桥梁终点将越出地图
-STR_ERROR_BRIDGE_TOO_LOW_FOR_STATION                            :{WHITE}桥梁过低，无法建设车站
-STR_ERROR_BRIDGE_TOO_LOW_FOR_ROADSTOP                           :{WHITE}桥梁过低，无法建设车站
-STR_ERROR_BRIDGE_TOO_LOW_FOR_BUOY                               :{WHITE}桥梁过低，无法放置浮标
-STR_ERROR_BRIDGE_TOO_LOW_FOR_RAIL_WAYPOINT                      :{WHITE}桥梁过低，无法建设路点
-STR_ERROR_BRIDGE_TOO_LOW_FOR_ROAD_WAYPOINT                      :{WHITE}桥梁过低，无法建设路点
+STR_ERROR_BRIDGE_TOO_LOW_FOR_STATION                            :{WHITE}桥梁过低，尚需 {HEIGHT}净空以建设车站
+STR_ERROR_BRIDGE_TOO_LOW_FOR_ROADSTOP                           :{WHITE}桥梁过低，尚需 {HEIGHT}净空以建设车站
+STR_ERROR_BRIDGE_TOO_LOW_FOR_DOCK                               :{WHITE}桥梁过低，尚需 {HEIGHT}净空以建设码头
+STR_ERROR_BRIDGE_TOO_LOW_FOR_BUOY                               :{WHITE}桥梁过低，尚需 {HEIGHT}净空以放置浮标
+STR_ERROR_BRIDGE_TOO_LOW_FOR_RAIL_WAYPOINT                      :{WHITE}桥梁过低，尚需 {HEIGHT}净空以建设路点
+STR_ERROR_BRIDGE_TOO_LOW_FOR_ROAD_WAYPOINT                      :{WHITE}桥梁过低，尚需 {HEIGHT}净空以建设路点
+STR_ERROR_BRIDGE_TOO_LOW_FOR_LOCK                               :{WHITE}桥梁过低，尚需 {HEIGHT}净空以建设船闸
 
 # Tunnel related errors
 STR_ERROR_CAN_T_BUILD_TUNNEL_HERE                               :{WHITE}不能在这里开凿隧道……

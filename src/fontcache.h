@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file fontcache.h Functions to read fonts from files and cache them. */
@@ -10,9 +10,9 @@
 #ifndef FONTCACHE_H
 #define FONTCACHE_H
 
+#include "gfx_type.h"
 #include "provider_manager.h"
-#include "string_type.h"
-#include "spritecache.h"
+#include "spritecache_type.h"
 
 /** Glyphs are characters from a font. */
 typedef uint32_t GlyphID;
@@ -229,8 +229,8 @@ public:
 		ProviderManager<FontCacheFactory>::Unregister(*this);
 	}
 
-	virtual std::unique_ptr<FontCache> LoadFont(FontSize fs, FontType fonttype) = 0;
-	virtual bool FindFallbackFont(struct FontCacheSettings *settings, const std::string &language_isocode, class MissingGlyphSearcher *callback) = 0;
+	virtual std::unique_ptr<FontCache> LoadFont(FontSize fs, FontType fonttype) const = 0;
+	virtual bool FindFallbackFont(struct FontCacheSettings *settings, const std::string &language_isocode, class MissingGlyphSearcher *callback) const = 0;
 };
 
 class FontProviderManager : ProviderManager<FontCacheFactory> {

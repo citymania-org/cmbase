@@ -14,7 +14,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -1839,7 +1839,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Hoogte eenheid: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Wanneer 'n hoogte word in die gebruikerskoppelvlak, wys dit in die geselekteerde eenhede
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Empiries (vt)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Metries (m)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (m)
@@ -2383,6 +2383,7 @@ STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Bou 'n s
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :Verstek stasie
 STR_STATION_CLASS_WAYP                                          :Roetebakens
 
@@ -2623,7 +2624,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Lughawe 
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Lughawe naam: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Lughawe teel naam: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NuweGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Vrag aangeneem: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Vrag aangeneem: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Spoor tipe: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_ROAD_TYPE                             :{BLACK}Padtipe: {LTBLUE}{STRING}
@@ -2846,6 +2847,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Suidwes
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Vryeform
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Water
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Lukraak
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Lukraak
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Handmatig
 
@@ -3073,7 +3076,6 @@ STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Tik 'n n
 # Town directory window
 STR_TOWN_DIRECTORY_NONE                                         :{ORANGE}- Geen -
 STR_TOWN_DIRECTORY_TOWN                                         :{ORANGE}{TOWN}{BLACK} ({COMMA})
-STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{YELLOW} (Stad){BLACK} ({COMMA})
 STR_TOWN_DIRECTORY_LIST_TOOLTIP                                 :{BLACK}Dorpname - klik op 'n naam om skerm daarna te skuif. Ctrl+klik om 'n nuwe venster vir die dorp oop te maak
 STR_TOWN_POPULATION                                             :{BLACK}Wêreldbevolking: {COMMA}
 
@@ -3247,14 +3249,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Uitstekend
 STR_CARGO_RATING_OUTSTANDING                                    :Treffend
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Skuif skerm na stasie. Ctrl+klik maak 'n nuwe venster oop vir die stasie
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Verander naam van stasie
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Toon alle treine wat hierdie stasie op hul skedule het
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Toon alle pad voertuie wat hierdie stasie op hul skedule het
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Toon alle vliegtuie wat hierdie stasie op hul skedule het
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Toon alle skepe wat hierdie stasie op hul skedule het
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Hernoem stasie/laai area
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Maak lughawe toe
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Verhoed dat vliegtuie by hierdie lughawe te land
@@ -3262,11 +3262,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Verhoed 
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Senter skerm op roetebaken. Ctrl+klik maak 'n nuwe venster oop vir die roetebaken
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Verander roetebaken se naam
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Sentreer hoofuitsig op boei. Ctrl+klik maak 'n nuwe venster oop vir die boei
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Verander baken naam
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Redigeer roetebaken se naam
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}{COMPANY} Finansies {BLACK}{COMPANY_NUM}
@@ -3355,12 +3353,12 @@ STR_COMPANY_INFRASTRUCTURE_VIEW_AIRPORTS                        :{WHITE}Lughawen
 
 # Industry directory
 STR_INDUSTRY_DIRECTORY_NONE                                     :{ORANGE}- Geen -
-STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% vervoer){BLACK}
+STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% vervoer)
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING} en {NUM} meer...
+STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING} en {NUM} meer...
 STR_INDUSTRY_DIRECTORY_LIST_TOOLTIP                             :{BLACK}Nywerheidsname - klik op 'n naam om skerm na nywerheid te skuif. Ctrl+klik maak 'n nuwe venster vir die nywerheid oop
 STR_INDUSTRY_DIRECTORY_ACCEPTED_CARGO_FILTER                    :{BLACK}Aanvaarde vrag: {SILVER}{STRING}
 STR_INDUSTRY_DIRECTORY_PRODUCED_CARGO_FILTER                    :{BLACK}Vervaardigde vrag: {SILVER}{STRING}
@@ -3375,9 +3373,9 @@ STR_INDUSTRY_VIEW_LOCATION_TOOLTIP                              :{BLACK}Skuif sk
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Produksie vlak: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}Die nywerheid het aangekondig dat dit binnekort gaan sluit!
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Benodig: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Produseer: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :, {STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Benodig: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Produseer: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :{STRING}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}Benodig:
 
@@ -3838,7 +3836,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Wys kapa
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Totale Vrag
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Toon totale kapasiteit van trein, per vragtipe
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Kapasiteit: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Kapasiteit: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Herbou)

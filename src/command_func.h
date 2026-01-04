@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file command_func.h Functions related to commands. */
@@ -28,6 +28,7 @@
 static const CommandCost CMD_ERROR = CommandCost(INVALID_STRING_ID);
 
 void NetworkSendCommand(Commands cmd, StringID err_message, CommandCallback *callback, CompanyID company, const CommandDataBuffer &cmd_data);
+bool IsNetworkRegisteredCallback(CommandCallback *callback);
 
 bool IsValidCommand(Commands cmd);
 CommandFlags GetCommandFlags(Commands cmd);
@@ -196,6 +197,7 @@ public:
 	template <typename Tcallback>
 	static bool Post(StringID err_message, Tcallback *callback, Targs... args)
 	{
+		assert(::IsNetworkRegisteredCallback(reinterpret_cast<CommandCallback *>(reinterpret_cast<void(*)()>(callback))));
 		return InternalPost(err_message, callback, true, false, std::forward_as_tuple(args...));
 	}
 

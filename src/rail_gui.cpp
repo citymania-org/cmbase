@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file rail_gui.cpp %File for dealing with rail construction user interface */
@@ -29,7 +29,6 @@
 #include "dropdown_func.h"
 #include "tunnelbridge.h"
 #include "tilehighlight_func.h"
-#include "spritecache.h"
 #include "core/geometry_func.hpp"
 #include "hotkeys.h"
 #include "engine_base.h"
@@ -120,8 +119,8 @@ static void GenericPlaceRail(TileIndex tile, Track track)
  */
 static void PlaceExtraDepotRail(TileIndex tile, DiagDirection dir, Track track)
 {
-	if (GetRailTileType(tile) == RAIL_TILE_DEPOT) return;
-	if (GetRailTileType(tile) == RAIL_TILE_SIGNALS && !_settings_client.gui.auto_remove_signals) return;
+	if (GetRailTileType(tile) == RailTileType::Depot) return;
+	if (GetRailTileType(tile) == RailTileType::Signals && !_settings_client.gui.auto_remove_signals) return;
 	if ((GetTrackBits(tile) & DiagdirReachesTracks(dir)) == 0) return;
 
 	Command<CMD_BUILD_SINGLE_RAIL>::Post(tile, _cur_railtype, track, _settings_client.gui.auto_remove_signals);
@@ -438,7 +437,7 @@ static void HandleAutoSignalPlacement()
 /** Rail toolbar management class. */
 struct BuildRailToolbarWindow : Window {
 	RailType railtype = INVALID_RAILTYPE; ///< Rail type to build.
-	int last_user_action = INVALID_WID_RAT; ///< Last started user action.
+	WidgetID last_user_action = INVALID_WIDGET; ///< Last started user action.
 
 	BuildRailToolbarWindow(WindowDesc &desc, RailType railtype) : Window(desc), railtype(railtype)
 	{
@@ -729,6 +728,11 @@ struct BuildRailToolbarWindow : Window {
 		VpSelectTilesWithMethod(pt.x, pt.y, select_method);
 	}
 
+	Point OnInitialPosition(int16_t sm_width, [[maybe_unused]] int16_t sm_height, [[maybe_unused]] int window_number) override
+	{
+		return AlignInitialConstructionToolbar(sm_width);
+	}
+
 	void OnPlaceMouseUp([[maybe_unused]] ViewportPlaceMethod select_method, ViewportDragDropSelectionProcess select_proc, [[maybe_unused]] Point pt, TileIndex start_tile, TileIndex end_tile) override
 	{
 		if (pt.x != -1) {
@@ -858,7 +862,7 @@ struct BuildRailToolbarWindow : Window {
 	}, RailToolbarGlobalHotkeys};
 };
 
-static constexpr NWidgetPart _nested_build_rail_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_build_rail_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_DARK_GREEN),
 		NWidget(WWT_CAPTION, COLOUR_DARK_GREEN, WID_RAT_CAPTION), SetTextStyle(TC_WHITE),
@@ -900,7 +904,7 @@ static constexpr NWidgetPart _nested_build_rail_widgets[] = {
 };
 
 static WindowDesc _build_rail_desc(
-	WDP_ALIGN_TOOLBAR, "toolbar_rail", 0, 0,
+	WDP_MANUAL, "toolbar_rail", 0, 0,
 	WC_BUILD_TOOLBAR, WC_NONE,
 	WindowDefaultFlag::Construction,
 	_nested_build_rail_widgets,
@@ -1384,7 +1388,7 @@ public:
 	}, BuildRailStationGlobalHotkeys};
 };
 
-static constexpr NWidgetPart _nested_station_builder_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_station_builder_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_DARK_GREEN),
 		NWidget(WWT_CAPTION, COLOUR_DARK_GREEN), SetStringTip(STR_STATION_BUILD_RAIL_CAPTION, STR_TOOLTIP_WINDOW_TITLE_DRAG_THIS),
@@ -1626,7 +1630,7 @@ public:
 };
 
 /** Nested widget definition of the build signal window */
-static constexpr NWidgetPart _nested_signal_builder_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_signal_builder_widgets = {
 	/* Title bar and buttons. */
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_DARK_GREEN),
@@ -1753,7 +1757,7 @@ struct BuildRailDepotWindow : public PickerWindowBase {
 };
 
 /** Nested widget definition of the build rail depot window */
-static constexpr NWidgetPart _nested_build_depot_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_build_depot_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_DARK_GREEN),
 		NWidget(WWT_CAPTION, COLOUR_DARK_GREEN), SetStringTip(STR_BUILD_DEPOT_TRAIN_ORIENTATION_CAPTION, STR_TOOLTIP_WINDOW_TITLE_DRAG_THIS),
@@ -1878,7 +1882,7 @@ struct BuildRailWaypointWindow : public PickerWindow {
 };
 
 /** Nested widget definition for the build NewGRF rail waypoint window */
-static constexpr NWidgetPart _nested_build_waypoint_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_build_waypoint_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_DARK_GREEN),
 		NWidget(WWT_CAPTION, COLOUR_DARK_GREEN), SetStringTip(STR_WAYPOINT_CAPTION, STR_TOOLTIP_WINDOW_TITLE_DRAG_THIS),
@@ -2071,7 +2075,7 @@ DropDownList GetRailTypeDropDownList(bool for_replacement, bool all_option)
 			std::string str = rti->max_speed > 0
 				? GetString(STR_TOOLBAR_RAILTYPE_VELOCITY, rti->strings.menu_text, rti->max_speed)
 				: GetString(rti->strings.menu_text);
-			list.push_back(MakeDropDownListBadgeIconItem(badge_class_list, rti->badges, GSF_RAILTYPES, rti->introduction_date, d, rti->gui_sprites.build_x_rail, PAL_NONE, std::move(str), rt, !avail_railtypes.Test(rt)));
+			list.push_back(MakeDropDownListBadgeIconItem(badge_class_list, rti->badges, GSF_RAILTYPES, rti->introduction_date, RailBuildCost(rt), d, rti->gui_sprites.build_x_rail, PAL_NONE, std::move(str), rt, !avail_railtypes.Test(rt)));
 		}
 	}
 

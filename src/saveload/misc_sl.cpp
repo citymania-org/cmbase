@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file misc_sl.cpp Saving and loading of things that didn't fit anywhere else */
@@ -87,6 +87,7 @@ static const SaveLoad _date_desc[] = {
 	SLEG_CONDVAR("tick_counter",           TimerGameTick::counter,           SLE_UINT64,                  SLV_U64_TICK_COUNTER, SL_MAX_VERSION),
 	SLEG_CONDVAR("economy_date",           TimerGameEconomy::date,           SLE_INT32,                   SLV_ECONOMY_DATE, SL_MAX_VERSION),
 	SLEG_CONDVAR("economy_date_fract",     TimerGameEconomy::date_fract,     SLE_UINT16,                  SLV_ECONOMY_DATE, SL_MAX_VERSION),
+	SLEG_CONDVAR("days_since_last_month",  TimerGameEconomy::days_since_last_month, SLE_UINT32,           SLV_INDUSTRY_ACCEPTED_HISTORY, SL_MAX_VERSION),
 	SLEG_CONDVAR("calendar_sub_date_fract", TimerGameCalendar::sub_date_fract, SLE_UINT16,                SLV_CALENDAR_SUB_DATE_FRACT, SL_MAX_VERSION),
 	SLEG_CONDVAR("age_cargo_skip_counter", _age_cargo_skip_counter, SLE_UINT8,                   SL_MIN_VERSION, SLV_162),
 	SLEG_CONDVAR("cur_tileloop_tile",      _cur_tileloop_tile,      SLE_FILE_U16 | SLE_VAR_U32,  SL_MIN_VERSION, SLV_6),

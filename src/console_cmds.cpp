@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file console_cmds.cpp Implementation of the console hooks. */
@@ -45,6 +45,10 @@
 #include "3rdparty/fmt/chrono.h"
 #include "company_cmd.h"
 #include "misc_cmd.h"
+
+#if defined(WITH_ZLIB)
+#include "network/network_content.h"
+#endif /* WITH_ZLIB */
 
 #include "table/strings.h"
 
@@ -2163,7 +2167,7 @@ static bool ConNetworkAuthorizedKey(std::span<std::string_view> argv)
 	}
 
 	for (auto [name, authorized_keys] : _console_cmd_authorized_keys) {
-		if (StrEqualsIgnoreCase(type, name)) continue;
+		if (!StrEqualsIgnoreCase(type, name)) continue;
 
 		PerformNetworkAuthorizedKeyAction(name, authorized_keys, action, authorized_key);
 		return true;
@@ -2176,7 +2180,6 @@ static bool ConNetworkAuthorizedKey(std::span<std::string_view> argv)
 
 /* Content downloading only is available with ZLIB */
 #if defined(WITH_ZLIB)
-#include "network/network_content.h"
 
 /** Resolve a string to a content type. */
 static ContentType StringToContentType(std::string_view str)
@@ -2699,7 +2702,7 @@ static std::string FormatLabel(uint32_t label)
 		return fmt::format("{:c}{:c}{:c}{:c}", GB(label, 24, 8), GB(label, 16, 8), GB(label, 8, 8), GB(label, 0, 8));
 	}
 
-	return fmt::format("{:08X}", std::byteswap(label));
+	return fmt::format("{:08X}", label);
 }
 
 static void ConDumpRoadTypes()

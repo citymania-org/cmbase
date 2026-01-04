@@ -13,7 +13,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -2127,7 +2127,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Unitate înălțime: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Afișează înălțimile în interfață folosind unitățile selectate
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Imperial (ft)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Metric (m)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (m)
@@ -2824,7 +2824,7 @@ STR_HOUSE_PICKER_YEARS_ANY                                      :{BLACK}Ani: {OR
 STR_HOUSE_PICKER_YEARS_FROM                                     :{BLACK}Ani: {ORANGE}Din {NUM}
 STR_HOUSE_PICKER_YEARS_UNTIL                                    :{BLACK}Ani: {ORANGE}Până {NUM}
 STR_HOUSE_PICKER_SIZE                                           :{BLACK}Mărime: {ORANGE}{NUM}x{NUM} pătrățele
-STR_HOUSE_PICKER_CARGO_ACCEPTED                                 :{BLACK}Marfă acceptată: {ORANGE}
+STR_HOUSE_PICKER_CARGO_ACCEPTED                                 :{BLACK}Marfă acceptată: {GOLD}{STRING}
 STR_HOUSE_PICKER_CARGO_PRODUCED                                 :{BLACK}Marfă produsă: {ORANGE}{CARGO_LIST}
 
 STR_HOUSE_PICKER_CLASS_ZONE1                                    :Margine
@@ -2833,10 +2833,8 @@ STR_HOUSE_PICKER_CLASS_ZONE3                                    :Suburbiile peri
 STR_HOUSE_PICKER_CLASS_ZONE4                                    :Suburbiile urbane
 STR_HOUSE_PICKER_CLASS_ZONE5                                    :Centrul orașului
 
-STR_HOUSE_PICKER_PROTECT_TITLE                                  :Preveniți upgrade-urile
 STR_HOUSE_PICKER_PROTECT_TOOLTIP                                :Alege dacă această casă va fi protejată împotriva înlocuirii pe măsură ce orașul crește
-STR_HOUSE_PICKER_PROTECT_OFF                                    :Oprit
-STR_HOUSE_PICKER_PROTECT_ON                                     :Pornit
+
 
 STR_STATION_CLASS_DFLT                                          :Implicită
 STR_STATION_CLASS_DFLT_STATION                                  :Stație implicită
@@ -3103,7 +3101,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Clasă a
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Nume aeroport: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Numele dalei aeroportului: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Încărcături acceptate: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Încărcături acceptate: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Tip șină: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_ROAD_TYPE                             :{BLACK}Tip de drum: {LTBLUE}{STRING}
@@ -3376,6 +3374,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Sud-vest
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Pământ
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Apă
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Aleator
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Aleator
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Manual
 
@@ -3416,7 +3416,6 @@ STR_GENERATION_LANDSCAPE_GENERATION                             :{BLACK}Generare
 STR_GENERATION_RIVER_GENERATION                                 :{BLACK}Generarea râurilor
 STR_GENERATION_CLEARING_TILES                                   :{BLACK}Generare zonă dură și pietroasă
 STR_GENERATION_TOWN_GENERATION                                  :{BLACK}Generare oraș
-STR_GENERATION_INDUSTRY_GENERATION                              :{BLACK}Generare industrie
 STR_GENERATION_OBJECT_GENERATION                                :{BLACK}Generare fixă
 STR_GENERATION_TREE_GENERATION                                  :{BLACK}Generare arbori
 STR_GENERATION_SETTINGUP_GAME                                   :{BLACK}Se configurează jocul
@@ -3629,7 +3628,6 @@ STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Introdu 
 STR_TOWN_DIRECTORY_CAPTION                                      :{WHITE}Orașe ({COMMA} din {COMMA})
 STR_TOWN_DIRECTORY_NONE                                         :{ORANGE}- Nimic -
 STR_TOWN_DIRECTORY_TOWN                                         :{ORANGE}{TOWN}{BLACK} ({COMMA})
-STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{YELLOW} (oraș){BLACK} ({COMMA})
 STR_TOWN_DIRECTORY_LIST_TOOLTIP                                 :{BLACK}Numele orașelor - clic pe un nume pentru a centra imaginea pe orașul respectiv. Ctrl+Click pentru a deshide o fereastra cu locația orașului
 STR_TOWN_POPULATION                                             :{BLACK}Populația totală: {COMMA}
 
@@ -3829,14 +3827,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Excelent
 STR_CARGO_RATING_OUTSTANDING                                    :Fantastic
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Centrează imaginea pe locația stației. Ctrl+Click pentru a deshide o fereastra cu locația stației
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Schimbă numele stației
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Afiseaza toate trenurile care opresc in aceasta statie
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Afiseaza toate autovehiculele care opresc in aceasta statie
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Afiseaza toate aeronavele care opresc in aceasta statie
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Afiseaza toate navele care opresc in aceasta statie
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Redenumește stația
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Închide aeroport
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Nu permite avioanelor să aterizeze pe acest aeroport
@@ -3844,11 +3840,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Nu permi
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Centrază fereasta principală pe punctul de tranzit. Ctrl+Click pentru a deshide o fereastra cu locația punctului de tranzit
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Schimbă numele haltei
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Centrează vizorul principal pe locația balizei. Ctrl+Clic pentru a deschide o nouă fereastră de vizualizare cu locația balizei
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Schimbă numele balizei
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Editează numele haltei
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}Situația financiară a companiei {COMPANY} {BLACK}{COMPANY_NUM}
@@ -3962,12 +3956,12 @@ STR_COMPANY_INFRASTRUCTURE_VIEW_TOTAL_PERIOD                    :{WHITE}{CURRENC
 # Industry directory
 STR_INDUSTRY_DIRECTORY_CAPTION                                  :{WHITE}Industrii ({COMMA} din {COMMA})
 STR_INDUSTRY_DIRECTORY_NONE                                     :{ORANGE}- Nimic-
-STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% transportat){BLACK}
+STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% transportat)
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING} și încă {NUM}...
+STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING} și încă {NUM}...
 STR_INDUSTRY_DIRECTORY_LIST_TOOLTIP                             :{BLACK}Numele industriilor - clic pe nume pentru focalizarea pe industrie. Ctrl+Click pentru a deschide o fereastră cu locația industriei
 STR_INDUSTRY_DIRECTORY_ACCEPTED_CARGO_FILTER                    :{BLACK}Marfă acceptată: {SILVER}{STRING}
 STR_INDUSTRY_DIRECTORY_PRODUCED_CARGO_FILTER                    :{BLACK}Marfă produsă: {SILVER}{STRING}
@@ -3983,9 +3977,9 @@ STR_INDUSTRY_VIEW_LOCATION_TOOLTIP                              :{BLACK}Centreaz
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Nivelul producției: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}Industria a anunțat închiderea iminentă!
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Necesită: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Produce: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :, {STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Necesită: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Produce: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :{STRING}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}Necesită:
 STR_INDUSTRY_VIEW_ACCEPT_CARGO_SUFFIX                           :{YELLOW}{0:STRING}{BLACK}{3:STRING}
@@ -4509,7 +4503,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Afișeaz
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Încãrcãturi
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Afiseazã capacitãtile totale ale trenului, diferentiate pe tip de încãrcãturã
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Capacitate: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Capacitate: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Schimbă marfa)

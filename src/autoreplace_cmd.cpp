@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file autoreplace_cmd.cpp Deals with autoreplace execution but not the setup */
@@ -71,16 +71,16 @@ bool CheckAutoreplaceValidity(EngineID from, EngineID to, CompanyID company)
 	switch (type) {
 		case VEH_TRAIN: {
 			/* make sure the railtypes are compatible */
-			if (!GetRailTypeInfo(e_from->u.rail.railtype)->compatible_railtypes.Any(GetRailTypeInfo(e_to->u.rail.railtype)->compatible_railtypes)) return false;
+			if (!GetAllCompatibleRailTypes(e_from->VehInfo<RailVehicleInfo>().railtypes).Any(GetAllCompatibleRailTypes(e_to->VehInfo<RailVehicleInfo>().railtypes))) return false;
 
 			/* make sure we do not replace wagons with engines or vice versa */
-			if ((e_from->u.rail.railveh_type == RAILVEH_WAGON) != (e_to->u.rail.railveh_type == RAILVEH_WAGON)) return false;
+			if ((e_from->VehInfo<RailVehicleInfo>().railveh_type == RAILVEH_WAGON) != (e_to->VehInfo<RailVehicleInfo>().railveh_type == RAILVEH_WAGON)) return false;
 			break;
 		}
 
 		case VEH_ROAD:
 			/* make sure the roadtypes are compatible */
-			if (!GetRoadTypeInfo(e_from->u.road.roadtype)->powered_roadtypes.Any(GetRoadTypeInfo(e_to->u.road.roadtype)->powered_roadtypes)) return false;
+			if (!GetRoadTypeInfo(e_from->VehInfo<RoadVehicleInfo>().roadtype)->powered_roadtypes.Any(GetRoadTypeInfo(e_to->VehInfo<RoadVehicleInfo>().roadtype)->powered_roadtypes)) return false;
 
 			/* make sure that we do not replace a tram with a normal road vehicles or vice versa */
 			if (e_from->info.misc_flags.Test(EngineMiscFlag::RoadIsTram) != e_to->info.misc_flags.Test(EngineMiscFlag::RoadIsTram)) return false;
@@ -88,7 +88,7 @@ bool CheckAutoreplaceValidity(EngineID from, EngineID to, CompanyID company)
 
 		case VEH_AIRCRAFT:
 			/* make sure that we do not replace a plane with a helicopter or vice versa */
-			if ((e_from->u.air.subtype & AIR_CTOL) != (e_to->u.air.subtype & AIR_CTOL)) return false;
+			if ((e_from->VehInfo<AircraftVehicleInfo>().subtype & AIR_CTOL) != (e_to->VehInfo<AircraftVehicleInfo>().subtype & AIR_CTOL)) return false;
 			break;
 
 		default: break;

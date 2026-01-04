@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file network_turn.cpp TURN sending/receiving part of the network protocol. */
@@ -57,9 +57,8 @@ bool ClientNetworkTurnSocketHandler::Receive_TURN_ERROR(Packet &)
 
 bool ClientNetworkTurnSocketHandler::Receive_TURN_CONNECTED(Packet &p)
 {
-	Debug(net, 9, "Receive_TURN_CONNECTED()");
-
 	std::string hostname = p.Recv_string(NETWORK_HOSTNAME_LENGTH);
+	Debug(net, 9, "Turn::Receive_TURN_CONNECTED({})", hostname);
 
 	/* Act like we no longer have a socket, as we are handing it over to the
 	 * game handler. */
@@ -101,6 +100,7 @@ void ClientNetworkTurnSocketHandler::Connect()
 	p->Send_uint8(NETWORK_COORDINATOR_VERSION);
 	p->Send_string(ticket);
 
+	Debug(net, 9, "Turn::SendTurn({})", ticket);
 	turn_handler->SendPacket(std::move(p));
 
 	return turn_handler;

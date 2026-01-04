@@ -14,7 +14,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -1675,7 +1675,7 @@ STR_CONFIG_SETTING_LARGER_TOWNS_DISABLED                        :Eingin
 
 ###length 3
 
-###length 3
+###length 4
 
 STR_CONFIG_SETTING_SOUND                                        :Ljóð effektir
 STR_CONFIG_SETTING_INTERFACE                                    :Takførisflati
@@ -2163,6 +2163,7 @@ STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Bygg ein
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :Vanlig støð
 STR_STATION_CLASS_WAYP                                          :Waypoint
 
@@ -2344,7 +2345,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Floghavn
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Navn á floghavn: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Navn á floghavna punti: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Farmur móttikin: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Farmur móttikin: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_SPEED_LIMIT                      :{BLACK}Jarnbreyta hámarksferð: {LTBLUE}{VELOCITY}
 
@@ -2524,6 +2525,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Útsynni
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Freeform
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Vatn
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Tilvildarligt
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Tilvildarligt
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Manuelt
 
@@ -2818,14 +2821,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Framúrskarandi
 STR_CARGO_RATING_OUTSTANDING                                    :Avberða gott
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Savna høvuðs sýni á støðina. Ctrl+trýst letur nýggjan sýnisglugga upp við sýni á støðina
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Broyt navn á støð
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Vís øll tok ið hava hesa støðina í teirra skrá
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Vís øll akfør ið hava hesa støðina í teirra skrá
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Vís øll flogfør ið hava hesa støðina í teirra skrá
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Vís øll skip ið hava hesa støðina í teirra skrá
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Navngev støð/lessingar øki
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Stong floghavn
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Forða flogførum í at lenda í hesari floghavnini
@@ -2833,11 +2834,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Forða f
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Savna høvuðs sýni á waypoint. Ctrl+trýst letur nýggjan sýnisglugga upp við sýni á waypoint
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Broyt navn á waypoint
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Savna høvuðs sýni á boyjuna. Ctrl+trýst letur nýggjan sýnisglugga upp á boyjuna
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Broyt navn á boyju
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Rætta waypoint navn
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}{COMPANY} Fíggjar støða {BLACK}{COMPANY_NUM}
@@ -3325,7 +3324,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Vís pl�
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Farmur í alt
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Vís samanlagda plássi í toki, deilt eftir farma slagi
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Pláss: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Pláss: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Umbygg)

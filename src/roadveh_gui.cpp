@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file roadveh_gui.cpp GUI for road vehicles. */
@@ -46,7 +46,7 @@ void DrawRoadVehDetails(const Vehicle *v, const Rect &r)
 			}
 		}
 
-		std::string capacity = GetString(STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY);
+		std::string capacity;
 		std::string_view list_separator = GetListSeparator();
 
 		bool first = true;
@@ -66,7 +66,7 @@ void DrawRoadVehDetails(const Vehicle *v, const Rect &r)
 			}
 		}
 
-		DrawString(r.left, r.right, y, capacity, TC_BLUE);
+		DrawString(r.left, r.right, y, GetString(STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY, capacity), TC_BLUE);
 		y += GetCharacterHeight(FS_NORMAL) + WidgetDimensions::scaled.vsep_normal;
 
 		for (const Vehicle *u = v; u != nullptr; u = u->Next()) {

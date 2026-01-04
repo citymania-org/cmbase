@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file newgrf_badge.cpp Functionality for NewGRF badges. */
@@ -21,6 +21,7 @@
 #include "strings_func.h"
 #include "timer/timer_game_calendar.h"
 #include "window_gui.h"
+#include "window_type.h"
 #include "zoom_func.h"
 
 #include "table/strings.h"
@@ -81,7 +82,7 @@ GUIBadgeClasses::GUIBadgeClasses(GrfSpecFeature feature) : UsedBadgeClasses(feat
 		const auto [config, sort_order] = GetBadgeClassConfigItem(feature, class_badge->label);
 
 		this->gui_classes.emplace_back(class_index, config.column, config.show_icon, sort_order, size, class_badge->label);
-		if (size.width != 0 && config.show_icon) max_column = std::max<uint>(max_column, config.column);
+		if (size.width != 0 && config.show_icon) max_column = std::max(max_column, config.column);
 	}
 
 	std::sort(std::begin(this->gui_classes), std::end(this->gui_classes));
@@ -133,6 +134,7 @@ int DrawBadgeNameList(Rect r, std::span<const BadgeID> badges, GrfSpecFeature)
 			const Badge *badge = GetBadge(index);
 			if (badge == nullptr || badge->name == STR_NULL) continue;
 			if (badge->class_index != class_index) continue;
+			if (badge->flags.Test(BadgeFlag::NameListSkip)) continue;
 
 			if (!s.empty()) {
 				if (badge->flags.Test(BadgeFlag::NameListFirstOnly)) continue;
@@ -193,9 +195,12 @@ public:
 	{
 		for (const auto &gc : gui_classes->GetClasses()) {
 			if (gc.column_group != 0) continue;
-			dim.width += gc.size.width + WidgetDimensions::scaled.hsep_normal;
-			dim.height = std::max(dim.height, gc.size.height);
+			dim.width += ScaleGUITrad(gc.size.width) + WidgetDimensions::scaled.hsep_normal;
+			dim.height = std::max<uint>(dim.height, ScaleGUITrad(gc.size.height));
 		}
+
+		/* Remove trailing `hsep_normal` spacer. */
+		if (dim.width > 0) dim.width -= WidgetDimensions::scaled.hsep_normal;
 	}
 
 	uint Height() const override
@@ -205,22 +210,29 @@ public:
 
 	uint Width() const override
 	{
-		return this->dim.width + WidgetDimensions::scaled.hsep_wide + this->TBase::Width();
+		if (this->dim.width == 0) return this->TBase::Width();
+		return this->dim.width + WidgetDimensions::scaled.hsep_normal + this->TBase::Width();
 	}
 
 	int OnClick(const Rect &r, const Point &pt) const override
 	{
-		bool rtl = TEnd ^ (_current_text_dir == TD_RTL);
-		return this->TBase::OnClick(r.Indent(this->dim.width + WidgetDimensions::scaled.hsep_wide, rtl), pt);
+		if (this->dim.width == 0) {
+			return this->TBase::OnClick(r, pt);
+		} else {
+			bool rtl = TEnd ^ (_current_text_dir == TD_RTL);
+			return this->TBase::OnClick(r.Indent(this->dim.width + WidgetDimensions::scaled.hsep_normal, rtl), pt);
+		}
 	}
 
 	void Draw(const Rect &full, const Rect &r, bool sel, int click_result, Colours bg_colour) const override
 	{
-		bool rtl = TEnd ^ (_current_text_dir == TD_RTL);
-
-		DrawBadgeColumn(r.WithWidth(this->dim.width, rtl), 0, *this->gui_classes, this->badges, this->feature, this->introduction_date, PAL_NONE);
-
-		this->TBase::Draw(full, r.Indent(this->dim.width + WidgetDimensions::scaled.hsep_wide, rtl), sel, click_result, bg_colour);
+		if (this->dim.width == 0) {
+			this->TBase::Draw(full, r, sel, click_result, bg_colour);
+		} else {
+			bool rtl = TEnd ^ (_current_text_dir == TD_RTL);
+			DrawBadgeColumn(r.WithWidth(this->dim.width, rtl), 0, *this->gui_classes, this->badges, this->feature, this->introduction_date, PAL_NONE);
+			this->TBase::Draw(full, r.Indent(this->dim.width + WidgetDimensions::scaled.hsep_normal, rtl), sel, click_result, bg_colour);
+		}
 	}
 
 private:
@@ -233,17 +245,22 @@ private:
 	Dimension dim{};
 };
 
-using DropDownListBadgeItem = DropDownBadges<DropDownListStringItem>;
-using DropDownListBadgeIconItem = DropDownBadges<DropDownListIconItem>;
+using DropDownListBadgeItem = DropDownBadges<DropDownString<DropDownSpacer<DropDownListStringItem, true>, FS_SMALL, true>>;
+using DropDownListBadgeIconItem = DropDownBadges<DropDownString<DropDownSpacer<DropDownListIconItem, true>, FS_SMALL, true>>;
 
 std::unique_ptr<DropDownListItem> MakeDropDownListBadgeItem(const std::shared_ptr<GUIBadgeClasses> &gui_classes, std::span<const BadgeID> badges, GrfSpecFeature feature, std::optional<TimerGameCalendar::Date> introduction_date, std::string &&str, int value, bool masked, bool shaded)
 {
-	return std::make_unique<DropDownListBadgeItem>(gui_classes, badges, feature, introduction_date, std::move(str), value, masked, shaded);
+	return std::make_unique<DropDownListBadgeItem>(gui_classes, badges, feature, introduction_date, "", std::move(str), value, masked, shaded);
 }
 
-std::unique_ptr<DropDownListItem> MakeDropDownListBadgeIconItem(const std::shared_ptr<GUIBadgeClasses> &gui_classes, std::span<const BadgeID> badges, GrfSpecFeature feature, std::optional<TimerGameCalendar::Date> introduction_date, const Dimension &dim, SpriteID sprite, PaletteID palette, std::string &&str, int value, bool masked, bool shaded)
+std::unique_ptr<DropDownListItem> MakeDropDownListBadgeItem(const std::shared_ptr<GUIBadgeClasses> &gui_classes, std::span<const BadgeID> badges, GrfSpecFeature feature, std::optional<TimerGameCalendar::Date> introduction_date, Money cost, std::string &&str, int value, bool masked, bool shaded)
 {
-	return std::make_unique<DropDownListBadgeIconItem>(gui_classes, badges, feature, introduction_date, dim, sprite, palette, std::move(str), value, masked, shaded);
+	return std::make_unique<DropDownListBadgeItem>(gui_classes, badges, feature, introduction_date, GetString(STR_JUST_CURRENCY_SHORT, cost), std::move(str), value, masked, shaded);
+}
+
+std::unique_ptr<DropDownListItem> MakeDropDownListBadgeIconItem(const std::shared_ptr<GUIBadgeClasses> &gui_classes, std::span<const BadgeID> badges, GrfSpecFeature feature, std::optional<TimerGameCalendar::Date> introduction_date, Money cost, const Dimension &dim, SpriteID sprite, PaletteID palette, std::string &&str, int value, bool masked, bool shaded)
+{
+	return std::make_unique<DropDownListBadgeIconItem>(gui_classes, badges, feature, introduction_date, GetString(STR_JUST_CURRENCY_SHORT, cost), dim, sprite, palette, std::move(str), value, masked, shaded);
 }
 
 /**
@@ -273,7 +290,7 @@ public:
 		bool rtl = (_current_text_dir == TD_RTL);
 		int w = SETTING_BUTTON_WIDTH;
 
-		Rect br = r.WithWidth(w, TEnd ^ rtl).CentreTo(w, SETTING_BUTTON_HEIGHT);
+		Rect br = r.WithWidth(w, TEnd ^ rtl).CentreToHeight(SETTING_BUTTON_HEIGHT);
 		if (br.WithWidth(w / 2, rtl).Contains(pt)) return this->click_up;
 		if (br.WithWidth(w / 2, !rtl).Contains(pt)) return this->click_down;
 
@@ -291,7 +308,7 @@ public:
 			if (click_result == this->click_down) state = 2;
 		}
 
-		Rect br = r.WithWidth(w, TEnd ^ rtl).CentreTo(w, SETTING_BUTTON_HEIGHT);
+		Rect br = r.WithWidth(w, TEnd ^ rtl).CentreToHeight(SETTING_BUTTON_HEIGHT);
 		DrawUpDownButtons(br.left, br.top, this->button_colour, state, this->click_up != 0, this->click_down != 0);
 
 		this->TBase::Draw(full, r.Indent(w + WidgetDimensions::scaled.hsep_wide, TEnd ^ rtl), sel, click_result, bg_colour);
@@ -314,7 +331,7 @@ enum BadgeClick : int {
 	BADGE_CLICK_TOGGLE_FILTER,
 };
 
-DropDownList BuildBadgeClassConfigurationList(const GUIBadgeClasses &gui_classes, uint columns, std::span<const StringID> column_separators)
+DropDownList BuildBadgeClassConfigurationList(const GUIBadgeClasses &gui_classes, uint columns, std::span<const StringID> column_separators, Colours bg_colour)
 {
 	DropDownList list;
 
@@ -333,7 +350,7 @@ DropDownList BuildBadgeClassConfigurationList(const GUIBadgeClasses &gui_classes
 
 			bool first = (i == 0 && gc.class_index == front);
 			bool last = (i == columns - 1 && gc.class_index == back);
-			list.push_back(std::make_unique<DropDownListToggleMoverItem>(first ? 0 : BADGE_CLICK_MOVE_UP, last ? 0 : BADGE_CLICK_MOVE_DOWN, COLOUR_YELLOW, gc.visible, BADGE_CLICK_TOGGLE_ICON, COLOUR_YELLOW, COLOUR_GREY, GetString(GetClassBadge(gc.class_index)->name), gc.class_index.base()));
+			list.push_back(std::make_unique<DropDownListToggleMoverItem>(first ? 0 : BADGE_CLICK_MOVE_UP, last ? 0 : BADGE_CLICK_MOVE_DOWN, COLOUR_YELLOW, gc.visible, BADGE_CLICK_TOGGLE_ICON, COLOUR_YELLOW, bg_colour, GetString(GetClassBadge(gc.class_index)->name), gc.class_index.base()));
 		}
 
 		if (i >= column_separators.size()) continue;
@@ -353,7 +370,7 @@ DropDownList BuildBadgeClassConfigurationList(const GUIBadgeClasses &gui_classes
 		if (!badge->flags.Test(BadgeFlag::HasText)) continue;
 
 		const auto [config, _] = GetBadgeClassConfigItem(gui_classes.GetFeature(), badge->label);
-		list.push_back(std::make_unique<DropDownListToggleItem>(config.show_filter, BADGE_CLICK_TOGGLE_FILTER, COLOUR_YELLOW, COLOUR_GREY, GetString(badge->name), (1U << 16) | badge_class_index.base()));
+		list.push_back(std::make_unique<DropDownListToggleItem>(config.show_filter, BADGE_CLICK_TOGGLE_FILTER, COLOUR_YELLOW, bg_colour, GetString(badge->name), (1U << 16) | badge_class_index.base()));
 	}
 
 	return list;
@@ -424,7 +441,7 @@ static void BadgeClassMoveNext(GrfSpecFeature feature, Badge &class_badge, uint 
 
 	auto pos_cur = std::ranges::find(gui_classes.GetClasses(), class_badge.class_index, &GUIBadgeClasses::Element::class_index);
 	if (std::next(pos_cur) == std::end(gui_classes.GetClasses())) {
-		if (it->column < static_cast<int>(columns - 1)) ++it->column;
+		if (it->column < columns - 1) ++it->column;
 		return;
 	}
 
@@ -493,9 +510,10 @@ std::string NWidgetBadgeFilter::GetStringParameter(const BadgeFilterChoices &cho
 
 /**
  * Get the drop down list of badges for this filter.
+ * @param palette Palette used to remap badge sprites.
  * @return Drop down list for filter.
  */
-DropDownList NWidgetBadgeFilter::GetDropDownList() const
+DropDownList NWidgetBadgeFilter::GetDropDownList(PaletteID palette) const
 {
 	DropDownList list;
 
@@ -518,7 +536,7 @@ DropDownList NWidgetBadgeFilter::GetDropDownList() const
 		if (badge.name == STR_NULL) continue;
 		if (!badge.features.Test(this->feature)) continue;
 
-		PalSpriteID ps = GetBadgeSprite(badge, this->feature, std::nullopt, PAL_NONE);
+		PalSpriteID ps = GetBadgeSprite(badge, this->feature, std::nullopt, palette);
 		if (ps.sprite == 0) {
 			list.push_back(MakeDropDownListStringItem(badge.name, badge.index.base()));
 		} else {
@@ -533,15 +551,17 @@ DropDownList NWidgetBadgeFilter::GetDropDownList() const
 
 /**
  * Add badge drop down filter widgets.
- * @param container Container widget to hold filter widgets.
+ * @param window Window that holds the container.
+ * @param container Container widget index to hold filter widgets.
  * @param widget Widget index to apply to first filter.
  * @param colour Background colour of widgets.
  * @param feature GRF feature for filters.
  * @return First and last widget indexes of filter widgets.
  */
-std::pair<WidgetID, WidgetID> AddBadgeDropdownFilters(NWidgetContainer &container, WidgetID widget, Colours colour, GrfSpecFeature feature)
+std::pair<WidgetID, WidgetID> AddBadgeDropdownFilters(Window *window, WidgetID container_id, WidgetID widget, Colours colour, GrfSpecFeature feature)
 {
-	container.Clear();
+	auto container = window->GetWidget<NWidgetContainer>(container_id);
+	container->Clear(window);
 	WidgetID first = ++widget;
 
 	/* Get list of classes used by feature. */
@@ -551,7 +571,7 @@ std::pair<WidgetID, WidgetID> AddBadgeDropdownFilters(NWidgetContainer &containe
 		const auto [config, _] = GetBadgeClassConfigItem(feature, GetClassBadge(class_index)->label);
 		if (!config.show_filter) continue;
 
-		container.Add(std::make_unique<NWidgetBadgeFilter>(colour, widget, feature, class_index));
+		container->Add(std::make_unique<NWidgetBadgeFilter>(colour, widget, feature, class_index));
 		++widget;
 	}
 

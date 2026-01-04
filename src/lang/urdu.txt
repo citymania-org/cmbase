@@ -14,7 +14,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -1482,7 +1482,7 @@ STR_CONFIG_SETTING_CITY_SIZE_MULTIPLIER                         :شہر کا ش�
 
 ###length 3
 
-###length 3
+###length 4
 
 STR_CONFIG_SETTING_INTERFACE                                    :انٹرفیس
 STR_CONFIG_SETTING_INTERFACE_CONSTRUCTION                       :تعمیرات
@@ -1984,6 +1984,7 @@ STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}کھین
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :طے شدہ اسٹیشن
 STR_STATION_CLASS_WAYP                                          :گزرگاہیں
 
@@ -2222,6 +2223,8 @@ STR_MAPGEN_BORDER_TYPE_TOOLTIP                                  :{BLACK}کھیل
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}فری فارم
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}پانی
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}بے ترتیب
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}بے ترتیب
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}دستی
 

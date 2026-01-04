@@ -13,7 +13,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -2056,7 +2056,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Satuan ketinggian: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Apabila ketinggian ditampilkan di antarmuka, nyatakan di satuan yang dipilih
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Imperial (ft)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Metrik (m)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (m)
@@ -2717,6 +2717,7 @@ STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Membangu
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :Standar
 STR_STATION_CLASS_DFLT_STATION                                  :Stasiun standar
 STR_STATION_CLASS_DFLT_ROADSTOP                                 :Pemberhentian jalan standar
@@ -2979,7 +2980,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Kelas Ba
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Nama Bandara: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Nama area bandara: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Muatan diterima: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Muatan diterima: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Tipe Rel: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_ROAD_TYPE                             :{BLACK}Tipe jalan: {LTBLUE}{STRING}
@@ -3240,6 +3241,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Barat Da
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Bebas
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Perairan
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Acak
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Acak
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Manual
 
@@ -3485,7 +3488,6 @@ STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Masukkan
 # Town directory window
 STR_TOWN_DIRECTORY_NONE                                         :{ORANGE}- Tidak Ada -
 STR_TOWN_DIRECTORY_TOWN                                         :{ORANGE}{TOWN}{BLACK} ({COMMA})
-STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{YELLOW} (Kota){BLACK} ({COMMA})
 STR_TOWN_DIRECTORY_LIST_TOOLTIP                                 :{BLACK}Nama-nama kota - Klik pada nama untuk mengarahkan pandangan utama pada kota. Ctrl+Click akan membuka viewport baru pada lokasi kota
 STR_TOWN_POPULATION                                             :{BLACK}Populasi Dunia: {COMMA}
 
@@ -3671,14 +3673,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Sempurna
 STR_CARGO_RATING_OUTSTANDING                                    :Luar Biasa
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Arahkan pandangan utama pada lokasi stasiun. Ctrl+Click akan membuka viewport baru pada lokasi stasiun
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Ganti nama stasiun
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Tampilkan semua kereta yang memiliki jadwal menuju stasiun ini.
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Tampilkan semua kendaraan yang memiliki jadwal menuju terminal ini.
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Tampilkan semua Pesawat yang memiliki jadwal menuju bandara ini.
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Tampilkan semua kapal yang memiliki jadwal menuju pelabuhan ini.
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Ubah nama stasiun/area bongkar muat
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Tutup bandara
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Cegah pesawat mendarat di bandara ini
@@ -3686,11 +3686,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Cegah pe
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Arahkan pandangan utama pada lokasi waypoint. Ctrl+Click akan membuka viewport baru pada lokasi waypoint
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Ubah nama waypoint
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Arahkan pandangan utama pada lokasi pelampung. Ctrl+Click akan membuka viewport baru pada lokasi pelampung
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Ubah nama pelampung
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Ubah nama waypoint
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}Keuangan {COMPANY} {BLACK}{COMPANY_NUM}
@@ -3801,12 +3799,12 @@ STR_COMPANY_INFRASTRUCTURE_VIEW_TOTAL_PERIOD                    :{WHITE}{CURRENC
 
 # Industry directory
 STR_INDUSTRY_DIRECTORY_NONE                                     :{ORANGE}- Tidak Ada -
-STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% Terkirim){BLACK}
+STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% Terkirim)
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING} dan {NUM} banyak lagi...
+STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING} dan {NUM} banyak lagi...
 STR_INDUSTRY_DIRECTORY_LIST_TOOLTIP                             :{BLACK}Nama-nama industri - klik di nama untuk mengarahkan pandangan utama pada industri. Ctrl+Click akan membuka viewport baru pada lokasi industri
 STR_INDUSTRY_DIRECTORY_ACCEPTED_CARGO_FILTER                    :{BLACK}Muatan diterima: {SILVER}{STRING}
 STR_INDUSTRY_DIRECTORY_PRODUCED_CARGO_FILTER                    :{BLACK}Kargo yang diproduksi: {SILVER}{STRING}
@@ -3821,9 +3819,9 @@ STR_INDUSTRY_VIEW_LOCATION_TOOLTIP                              :{BLACK}Arahkan 
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Tingkat produksi: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}Industri akan segera ditutup!
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Membutuhkan: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Produksi: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :, {STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Membutuhkan: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Produksi: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :{STRING}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}Membutuhkan:
 
@@ -4329,7 +4327,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Tampilka
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Total kargo
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Tampilkan kapasitas total Kereta , pisahkan dengan jenis kargo
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Kapasitas: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Kapasitas: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Renovasi)

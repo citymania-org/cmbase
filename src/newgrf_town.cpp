@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file newgrf_town.cpp Implementation of the town part of NewGRF houses. */
@@ -63,7 +63,7 @@ static uint16_t TownHistoryHelper(const Town *t, CargoLabel label, uint period, 
 		case 0x82: return ClampTo<uint16_t>(this->t->cache.population);
 		case 0x83: return GB(ClampTo<uint16_t>(this->t->cache.population), 8, 8);
 		case 0x8A: return this->t->grow_counter / Ticks::TOWN_GROWTH_TICKS;
-		case 0x92: return this->t->flags;  // In original game, 0x92 and 0x93 are really one word. Since flags is a byte, this is to adjust
+		case 0x92: return this->t->flags.base(); // In original game, 0x92 and 0x93 are one word.
 		case 0x93: return 0;
 		case 0x94: return ClampTo<uint16_t>(this->t->cache.squared_town_zone_radius[to_underlying(HouseZone::TownEdge)]);
 		case 0x95: return GB(ClampTo<uint16_t>(this->t->cache.squared_town_zone_radius[to_underlying(HouseZone::TownEdge)]), 8, 8);

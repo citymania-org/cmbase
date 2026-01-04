@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file train.h Base for the train class. */
@@ -99,7 +99,7 @@ struct Train final : public GroundVehicle<Train, VEH_TRAIN> {
 	Train *other_multiheaded_part = nullptr;
 
 	RailTypes compatible_railtypes{};
-	RailType railtype = INVALID_RAILTYPE;
+	RailTypes railtypes{};
 
 	TrackBits track{};
 	TrainForceProceeding force_proceed{};
@@ -180,6 +180,15 @@ struct Train final : public GroundVehicle<Train, VEH_TRAIN> {
 		return this->gcache.cached_veh_length / 2 + (this->Next() != nullptr ? this->Next()->gcache.cached_veh_length + 1 : 0) / 2;
 	}
 
+	/**
+	 * Allows to know the acceleration type of a vehicle.
+	 * @return Acceleration type of the vehicle.
+	 */
+	inline VehicleAccelerationModel GetAccelerationType() const
+	{
+		return GetRailTypeInfo(GetRailType(this->tile))->acceleration_type;
+	}
+
 protected: // These functions should not be called outside acceleration code.
 
 	/**
@@ -189,7 +198,7 @@ protected: // These functions should not be called outside acceleration code.
 	inline uint16_t GetPower() const
 	{
 		/* Power is not added for articulated parts */
-		if (!this->IsArticulatedPart() && HasPowerOnRail(this->railtype, GetRailType(this->tile))) {
+		if (!this->IsArticulatedPart() && HasPowerOnRail(this->railtypes, GetRailType(this->tile))) {
 			uint16_t power = GetVehicleProperty(this, PROP_TRAIN_POWER, RailVehInfo(this->engine_type)->power);
 			/* Halve power for multiheaded parts */
 			if (this->IsMultiheaded()) power /= 2;
@@ -206,7 +215,7 @@ protected: // These functions should not be called outside acceleration code.
 	inline uint16_t GetPoweredPartPower(const Train *head) const
 	{
 		/* For powered wagons the engine defines the type of engine (i.e. railtype) */
-		if (this->flags.Test(VehicleRailFlag::PoweredWagon) && HasPowerOnRail(head->railtype, GetRailType(this->tile))) {
+		if (this->flags.Test(VehicleRailFlag::PoweredWagon) && HasPowerOnRail(head->railtypes, GetRailType(this->tile))) {
 			return RailVehInfo(this->gcache.first_engine)->pow_wag_power;
 		}
 
@@ -296,15 +305,6 @@ protected: // These functions should not be called outside acceleration code.
 		 * The friction coefficient increases with speed in a way that
 		 * it doubles at 512 km/h, triples at 1024 km/h and so on. */
 		return 15 * (512 + this->GetCurrentSpeed()) / 512;
-	}
-
-	/**
-	 * Allows to know the acceleration type of a vehicle.
-	 * @return Acceleration type of the vehicle.
-	 */
-	inline int GetAccelerationType() const
-	{
-		return GetRailTypeInfo(this->railtype)->acceleration_type;
 	}
 
 	/**

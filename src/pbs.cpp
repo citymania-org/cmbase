@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file pbs.cpp PBS support routines */
@@ -296,7 +296,7 @@ PBSTileInfo FollowTrainReservation(const Train *v, Vehicle **train_on_res)
 	if (IsRailDepotTile(tile) && !GetDepotReservationTrackBits(tile)) return PBSTileInfo(tile, trackdir, false);
 
 	FindTrainOnTrackInfo ftoti;
-	ftoti.res = FollowReservation(v->owner, GetRailTypeInfo(v->railtype)->compatible_railtypes, tile, trackdir);
+	ftoti.res = FollowReservation(v->owner, GetAllCompatibleRailTypes(v->railtypes), tile, trackdir);
 	ftoti.res.okay = IsSafeWaitingPosition(v, ftoti.res.tile, ftoti.res.trackdir, true, _settings_game.pf.forbid_90_deg);
 	if (train_on_res != nullptr) {
 		CheckTrainsOnTrack(ftoti, ftoti.res.tile);
@@ -388,7 +388,7 @@ bool IsSafeWaitingPosition(const Train *v, TileIndex tile, Trackdir trackdir, bo
 	}
 
 	/* Check next tile. For performance reasons, we check for 90 degree turns ourself. */
-	CFollowTrackRail ft(v, GetRailTypeInfo(v->railtype)->compatible_railtypes);
+	CFollowTrackRail ft(v, GetAllCompatibleRailTypes(v->railtypes));
 
 	/* End of track? */
 	if (!ft.Follow(tile, trackdir)) {

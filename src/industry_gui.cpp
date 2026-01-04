@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file industry_gui.cpp GUIs related to industries. */
@@ -257,7 +257,7 @@ void SortIndustryTypes()
 	std::sort(_sorted_industry_types.begin(), _sorted_industry_types.end(), IndustryTypeNameSorter);
 }
 
-static constexpr NWidgetPart _nested_build_industry_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_build_industry_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_DARK_GREEN),
 		NWidget(WWT_CAPTION, COLOUR_DARK_GREEN), SetStringTip(STR_FUND_INDUSTRY_CAPTION, STR_TOOLTIP_WINDOW_TITLE_DRAG_THIS),
@@ -368,27 +368,18 @@ class BuildIndustryWindow : public Window {
 		assert(cargolist.size() == cargo_suffix.size());
 
 		std::string cargostring;
-		size_t numcargo = 0;
-		size_t firstcargo = 0;
+		std::string_view list_separator = GetListSeparator();
 
 		for (size_t j = 0; j < cargolist.size(); j++) {
 			if (!IsValidCargoType(cargolist[j])) continue;
-			numcargo++;
-			if (numcargo == 1) {
-				firstcargo = j;
-				continue;
-			}
+
+			if (!cargostring.empty()) cargostring += list_separator;
 			auto params = MakeParameters(CargoSpec::Get(cargolist[j])->name, cargo_suffix[j].text);
 			AppendStringWithArgsInPlace(cargostring, STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION, params);
 		}
 
-		if (numcargo > 0) {
-			cargostring = GetString(prefixstr, CargoSpec::Get(cargolist[firstcargo])->name, cargo_suffix[firstcargo].text) + cargostring;
-		} else {
-			cargostring = GetString(prefixstr, STR_JUST_NOTHING, ""sv);
-		}
-
-		return cargostring;
+		if (cargostring.empty()) AppendStringInPlace(cargostring, STR_JUST_NOTHING);
+		return GetString(prefixstr, cargostring);
 	}
 
 public:
@@ -1204,7 +1195,7 @@ static void UpdateIndustryProduction(Industry *i)
 }
 
 /** Widget definition of the view industry gui */
-static constexpr NWidgetPart _nested_industry_view_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_industry_view_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_CREAM),
 		NWidget(WWT_CAPTION, COLOUR_CREAM, WID_IV_CAPTION),
@@ -1242,7 +1233,7 @@ void ShowIndustryViewWindow(IndustryID industry)
 }
 
 /** Widget definition of the industry directory gui */
-static constexpr NWidgetPart _nested_industry_directory_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_industry_directory_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_BROWN),
 		NWidget(WWT_CAPTION, COLOUR_BROWN, WID_ID_CAPTION),
@@ -1931,7 +1922,7 @@ void ShowIndustryDirectory()
 }
 
 /** Widgets of the industry cargoes window. */
-static constexpr NWidgetPart _nested_industry_cargoes_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_industry_cargoes_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_BROWN),
 		NWidget(WWT_CAPTION, COLOUR_BROWN, WID_IC_CAPTION),
@@ -2297,17 +2288,17 @@ struct CargoesField {
 		uint col;
 		for (col = 0; col < this->u.cargo.num_cargoes; col++) {
 			if (pt.x < cpos) break;
-			if (pt.x < cpos + (int)CargoesField::cargo_line.width) return this->u.cargo.vertical_cargoes[col];
+			if (pt.x < cpos + static_cast<int>(CargoesField::cargo_line.width)) return this->u.cargo.vertical_cargoes[col];
 			cpos += CargoesField::cargo_line.width + CargoesField::cargo_space.width;
 		}
 		/* col = 0 -> left of first col, 1 -> left of 2nd col, ... this->u.cargo.num_cargoes right of last-col. */
 
-		int vpos = vert_inter_industry_space / 2 + CargoesField::cargo_border.width;
+		int vpos = (vert_inter_industry_space / 2) + CargoesField::cargo_border.height + (GetCharacterHeight(FS_NORMAL) - CargoesField::cargo_line.height) / 2;
 		uint row;
 		for (row = 0; row < MAX_CARGOES; row++) {
 			if (pt.y < vpos) return INVALID_CARGO;
-			if (pt.y < vpos + GetCharacterHeight(FS_NORMAL)) break;
-			vpos += GetCharacterHeight(FS_NORMAL) + CargoesField::cargo_space.width;
+			if (pt.y < vpos + static_cast<int>(CargoesField::cargo_line.height)) break;
+			vpos += GetCharacterHeight(FS_NORMAL) + CargoesField::cargo_space.height;
 		}
 		if (row == MAX_CARGOES) return INVALID_CARGO;
 

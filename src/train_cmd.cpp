@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file train_cmd.cpp Handling of trains. */
@@ -26,7 +26,6 @@
 #include "newgrf_station.h"
 #include "effectvehicle_func.h"
 #include "network/network.h"
-#include "spritecache.h"
 #include "core/random_func.hpp"
 #include "company_base.h"
 #include "newgrf.h"
@@ -127,7 +126,7 @@ void Train::ConsistChanged(ConsistChangeFlags allowed_changes)
 
 		/* update the 'first engine' */
 		u->gcache.first_engine = this == u ? EngineID::Invalid() : first_engine;
-		u->railtype = rvi_u->railtype;
+		u->railtypes = rvi_u->railtypes;
 
 		if (u->IsEngine()) first_engine = u->engine_type;
 
@@ -146,7 +145,7 @@ void Train::ConsistChanged(ConsistChangeFlags allowed_changes)
 
 	for (Train *u = this; u != nullptr; u = u->Next()) {
 		const Engine *e_u = u->GetEngine();
-		const RailVehicleInfo *rvi_u = &e_u->u.rail;
+		const RailVehicleInfo *rvi_u = &e_u->VehInfo<RailVehicleInfo>();
 
 		if (!e_u->info.misc_flags.Test(EngineMiscFlag::RailTilts)) train_can_tilt = false;
 		min_curve_speed_mod = std::min(min_curve_speed_mod, u->GetCurveSpeedModifier());
@@ -172,13 +171,13 @@ void Train::ConsistChanged(ConsistChangeFlags allowed_changes)
 			/* Do not count powered wagons for the compatible railtypes, as wagons always
 			   have railtype normal */
 			if (rvi_u->power > 0) {
-				this->compatible_railtypes.Set(GetRailTypeInfo(u->railtype)->powered_railtypes);
+				this->compatible_railtypes.Set(GetAllPoweredRailTypes(u->railtypes));
 			}
 
 			/* Some electric engines can be allowed to run on normal rail. It happens to all
 			 * existing electric engines when elrails are disabled and then re-enabled */
 			if (u->flags.Test(VehicleRailFlag::AllowedOnNormalRail)) {
-				u->railtype = RAILTYPE_RAIL;
+				u->railtypes.Set(RAILTYPE_RAIL);
 				u->compatible_railtypes.Set(RAILTYPE_RAIL);
 			}
 
@@ -266,10 +265,10 @@ int GetTrainStopLocation(StationID station_id, TileIndex tile, const Train *v, i
 
 	/* Default to the middle of the station for stations stops that are not in
 	 * the order list like intermediate stations when non-stop is disabled */
-	OrderStopLocation osl = OSL_PLATFORM_MIDDLE;
+	OrderStopLocation osl = OrderStopLocation::Middle;
 	if (v->gcache.cached_total_length >= *station_length) {
 		/* The train is longer than the station, make it stop at the far end of the platform */
-		osl = OSL_PLATFORM_FAR_END;
+		osl = OrderStopLocation::FarEnd;
 	} else if (v->current_order.IsType(OT_GOTO_STATION) && v->current_order.GetDestination() == station_id) {
 		osl = v->current_order.GetStopLocation();
 	}
@@ -279,15 +278,15 @@ int GetTrainStopLocation(StationID station_id, TileIndex tile, const Train *v, i
 	switch (osl) {
 		default: NOT_REACHED();
 
-		case OSL_PLATFORM_NEAR_END:
+		case OrderStopLocation::NearEnd:
 			stop = v->gcache.cached_total_length;
 			break;
 
-		case OSL_PLATFORM_MIDDLE:
+		case OrderStopLocation::Middle:
 			stop = *station_length - (*station_length - v->gcache.cached_total_length) / 2;
 			break;
 
-		case OSL_PLATFORM_FAR_END:
+		case OrderStopLocation::FarEnd:
 			stop = *station_length;
 			break;
 	}
@@ -441,7 +440,7 @@ int Train::GetCursorImageOffset() const
 		int reference_width = TRAININFO_DEFAULT_VEHICLE_WIDTH;
 
 		const Engine *e = this->GetEngine();
-		if (e->GetGRF() != nullptr && IsCustomVehicleSpriteNum(e->u.rail.image_index)) {
+		if (e->GetGRF() != nullptr && IsCustomVehicleSpriteNum(e->VehInfo<RailVehicleInfo>().image_index)) {
 			reference_width = e->GetGRF()->traininfo_vehicle_width;
 		}
 
@@ -461,7 +460,7 @@ int Train::GetDisplayImageWidth(Point *offset) const
 	int vehicle_pitch = 0;
 
 	const Engine *e = this->GetEngine();
-	if (e->GetGRF() != nullptr && IsCustomVehicleSpriteNum(e->u.rail.image_index)) {
+	if (e->GetGRF() != nullptr && IsCustomVehicleSpriteNum(e->VehInfo<RailVehicleInfo>().image_index)) {
 		reference_width = e->GetGRF()->traininfo_vehicle_width;
 		vehicle_pitch = e->GetGRF()->traininfo_vehicle_pitch;
 	}
@@ -515,7 +514,7 @@ static void GetRailIcon(EngineID engine, bool rear_head, int &y, EngineImageType
 {
 	const Engine *e = Engine::Get(engine);
 	Direction dir = rear_head ? DIR_E : DIR_W;
-	uint8_t spritenum = e->u.rail.image_index;
+	uint8_t spritenum = e->VehInfo<RailVehicleInfo>().image_index;
 
 	if (IsCustomVehicleSpriteNum(spritenum)) {
 		GetCustomVehicleIcon(engine, dir, image_type, result);
@@ -636,10 +635,10 @@ static std::vector<VehicleID> GetFreeWagonsInDepot(TileIndex tile)
  */
 static CommandCost CmdBuildRailWagon(DoCommandFlags flags, TileIndex tile, const Engine *e, Vehicle **ret)
 {
-	const RailVehicleInfo *rvi = &e->u.rail;
+	const RailVehicleInfo *rvi = &e->VehInfo<RailVehicleInfo>();
 
 	/* Check that the wagon can drive on the track in question */
-	if (!IsCompatibleRail(rvi->railtype, GetRailType(tile))) return CMD_ERROR;
+	if (!IsCompatibleRail(rvi->railtypes, GetRailType(tile))) return CMD_ERROR;
 
 	if (flags.Test(DoCommandFlag::Execute)) {
 		Train *v = new Train();
@@ -674,7 +673,7 @@ static CommandCost CmdBuildRailWagon(DoCommandFlags flags, TileIndex tile, const
 		v->cargo_cap = rvi->capacity;
 		v->refit_cap = 0;
 
-		v->railtype = rvi->railtype;
+		v->railtypes = rvi->railtypes;
 
 		v->date_of_last_service = TimerGameEconomy::date;
 		v->date_of_last_service_newgrf = TimerGameCalendar::date;
@@ -741,7 +740,7 @@ static void AddRearEngineToMultiheadedTrain(Train *v)
 	u->cargo_subtype = v->cargo_subtype;
 	u->cargo_cap = v->cargo_cap;
 	u->refit_cap = v->refit_cap;
-	u->railtype = v->railtype;
+	u->railtypes = v->railtypes;
 	u->engine_type = v->engine_type;
 	u->date_of_last_service = v->date_of_last_service;
 	u->date_of_last_service_newgrf = v->date_of_last_service_newgrf;
@@ -770,13 +769,13 @@ static void AddRearEngineToMultiheadedTrain(Train *v)
  */
 CommandCost CmdBuildRailVehicle(DoCommandFlags flags, TileIndex tile, const Engine *e, Vehicle **ret)
 {
-	const RailVehicleInfo *rvi = &e->u.rail;
+	const RailVehicleInfo *rvi = &e->VehInfo<RailVehicleInfo>();
 
 	if (rvi->railveh_type == RAILVEH_WAGON) return CmdBuildRailWagon(flags, tile, e, ret);
 
 	/* Check if depot and new engine uses the same kind of tracks *
 	 * We need to see if the engine got power on the tile to avoid electric engines in non-electric depots */
-	if (!HasPowerOnRail(rvi->railtype, GetRailType(tile))) return CMD_ERROR;
+	if (!HasPowerOnRail(rvi->railtypes, GetRailType(tile))) return CMD_ERROR;
 
 	if (flags.Test(DoCommandFlag::Execute)) {
 		DiagDirection dir = GetRailDepotDirection(tile);
@@ -808,7 +807,7 @@ CommandCost CmdBuildRailVehicle(DoCommandFlags flags, TileIndex tile, const Engi
 		v->reliability_spd_dec = e->reliability_spd_dec;
 		v->max_age = e->GetLifeLengthInDays();
 
-		v->railtype = rvi->railtype;
+		v->railtypes = rvi->railtypes;
 
 		v->SetServiceInterval(Company::Get(_current_company)->settings.vehicle.servint_trains);
 		v->date_of_last_service = TimerGameEconomy::date;
@@ -2139,6 +2138,27 @@ CommandCost CmdReverseTrainDirection(DoCommandFlags flags, VehicleID veh_id, boo
 }
 
 /**
+ * Determine to what force_proceed should be changed.
+ * If we are forced to proceed, cancel that order.
+ * If we are marked stuck we would want to force the train to
+ * proceed to the next signal unless we are stuck just before
+ * the next signal. In the other cases we would like to pass
+ * the signal at danger and run till the next signal we encounter.
+ * @param t The train to determine the new value of force_proceed for.
+ * @return The next state of force_proceed.
+ */
+static TrainForceProceeding DetermineNextTrainForceProceeding(const Train *t)
+{
+	if (t->vehstatus.Test(VehState::Crashed) || t->force_proceed == TFP_SIGNAL) return TFP_NONE;
+	if (!t->flags.Test(VehicleRailFlag::Stuck)) return t->IsChainInDepot() ? TFP_STUCK : TFP_SIGNAL;
+
+	TileIndex next_tile = TileAddByDiagDir(t->tile, TrackdirToExitdir(t->GetVehicleTrackdir()));
+	if (next_tile == INVALID_TILE || !IsTileType(next_tile, MP_RAILWAY) || !HasSignals(next_tile)) return TFP_STUCK;
+	TrackBits new_tracks = DiagdirReachesTracks(TrackdirToExitdir(t->GetVehicleTrackdir())) & GetTrackBits(next_tile);
+	return new_tracks != TRACK_BIT_NONE && HasSignalOnTrack(next_tile, FindFirstTrack(new_tracks)) ? TFP_SIGNAL : TFP_STUCK;
+}
+
+/**
  * Force a train through a red signal
  * @param flags type of operation
  * @param veh_id train to ignore the red signal
@@ -2156,12 +2176,7 @@ CommandCost CmdForceTrainProceed(DoCommandFlags flags, VehicleID veh_id)
 
 
 	if (flags.Test(DoCommandFlag::Execute)) {
-		/* If we are forced to proceed, cancel that order.
-		 * If we are marked stuck we would want to force the train
-		 * to proceed to the next signal. In the other cases we
-		 * would like to pass the signal at danger and run till the
-		 * next signal we encounter. */
-		t->force_proceed = t->force_proceed == TFP_SIGNAL ? TFP_NONE : t->flags.Test(VehicleRailFlag::Stuck) || t->IsChainInDepot() ? TFP_STUCK : TFP_SIGNAL;
+		t->force_proceed = DetermineNextTrainForceProceeding(t);
 		SetWindowDirty(WC_VEHICLE_VIEW, t->index);
 
 		/* Unbunching data is no longer valid. */
@@ -2418,7 +2433,7 @@ void FreeTrainTrackReservation(const Train *v)
 	/* Don't free reservation if it's not ours. */
 	if (TracksOverlap(GetReservedTrackbits(tile) | TrackToTrackBits(TrackdirToTrack(td)))) return;
 
-	CFollowTrackRail ft(v, GetRailTypeInfo(v->railtype)->compatible_railtypes);
+	CFollowTrackRail ft(v, GetAllCompatibleRailTypes(v->railtypes));
 	while (ft.Follow(tile, td)) {
 		tile = ft.new_tile;
 		TrackdirBits bits = ft.new_td_bits & TrackBitsToTrackdirBits(GetReservedTrackbits(tile));
@@ -2676,7 +2691,7 @@ public:
 			switch (order->GetType()) {
 				case OT_GOTO_DEPOT:
 					/* Skip service in depot orders when the train doesn't need service. */
-					if ((order->GetDepotOrderType() & ODTFB_SERVICE) && !this->v->NeedsServicing()) break;
+					if (order->GetDepotOrderType().Test(OrderDepotTypeFlag::Service) && !this->v->NeedsServicing()) break;
 					[[fallthrough]];
 				case OT_GOTO_STATION:
 				case OT_GOTO_WAYPOINT:
@@ -2860,7 +2875,7 @@ static Track ChooseTrainTrack(Train *v, TileIndex tile, DiagDirection enterdir, 
 
 	orders.Restore();
 	if (v->current_order.IsType(OT_GOTO_DEPOT) &&
-			(v->current_order.GetDepotActionType() & ODATFB_NEAREST_DEPOT) &&
+			v->current_order.GetDepotActionType().Test(OrderDepotActionFlag::NearestDepot) &&
 			final_dest != INVALID_TILE && IsRailDepotTile(final_dest)) {
 		v->current_order.SetDestination(GetDepotIndex(final_dest));
 		v->dest_tile = final_dest;
@@ -3074,7 +3089,7 @@ static inline void AffectSpeedByZChange(Train *v, int old_z)
 {
 	if (old_z == v->z_pos || _settings_game.vehicle.train_acceleration_model != AM_ORIGINAL) return;
 
-	const AccelerationSlowdownParams *asp = &_accel_slowdown[GetRailTypeInfo(v->railtype)->acceleration_type];
+	const AccelerationSlowdownParams *asp = &_accel_slowdown[static_cast<int>(v->GetAccelerationType())];
 
 	if (old_z < v->z_pos) {
 		v->cur_speed -= (v->cur_speed * asp->z_up >> 8);
@@ -3087,7 +3102,7 @@ static inline void AffectSpeedByZChange(Train *v, int old_z)
 static bool TrainMovedChangeSignals(TileIndex tile, DiagDirection dir)
 {
 	if (IsTileType(tile, MP_RAILWAY) &&
-			GetRailTileType(tile) == RAIL_TILE_SIGNALS) {
+			GetRailTileType(tile) == RailTileType::Signals) {
 		TrackdirBits tracks = TrackBitsToTrackdirBits(GetTrackBits(tile)) & DiagdirReachesTrackdirs(dir);
 		Trackdir trackdir = FindFirstTrackdir(tracks);
 		if (UpdateSignalsOnSegment(tile,  TrackdirToExitdir(trackdir), GetTileOwner(tile)) == SIGSEG_PBS && HasSignalOnTrackdir(tile, trackdir)) {
@@ -3481,7 +3496,7 @@ bool TrainController(Train *v, Vehicle *nomove, bool reverse)
 
 				if (chosen_dir != v->direction) {
 					if (prev == nullptr && _settings_game.vehicle.train_acceleration_model == AM_ORIGINAL) {
-						const AccelerationSlowdownParams *asp = &_accel_slowdown[GetRailTypeInfo(v->railtype)->acceleration_type];
+						const AccelerationSlowdownParams *asp = &_accel_slowdown[static_cast<int>(v->GetAccelerationType())];
 						DirDiff diff = DirDifference(v->direction, chosen_dir);
 						v->cur_speed -= (diff == DIRDIFF_45RIGHT || diff == DIRDIFF_45LEFT ? asp->small_turn : asp->large_turn) * v->cur_speed >> 8;
 					}
@@ -4043,7 +4058,7 @@ static bool TrainLocoHandler(Train *v, bool mode)
 			OrderType order_type = v->current_order.GetType();
 			/* Do not skip waypoints (incl. 'via' stations) when passing through at full speed. */
 			if ((order_type == OT_GOTO_WAYPOINT || order_type == OT_GOTO_STATION) &&
-						(v->current_order.GetNonStopType() & ONSF_NO_STOP_AT_DESTINATION_STATION) &&
+						v->current_order.GetNonStopType().Test(OrderNonStopFlag::NoDestination) &&
 						IsTileType(v->tile, MP_STATION) &&
 						v->current_order.GetDestination() == GetStationIndex(v->tile)) {
 				ProcessOrders(v);
@@ -4074,15 +4089,15 @@ Money Train::GetRunningCost() const
 
 	do {
 		const Engine *e = v->GetEngine();
-		if (e->u.rail.running_cost_class == INVALID_PRICE) continue;
+		if (e->VehInfo<RailVehicleInfo>().running_cost_class == INVALID_PRICE) continue;
 
-		uint cost_factor = GetVehicleProperty(v, PROP_TRAIN_RUNNING_COST_FACTOR, e->u.rail.running_cost);
+		uint cost_factor = GetVehicleProperty(v, PROP_TRAIN_RUNNING_COST_FACTOR, e->VehInfo<RailVehicleInfo>().running_cost);
 		if (cost_factor == 0) continue;
 
 		/* Halve running cost for multiheaded parts */
 		if (v->IsMultiheaded()) cost_factor /= 2;
 
-		cost += GetPrice(e->u.rail.running_cost_class, cost_factor, e->GetGRF());
+		cost += GetPrice(e->VehInfo<RailVehicleInfo>().running_cost_class, cost_factor, e->GetGRF());
 	} while ((v = v->GetNextVehicle()) != nullptr);
 
 	return cost;
@@ -4153,7 +4168,7 @@ static void CheckIfTrainNeedsService(Train *v)
 	}
 
 	SetBit(v->gv_flags, GVF_SUPPRESS_IMPLICIT_ORDERS);
-	v->current_order.MakeGoToDepot(depot, ODTFB_SERVICE, ONSF_NO_STOP_AT_INTERMEDIATE_STATIONS, ODATFB_NEAREST_DEPOT);
+	v->current_order.MakeGoToDepot(depot, OrderDepotTypeFlag::Service, OrderNonStopFlag::NoIntermediate, OrderDepotActionFlag::NearestDepot);
 	v->dest_tile = tfdd.tile;
 	SetWindowWidgetDirty(WC_VEHICLE_VIEW, v->index, WID_VV_START_STOP);
 }

@@ -13,7 +13,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -853,7 +853,7 @@ STR_CONFIG_SETTING_TOWN_GROWTH_VERY_FAST                        :Питӗ хӑв
 
 ###length 3
 
-###length 3
+###length 4
 
 STR_CONFIG_SETTING_INTERFACE                                    :Интерфейс
 STR_CONFIG_SETTING_INTERFACE_CONSTRUCTION                       :Лартӑм
@@ -1067,6 +1067,7 @@ STR_CONTENT_DETAIL_VERSION                                      :{SILVER}Вер�
 
 
 
+
 # Signal window
 
 # Bridge selection window
@@ -1221,6 +1222,8 @@ STR_MAPGEN_TOWN_NAME_ITALIAN                                    :Итали
 STR_MAPGEN_TOWN_NAME_CATALAN                                    :Катталун
 
 # Strings for map borders at game generation
+
+###length 3
 
 
 

@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file 32bpp_sse2.cpp Implementation of the SSE2 32 bpp blitter. */
@@ -113,7 +113,7 @@ Sprite *Blitter_32bppSSE_Base::Encode(SpriteType sprite_type, const SpriteLoader
 				else break;
 				dst_rgba++;
 			}
-			(*dst_rgba_line).data = nb_pix_transp;
+			dst_rgba_line->data = nb_pix_transp;
 
 			Colour *nb_right = dst_rgba_line + 1;
 			dst_rgba_line = reinterpret_cast<Colour *>(reinterpret_cast<std::byte *>(dst_rgba_line) + info.sprite_line_size);
@@ -126,7 +126,7 @@ Sprite *Blitter_32bppSSE_Base::Encode(SpriteType sprite_type, const SpriteLoader
 				else break;
 				dst_rgba--;
 			}
-			(*nb_right).data = nb_pix_transp;
+			nb_right->data = nb_pix_transp;
 		}
 	}
 

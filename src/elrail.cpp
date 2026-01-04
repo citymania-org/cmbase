@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /**
@@ -89,7 +89,7 @@ static TrackBits GetRailTrackBitsUniversal(TileIndex t, DiagDirections *override
 		case MP_RAILWAY:
 			if (!HasRailCatenary(GetRailType(t))) return TRACK_BIT_NONE;
 			switch (GetRailTileType(t)) {
-				case RAIL_TILE_NORMAL: case RAIL_TILE_SIGNALS:
+				case RailTileType::Normal: case RailTileType::Signals:
 					return GetTrackBits(t);
 				default:
 					return TRACK_BIT_NONE;
@@ -580,15 +580,13 @@ void SettingsDisableElrail(int32_t new_value)
 
 void UpdateDisableElrailSettingState(bool disable, bool update_vehicles)
 {
-	/* pick appropriate railtype for elrail engines depending on setting */
-	const RailType new_railtype = disable ? RAILTYPE_RAIL : RAILTYPE_ELECTRIC;
-
 	/* walk through all train engines */
 	for (Engine *e : Engine::IterateType(VEH_TRAIN)) {
-		RailVehicleInfo *rv_info = &e->u.rail;
+		RailVehicleInfo *rv_info = &e->VehInfo<RailVehicleInfo>();
 		/* update railtype of engines intended to use elrail */
-		if (rv_info->intended_railtype == RAILTYPE_ELECTRIC) {
-			rv_info->railtype = new_railtype;
+		if (rv_info->intended_railtypes.Test(RAILTYPE_ELECTRIC)) {
+			rv_info->railtypes.Set(RAILTYPE_ELECTRIC, !disable);
+			rv_info->railtypes.Set(RAILTYPE_RAIL, disable);
 		}
 	}
 
@@ -596,11 +594,12 @@ void UpdateDisableElrailSettingState(bool disable, bool update_vehicles)
 	 *  normal rail too */
 	if (disable) {
 		for (Train *t : Train::Iterate()) {
-			if (t->railtype == RAILTYPE_ELECTRIC) {
+			if (t->railtypes.Test(RAILTYPE_ELECTRIC)) {
 				/* this railroad vehicle is now compatible only with elrail,
 				 *  so add there also normal rail compatibility */
 				t->compatible_railtypes.Set(RAILTYPE_RAIL);
-				t->railtype = RAILTYPE_RAIL;
+				t->railtypes.Reset(RAILTYPE_ELECTRIC);
+				t->railtypes.Set(RAILTYPE_RAIL);
 				t->flags.Set(VehicleRailFlag::AllowedOnNormalRail);
 			}
 		}

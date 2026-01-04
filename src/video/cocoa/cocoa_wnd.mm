@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /******************************************************************************
@@ -177,8 +177,8 @@ static NSImage *NSImageFromSprite(SpriteID sprite_id, ZoomLevel zoom)
 	if (!data) return nullptr;
 
 	CGBitmapInfo info = kCGImageAlphaFirst | kCGBitmapByteOrder32Host;
-	CFAutoRelease<CGColorSpaceRef> color_space(CGColorSpaceCreateWithName(kCGColorSpaceSRGB));
-	CFAutoRelease<CGImage> bitmap(CGImageCreate(dim.width, dim.height, 8, 32, dim.width * 4, color_space.get(), info, data.get(), nullptr, false, kCGRenderingIntentDefault));
+	CFAutoRelease<CGColorSpaceRef> colour_space(CGColorSpaceCreateWithName(kCGColorSpaceSRGB));
+	CFAutoRelease<CGImage> bitmap(CGImageCreate(dim.width, dim.height, 8, 32, dim.width * 4, colour_space.get(), info, data.get(), nullptr, false, kCGRenderingIntentDefault));
 	if (!bitmap) return nullptr;
 
 	return [ [ [ NSImage alloc ] initWithCGImage:bitmap.get() size:NSZeroSize ] autorelease ];
@@ -401,7 +401,7 @@ void CocoaDialog(std::string_view title, std::string_view message, std::string_v
 	bool wasstarted = _cocoa_video_started;
 	if (VideoDriver::GetInstance() == nullptr) {
 		CocoaSetupApplication(); // Setup application before showing dialog
-	} else if (!_cocoa_video_started && VideoDriver::GetInstance()->Start({}) != nullptr) {
+	} else if (!_cocoa_video_started && VideoDriver::GetInstance()->Start({}).has_value()) {
 		fmt::print(stderr, "{}: {}\n", title, message);
 		return;
 	}

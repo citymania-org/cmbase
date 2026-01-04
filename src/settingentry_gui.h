@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file settingentry_gui.h Declarations of classes for handling display of individual configuration settings. */
@@ -13,9 +13,6 @@
 #include "core/enum_type.hpp"
 #include "settings_internal.h"
 #include "stringfilter_type.h"
-
-extern Dimension _setting_circle_size;
-extern int SETTING_HEIGHT;
 
 /**
  * Flags for #SettingEntry
@@ -85,6 +82,9 @@ struct BaseSettingEntry {
 	virtual bool UpdateFilterState(SettingFilter &filter, bool force_visible) = 0;
 
 	virtual uint Draw(GameSettings *settings_ptr, int left, int right, int y, uint first_row, uint max_row, BaseSettingEntry *selected, uint cur_row = 0, uint parent_last = 0) const;
+
+	static inline Dimension circle_size; ///< Dimension of the circle +/- icon.
+	static inline int line_height; ///< Height of a single setting.
 
 protected:
 	virtual void DrawSetting(GameSettings *settings_ptr, int left, int right, int y, bool highlight) const = 0;

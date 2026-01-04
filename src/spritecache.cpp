@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file spritecache.cpp Caching of sprites. */
@@ -534,7 +534,7 @@ static void *ReadSprite(const SpriteCache *sc, SpriteID id, SpriteType sprite_ty
 }
 
 struct GrfSpriteOffset {
-	size_t file_pos;
+	size_t file_pos = 0;
 	SpriteCacheCtrlFlags control_flags{};
 };
 
@@ -565,7 +565,7 @@ void ReadGRFSpriteOffsets(SpriteFile &file)
 		size_t old_pos = file.GetPos();
 		file.SeekTo(data_offset, SEEK_CUR);
 
-		GrfSpriteOffset offset{0};
+		GrfSpriteOffset offset{};
 
 		/* Loop over all sprite section entries and store the file
 		 * offset for each newly encountered ID. */
@@ -574,6 +574,7 @@ void ReadGRFSpriteOffsets(SpriteFile &file)
 			if (id != prev_id) {
 				_grf_sprite_offsets[prev_id] = offset;
 				offset.file_pos = file.GetPos() - 4;
+				offset.control_flags.Reset();
 			}
 			prev_id = id;
 			uint length = file.ReadDword();

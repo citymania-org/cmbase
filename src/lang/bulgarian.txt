@@ -15,7 +15,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -2125,7 +2125,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Мерни единици за височина: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Показваните височини ще бъдат изписвани в избраните мерни единици
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Имперски (фут)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Метрични (м)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (м)
@@ -2823,6 +2823,7 @@ STR_HOUSE_PICKER_CLASS_ZONE4                                    :Вътрешн�
 STR_HOUSE_PICKER_CLASS_ZONE5                                    :Градски център
 
 
+
 STR_STATION_CLASS_DFLT                                          :Станция по подразбиране
 STR_STATION_CLASS_DFLT_STATION                                  :Товарна станция по подразбиране
 STR_STATION_CLASS_DFLT_ROADSTOP                                 :Спирка по подразбиране
@@ -3090,7 +3091,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Клас
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Име на летището: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Име на поле на летище: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Приет товар: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Приет товар: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Тип релси: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_ROAD_TYPE                             :{BLACK}Тип път: {LTBLUE}{STRING}
@@ -3358,6 +3359,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Югоз
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Произволни
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Вода
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Случаен
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Случаен
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Ръчно нагалсени
 
@@ -3398,7 +3401,6 @@ STR_GENERATION_LANDSCAPE_GENERATION                             :{BLACK}Гене
 STR_GENERATION_RIVER_GENERATION                                 :{BLACK}Генериране на реки
 STR_GENERATION_CLEARING_TILES                                   :{BLACK}Генериране на твърда и скална повърност
 STR_GENERATION_TOWN_GENERATION                                  :{BLACK}Генерация на град
-STR_GENERATION_INDUSTRY_GENERATION                              :{BLACK}Генерация на индустрията
 STR_GENERATION_OBJECT_GENERATION                                :{BLACK}Генериране на обекти
 STR_GENERATION_TREE_GENERATION                                  :{BLACK}Генериране на дървета
 STR_GENERATION_SETTINGUP_GAME                                   :{BLACK}Настройване на играта
@@ -3618,7 +3620,6 @@ STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Въве
 STR_TOWN_DIRECTORY_CAPTION                                      :{WHITE}Градове ({COMMA} от {COMMA})
 STR_TOWN_DIRECTORY_NONE                                         :{ORANGE}- Отсъства -
 STR_TOWN_DIRECTORY_TOWN                                         :{ORANGE}{TOWN}{BLACK} ({COMMA})
-STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{YELLOW} (метрополис){BLACK} ({COMMA})
 STR_TOWN_DIRECTORY_LIST_TOOLTIP                                 :{BLACK}Имена на градовете - натиснете на името, за да центрирате камерата върху този град. Ctrl+Click отваря прозорец с нов изглед към града
 STR_TOWN_POPULATION                                             :{BLACK}Обща популация на картата: {COMMA}
 
@@ -3818,14 +3819,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Отлично
 STR_CARGO_RATING_OUTSTANDING                                    :Невероятно
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Центриране на камерата върху станцията. Ctrl+Click отваря прозорец с нов изглед към станцията
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Промяна името на станцията
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Показване на всички влакове които минават през гарата
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Показване на всички автомобили които минават през гарата
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Показване на всички летателни средства които кацат на летището
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Показване на всички кораби които спират на пристанището
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Преименуване на станция
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Затвори летище
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Забранява кацането на летателни средства на това летище
@@ -3833,11 +3832,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Забр
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Центриране на камерата върху междинния пункт. Ctrl+Click отваря прозорец с нов изглед към пункта
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Смяна на името на междинния пункт
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Центриране на камерата върху шамандура. Ctrl+Click отваря прозорец с нов изглед към шамандурата
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Промяна на името на шамандурата
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Редакция на името на междинния пункт
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}Финансов отчет на {COMPANY} {BLACK}{COMPANY_NUM}
@@ -3952,12 +3949,12 @@ STR_COMPANY_INFRASTRUCTURE_VIEW_TOTAL_PERIOD                    :{WHITE}{CURRENC
 # Industry directory
 STR_INDUSTRY_DIRECTORY_CAPTION                                  :{WHITE}Индустрии({COMMA} от {COMMA})
 STR_INDUSTRY_DIRECTORY_NONE                                     :{ORANGE}- Отсъства -
-STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% транспортирани){BLACK}
+STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% транспортирани)
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING} и още {NUM}...
+STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING} и още {NUM}...
 STR_INDUSTRY_DIRECTORY_LIST_TOOLTIP                             :{BLACK}Имена на индустриите - натиснете, за да центрирате камерата върху индустрията. Ctrl+Click отваря прозорец с нов изглед към индустрията
 STR_INDUSTRY_DIRECTORY_ACCEPTED_CARGO_FILTER                    :{BLACK}Приеман товар {SILVER}{STRING}
 STR_INDUSTRY_DIRECTORY_PRODUCED_CARGO_FILTER                    :{BLACK}Произведен товар: {SILVER}{STRING}
@@ -3973,9 +3970,9 @@ STR_INDUSTRY_VIEW_LOCATION_TOOLTIP                              :{BLACK}Цент
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Ниво на производство: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}Индустрията обяви незабавна ликвидация!
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Изисква: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Произвежда: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :, {STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Изисква: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Произвежда: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :{STRING}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}Изисква:
 
@@ -4495,7 +4492,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Капа
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Общо товар
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Общ капацитет на влака, разделен по типове товар
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Капацитет: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Капацитет: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Преоборудване)

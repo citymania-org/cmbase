@@ -14,7 +14,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -2154,7 +2154,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Unidades de altura: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Cada vez que se muestre una altura en la interfaz de usuario, se emplearán las unidades elegidas
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Imperial (pies)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Métrico (m)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (m)
@@ -2862,7 +2862,7 @@ STR_HOUSE_PICKER_YEARS_ANY                                      :{BLACK}Años: {
 STR_HOUSE_PICKER_YEARS_FROM                                     :{BLACK}Años: {ORANGE}Desde {NUM}
 STR_HOUSE_PICKER_YEARS_UNTIL                                    :{BLACK}Años: {ORANGE}Hasta {NUM}
 STR_HOUSE_PICKER_SIZE                                           :{BLACK}Tamaño: {ORANGE}{NUM}×{NUM} casillas
-STR_HOUSE_PICKER_CARGO_ACCEPTED                                 :{BLACK}Carga aceptada: {ORANGE}
+STR_HOUSE_PICKER_CARGO_ACCEPTED                                 :{BLACK}Carga aceptada: {GOLD}{STRING}
 STR_HOUSE_PICKER_CARGO_PRODUCED                                 :{BLACK}Carga producida: {ORANGE}{CARGO_LIST}
 
 STR_HOUSE_PICKER_CLASS_ZONE1                                    :Extremos
@@ -2871,10 +2871,8 @@ STR_HOUSE_PICKER_CLASS_ZONE3                                    :Suburbios exter
 STR_HOUSE_PICKER_CLASS_ZONE4                                    :Suburbios interiores
 STR_HOUSE_PICKER_CLASS_ZONE5                                    :Centro
 
-STR_HOUSE_PICKER_PROTECT_TITLE                                  :Prevenir mejoras
 STR_HOUSE_PICKER_PROTECT_TOOLTIP                                :Optar por que el edificio no sea reemplazado cuando el pueblo crezca
-STR_HOUSE_PICKER_PROTECT_OFF                                    :No
-STR_HOUSE_PICKER_PROTECT_ON                                     :Sí
+
 
 STR_STATION_CLASS_DFLT                                          :por defecto
 STR_STATION_CLASS_DFLT_STATION                                  :Estación por defecto
@@ -3149,7 +3147,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Tipo de 
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Nombre del aeropuerto: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Nombre de casilla del aeropuerto: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Carga aceptada: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Carga aceptada: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Tipo de vía: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_ROAD_TYPE                             :{BLACK}Tipo de carretera: {LTBLUE}{STRING}
@@ -3422,6 +3420,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Suroeste
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Forma libre
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Agua
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Aleatorio
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Aleatorio
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Manual
 
@@ -3462,7 +3462,6 @@ STR_GENERATION_LANDSCAPE_GENERATION                             :{BLACK}Generaci
 STR_GENERATION_RIVER_GENERATION                                 :{BLACK}Generación de ríos
 STR_GENERATION_CLEARING_TILES                                   :{BLACK}Generación de áreas rugosas y rocosas
 STR_GENERATION_TOWN_GENERATION                                  :{BLACK}Generación de pueblos
-STR_GENERATION_INDUSTRY_GENERATION                              :{BLACK}Generación de industrias
 STR_GENERATION_OBJECT_GENERATION                                :{BLACK}Generación de objetos
 STR_GENERATION_TREE_GENERATION                                  :{BLACK}Generación de árboles
 STR_GENERATION_SETTINGUP_GAME                                   :{BLACK}Configurando partida
@@ -3682,7 +3681,6 @@ STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Indicar 
 STR_TOWN_DIRECTORY_CAPTION                                      :{WHITE}Pueblos ({COMMA} de {COMMA})
 STR_TOWN_DIRECTORY_NONE                                         :{ORANGE}- Ninguno -
 STR_TOWN_DIRECTORY_TOWN                                         :{ORANGE}{TOWN}{BLACK} ({COMMA})
-STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{YELLOW} (ciudad){BLACK} ({COMMA})
 STR_TOWN_DIRECTORY_LIST_TOOLTIP                                 :{BLACK}Nombres de pueblos. Clic en un nombre centra la vista principal en el pueblo. Ctrl+Clic abre una vista aparte en su ubicación
 STR_TOWN_POPULATION                                             :{BLACK}Población mundial: {COMMA}
 
@@ -3886,14 +3884,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Excelente
 STR_CARGO_RATING_OUTSTANDING                                    :Excepcional
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Centrar vista en la estación. Ctrl+Clic abre una vista aparte en su ubicación
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Cambiar nombre de la estación
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Mostrar los trenes con esta estación en su horario
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Mostrar los autotransportes con esta estación en su horario
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Mostrar las aeronaves con este aeropuerto en su horario
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Mostrar los barcos con este muelle en su horario
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Cambiar nombre de estación
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Cerrar aeropuerto
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Evita el aterrizaje de aeronaves en este aeropuerto
@@ -3901,11 +3897,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Evita el
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Centrar vista en el punto de ruta. Ctrl+Clic abre una vista aparte en su ubicación
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Cambiar nombre de punto de ruta
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Centrar vista en la boya. Ctrl+Clic abre una vista aparte en su ubicación
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Cambiar nombre de boya
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Cambiar nombre de punto de ruta
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}Finanzas de {COMPANY} {BLACK}{COMPANY_NUM}
@@ -4020,12 +4014,12 @@ STR_COMPANY_INFRASTRUCTURE_VIEW_TOTAL_PERIOD                    :{WHITE}{CURRENC
 # Industry directory
 STR_INDUSTRY_DIRECTORY_CAPTION                                  :{WHITE}Industrias ({COMMA} de {COMMA})
 STR_INDUSTRY_DIRECTORY_NONE                                     :{ORANGE}- Ninguna -
-STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% transportad{G 0 o a o a}{P 0 "" s}){BLACK}
+STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} ({COMMA}% transportad{G 0 o a o a}{P 0 "" s})
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING} y {NUM} más...
+STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING} y {NUM} más...
 STR_INDUSTRY_DIRECTORY_LIST_TOOLTIP                             :{BLACK}Nombres de industrias. Clic en un nombre centra la vista principal en la industria. Ctrl+Clic abre una vista aparte en su ubicación
 STR_INDUSTRY_DIRECTORY_ACCEPTED_CARGO_FILTER                    :{BLACK}Carga aceptada: {SILVER}{STRING}
 STR_INDUSTRY_DIRECTORY_PRODUCED_CARGO_FILTER                    :{BLACK}Carga producida: {SILVER}{STRING}
@@ -4043,9 +4037,9 @@ STR_INDUSTRY_VIEW_CARGO_GRAPH_TOOLTIP                           :{BLACK}Mostrar 
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Nivel de producción: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}¡La industria ha anunciado su cierre inminente!
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Requiere: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Produce: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :, {STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Requiere: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Produce: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :{STRING}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}Requiere:
 STR_INDUSTRY_VIEW_ACCEPT_CARGO_SUFFIX                           :{YELLOW}{0:STRING}{BLACK}{3:STRING}
@@ -4569,7 +4563,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Mostrar 
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Carga total
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Mostrar capacidad total del tren dividida por carga
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Capacidad: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Capacidad: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (reformar)

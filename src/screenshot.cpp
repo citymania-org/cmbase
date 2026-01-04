@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file screenshot.cpp The creation of screenshots! */
@@ -46,12 +46,12 @@ uint _heightmap_highest_peak;         ///< When saving a heightmap, this contain
  * If the selected provider is not found, then the first provider will be used instead.
  * @returns ScreenshotProvider, or null if none exist.
  */
-static ScreenshotProvider *GetScreenshotProvider()
+static const ScreenshotProvider *GetScreenshotProvider()
 {
-	auto providers = ProviderManager<ScreenshotProvider>::GetProviders();
+	const auto &providers = ProviderManager<ScreenshotProvider>::GetProviders();
 	if (providers.empty()) return nullptr;
 
-	auto it = std::ranges::find_if(providers, [](const auto &p) { return p->GetName() == _screenshot_format_name; });
+	auto it = std::ranges::find(providers, _screenshot_format_name, &ScreenshotProvider::GetName);
 	if (it != std::end(providers)) return *it;
 
 	return providers.front();

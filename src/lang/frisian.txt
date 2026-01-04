@@ -13,7 +13,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -1785,7 +1785,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Hichte-ienheid: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Wannear't der hichten sichtber binne yn de interface de selektearre ienheiden brûke
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Ymperiaal (ft)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Metrysk (m)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (m)
@@ -2264,6 +2264,7 @@ STR_STATION_BUILD_DRAG_DROP                                     :Sleepe en los l
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :Standert stasjon
 STR_STATION_CLASS_WAYP                                          :Kontrôleposten
 
@@ -2467,7 +2468,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Fleanfji
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Fleanfjild namme: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Fleanfjild tile namme: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Akseptearre fracht: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Akseptearre fracht: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Spoarsoart: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_TRAM_TYPE                             :{BLACK}Tramsoart: {LTBLUE}{STRING}
@@ -2660,6 +2661,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Súdwest
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Frij foarmje
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Wetter
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Samar wat
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Samar wat
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Hânmjittich
 
@@ -3039,21 +3042,17 @@ STR_CARGO_RATING_EXCELLENT                                      :Geweldich
 STR_CARGO_RATING_OUTSTANDING                                    :Poerbêst
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Sintrearje it byld op de lokaasje fan dit stasjon
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Feroarje stasjonsnamme
 
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Jou stasjon in nije namme
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Fleanfjild slute
 
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Sintrearje it byld op de lokaasje fan dizze kontrôlepost
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Namme fan kontrôlepost oanpasse
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Sintrearje it byld op de lokaasje fan dizze boei
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Namme fan boei oanpasse
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Namme fan kontrôlepost oanpasse
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}{COMPANY} Finânsjes {BLACK}{COMPANY_NUM}
@@ -3142,7 +3141,7 @@ STR_COMPANY_INFRASTRUCTURE_VIEW_AIRPORTS                        :{WHITE}Fleanfji
 # Industry directory
 STR_INDUSTRY_DIRECTORY_NONE                                     :{ORANGE}- Gjin -
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING}
 STR_INDUSTRY_DIRECTORY_FILTER_NONE                              :Gjin
 
 # Industry view
@@ -3153,7 +3152,7 @@ STR_INDUSTRY_VIEW_LOCATION_TOOLTIP                              :{BLACK}Sintrear
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Produksje nivo: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}Yndustry kundicht drigend sluten oan!
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Nedichheden: {YELLOW}{STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Nedichheden: {YELLOW}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}Nedichheden:
 
@@ -3515,7 +3514,7 @@ STR_VEHICLE_DETAILS_TRAIN_INFORMATION_TOOLTIP                   :{BLACK}Treindet
 STR_VEHICLE_DETAIL_TAB_CAPACITIES                               :{BLACK}Kapasiteit
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Totale Fracht
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Kapasiteit: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Kapasiteit: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Ombouwe)

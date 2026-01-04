@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /**
@@ -17,7 +17,6 @@
 #include "network/network_func.h"
 #include "network/core/config.h"
 #include "pathfinder/pathfinder_type.h"
-#include "pathfinder/aystar.h"
 #include "linkgraph/linkgraphschedule.h"
 #include "genworld.h"
 #include "train.h"
@@ -573,7 +572,7 @@ static void MaxVehiclesChanged(int32_t)
  */
 static bool ReplaceAsteriskWithEmptyPassword(std::string &newval)
 {
-	if (newval.compare("*") == 0) newval.clear();
+	if (newval == "*") newval.clear();
 	return true;
 }
 
@@ -671,7 +670,7 @@ static void ChangeMinutesPerYear(int32_t new_value)
 static std::tuple<int32_t, uint32_t> GetMinutesPerYearRange(const IntSettingDesc &)
 {
 	/* Allow a non-default value only if using Wallclock timekeeping units. */
-	if (_settings_newgame.economy.timekeeping_units == TKU_WALLCLOCK) return { CalendarTime::FROZEN_MINUTES_PER_YEAR, CalendarTime::MAX_MINUTES_PER_YEAR };
+	if (TimerGameEconomy::UsingWallclockUnits(_game_mode == GM_MENU)) return { CalendarTime::FROZEN_MINUTES_PER_YEAR, CalendarTime::MAX_MINUTES_PER_YEAR };
 
 	return { CalendarTime::DEF_MINUTES_PER_YEAR, CalendarTime::DEF_MINUTES_PER_YEAR };
 }

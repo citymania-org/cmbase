@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file newgrf_internal_vehicle.h NewGRF internal processing state for vehicles. */
@@ -27,7 +27,7 @@ struct GRFTempEngineData {
 	CargoClasses cargo_allowed;          ///< Bitmask of cargo classes that are allowed as a refit.
 	CargoClasses cargo_allowed_required; ///< Bitmask of cargo classes that are required to be all present to allow a cargo as a refit.
 	CargoClasses cargo_disallowed;       ///< Bitmask of cargo classes that are disallowed as a refit.
-	RailTypeLabel railtypelabel;
+	std::vector<RailTypeLabel> railtypelabels;
 	uint8_t roadtramtype;
 	const GRFFile *defaultcargo_grf; ///< GRF defining the cargo translation table to use if the default cargo is the 'first refittable'.
 	Refittability refittability;     ///< Did the newgrf set any refittability property? If not, default refittability will be applied.

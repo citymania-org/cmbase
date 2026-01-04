@@ -13,7 +13,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -719,7 +719,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_VELOCITY_SI               :अंतर्
 
 ###length 3
 
-###length 3
+###length 4
 
 STR_CONFIG_SETTING_INTERFACE_GENERAL                            :सामान्य
 STR_CONFIG_SETTING_COMPANY                                      :कंपनी
@@ -885,6 +885,7 @@ STR_TOOLBAR_DISABLED_NO_VEHICLE_AVAILABLE                       :{BLACK}अक�
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :मानक स्टेशन
 STR_STATION_CLASS_WAYP                                          :पथ-संकेत
 
@@ -1003,6 +1004,8 @@ STR_MAPGEN_TOWN_NAME_ITALIAN                                    :इटैलि
 # Strings for map borders at game generation
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}जल
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}यादृच्छिक
+
+###length 3
 
 
 
@@ -1165,8 +1168,8 @@ STR_COMPANY_VIEW_COMPANY_NAME_BUTTON                            :{BLACK}कं�
 
 # Industry directory
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING}
 
 # Industry view
 STR_INDUSTRY_VIEW_CAPTION                                       :{WHITE}{INDUSTRY}

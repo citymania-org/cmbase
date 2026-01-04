@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file toolbar_gui.cpp Code related to the (main) toolbar. */
@@ -107,6 +107,12 @@ public:
 	}
 };
 
+static DropDownOptions GetToolbarDropDownOptions()
+{
+	if (_settings_client.gui.toolbar_dropdown_autoselect) return DropDownOption::InstantClose;
+	return {};
+}
+
 /**
  * Pop up a generic text only menu.
  * @param w Toolbar
@@ -116,8 +122,7 @@ public:
  */
 static void PopupMainToolbarMenu(Window *w, WidgetID widget, DropDownList &&list, int def)
 {
-	ShowDropDownList(w, std::move(list), def, widget, 0, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, std::move(list), def, widget, 0, GetToolbarDropDownOptions());
 }
 
 /**
@@ -290,8 +295,7 @@ static CallBackFunction ToolbarOptionsClick(Window *w)
 	list.push_back(MakeDropDownListCheckedItem(IsTransparencySet(TO_HOUSES), STR_SETTINGS_MENU_TRANSPARENT_BUILDINGS, OME_TRANSPARENTBUILDINGS));
 	list.push_back(MakeDropDownListCheckedItem(IsTransparencySet(TO_SIGNS), STR_SETTINGS_MENU_TRANSPARENT_SIGNS, OME_SHOW_STATIONSIGNS));
 
-	ShowDropDownList(w, std::move(list), 0, WID_TN_SETTINGS, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, std::move(list), 0, WID_TN_SETTINGS, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -683,9 +687,7 @@ static CallBackFunction ToolbarGraphsClick(Window *w)
 
 	if (_toolbar_mode != TB_NORMAL) AddDropDownLeagueTableOptions(list);
 
-	ShowDropDownList(w, std::move(list), GRMN_OPERATING_PROFIT_GRAPH, WID_TN_GRAPHS, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
-
+	ShowDropDownList(w, std::move(list), GRMN_OPERATING_PROFIT_GRAPH, WID_TN_GRAPHS, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -696,9 +698,7 @@ static CallBackFunction ToolbarLeagueClick(Window *w)
 	AddDropDownLeagueTableOptions(list);
 
 	int selected = list[0]->result;
-	ShowDropDownList(w, std::move(list), selected, WID_TN_LEAGUE, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
-
+	ShowDropDownList(w, std::move(list), selected, WID_TN_LEAGUE, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -875,8 +875,7 @@ static CallBackFunction ToolbarZoomOutClick(Window *w)
 
 static CallBackFunction ToolbarBuildRailClick(Window *w)
 {
-	ShowDropDownList(w, GetRailTypeDropDownList(), _last_built_railtype, WID_TN_RAILS, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, GetRailTypeDropDownList(), _last_built_railtype, WID_TN_RAILS, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -897,8 +896,7 @@ static CallBackFunction MenuClickBuildRail(int index)
 
 static CallBackFunction ToolbarBuildRoadClick(Window *w)
 {
-	ShowDropDownList(w, GetRoadTypeDropDownList(RTTB_ROAD), _last_built_roadtype, WID_TN_ROADS, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, GetRoadTypeDropDownList(RTTB_ROAD), _last_built_roadtype, WID_TN_ROADS, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -919,8 +917,7 @@ static CallBackFunction MenuClickBuildRoad(int index)
 
 static CallBackFunction ToolbarBuildTramClick(Window *w)
 {
-	ShowDropDownList(w, GetRoadTypeDropDownList(RTTB_TRAM), _last_built_tramtype, WID_TN_TRAMS, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, GetRoadTypeDropDownList(RTTB_TRAM), _last_built_tramtype, WID_TN_TRAMS, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -943,8 +940,7 @@ static CallBackFunction ToolbarBuildWaterClick(Window *w)
 {
 	DropDownList list;
 	list.push_back(MakeDropDownListIconItem(SPR_IMG_BUILD_CANAL, PAL_NONE, STR_WATERWAYS_MENU_WATERWAYS_CONSTRUCTION, 0));
-	ShowDropDownList(w, std::move(list), 0, WID_TN_WATER, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, std::move(list), 0, WID_TN_WATER, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -965,8 +961,7 @@ static CallBackFunction ToolbarBuildAirClick(Window *w)
 {
 	DropDownList list;
 	list.push_back(MakeDropDownListIconItem(SPR_IMG_AIRPORT, PAL_NONE, STR_AIRCRAFT_MENU_AIRPORT_CONSTRUCTION, 0));
-	ShowDropDownList(w, std::move(list), 0, WID_TN_AIR, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, std::move(list), 0, WID_TN_AIR, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -989,8 +984,7 @@ static CallBackFunction ToolbarForestClick(Window *w)
 	list.push_back(MakeDropDownListIconItem(SPR_IMG_LANDSCAPING, PAL_NONE, STR_LANDSCAPING_MENU_LANDSCAPING, 0));
 	list.push_back(MakeDropDownListIconItem(SPR_IMG_PLANTTREES, PAL_NONE, STR_LANDSCAPING_MENU_PLANT_TREES, 1));
 	list.push_back(MakeDropDownListIconItem(SPR_IMG_SIGN, PAL_NONE, STR_LANDSCAPING_MENU_PLACE_SIGN, 2));
-	ShowDropDownList(w, std::move(list), 0, WID_TN_LANDSCAPE, 100, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, std::move(list), 0, WID_TN_LANDSCAPE, 100, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -1259,8 +1253,7 @@ static CallBackFunction ToolbarScenGenIndustry(Window *w)
 
 static CallBackFunction ToolbarScenBuildRoadClick(Window *w)
 {
-	ShowDropDownList(w, GetScenRoadTypeDropDownList(RTTB_ROAD), _last_built_roadtype, WID_TE_ROADS, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, GetScenRoadTypeDropDownList(RTTB_ROAD), _last_built_roadtype, WID_TE_ROADS, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -1279,8 +1272,7 @@ static CallBackFunction ToolbarScenBuildRoad(int index)
 
 static CallBackFunction ToolbarScenBuildTramClick(Window *w)
 {
-	ShowDropDownList(w, GetScenRoadTypeDropDownList(RTTB_TRAM), _last_built_tramtype, WID_TE_TRAMS, 140, _settings_client.gui.toolbar_dropdown_autoselect);
-	SndClickBeep();
+	ShowDropDownList(w, GetScenRoadTypeDropDownList(RTTB_TRAM), _last_built_tramtype, WID_TE_TRAMS, 140, GetToolbarDropDownOptions());
 	return CBF_NONE;
 }
 
@@ -2109,15 +2101,6 @@ struct MainToolbarWindow : Window {
 		}
 	}};
 
-	void OnTimeout() override
-	{
-		/* We do not want to automatically raise the pause, fast forward and
-		 * switchbar buttons; they have to stay down when pressed etc. */
-		for (WidgetID i = WID_TN_SETTINGS; i < WID_TN_SWITCH_BAR; i++) {
-			this->RaiseWidgetWhenLowered(i);
-		}
-	}
-
 	/**
 	 * Some data on this window has become invalid.
 	 * @param data Information about the changed data.
@@ -2176,43 +2159,43 @@ struct MainToolbarWindow : Window {
 static std::unique_ptr<NWidgetBase> MakeMainToolbar()
 {
 	/** Sprites to use for the different toolbar buttons */
-	static const SpriteID toolbar_button_sprites[] = {
-		SPR_IMG_PAUSE,           // WID_TN_PAUSE
-		SPR_IMG_FASTFORWARD,     // WID_TN_FAST_FORWARD
-		SPR_IMG_SETTINGS,        // WID_TN_SETTINGS
-		SPR_IMG_SAVE,            // WID_TN_SAVE
-		SPR_IMG_SMALLMAP,        // WID_TN_SMALL_MAP
-		SPR_IMG_TOWN,            // WID_TN_TOWNS
-		SPR_IMG_SUBSIDIES,       // WID_TN_SUBSIDIES
-		SPR_IMG_COMPANY_LIST,    // WID_TN_STATIONS
-		SPR_IMG_COMPANY_FINANCE, // WID_TN_FINANCES
-		SPR_IMG_COMPANY_GENERAL, // WID_TN_COMPANIES
-		SPR_IMG_STORY_BOOK,      // WID_TN_STORY
-		SPR_IMG_GOAL,            // WID_TN_GOAL
-		SPR_IMG_GRAPHS,          // WID_TN_GRAPHS
-		SPR_IMG_COMPANY_LEAGUE,  // WID_TN_LEAGUE
-		SPR_IMG_INDUSTRY,        // WID_TN_INDUSTRIES
-		SPR_IMG_TRAINLIST,       // WID_TN_TRAINS
-		SPR_IMG_TRUCKLIST,       // WID_TN_ROADVEHS
-		SPR_IMG_SHIPLIST,        // WID_TN_SHIPS
-		SPR_IMG_AIRPLANESLIST,   // WID_TN_AIRCRAFT
-		SPR_IMG_ZOOMIN,          // WID_TN_ZOOMIN
-		SPR_IMG_ZOOMOUT,         // WID_TN_ZOOMOUT
-		SPR_IMG_BUILDRAIL,       // WID_TN_RAILS
-		SPR_IMG_BUILDROAD,       // WID_TN_ROADS
-		SPR_IMG_BUILDTRAMS,      // WID_TN_TRAMS
-		SPR_IMG_BUILDWATER,      // WID_TN_WATER
-		SPR_IMG_BUILDAIR,        // WID_TN_AIR
-		SPR_IMG_LANDSCAPING,     // WID_TN_LANDSCAPE
-		SPR_IMG_MUSIC,           // WID_TN_MUSIC_SOUND
-		SPR_IMG_MESSAGES,        // WID_TN_MESSAGES
-		SPR_IMG_QUERY,           // WID_TN_HELP
-		SPR_IMG_SWITCH_TOOLBAR,  // WID_TN_SWITCH_BAR
+	static const std::tuple<WidgetID, WidgetType, SpriteID> toolbar_button_sprites[] = {
+		{WID_TN_PAUSE,        WWT_IMGBTN,     SPR_IMG_PAUSE},
+		{WID_TN_FAST_FORWARD, WWT_IMGBTN,     SPR_IMG_FASTFORWARD},
+		{WID_TN_SETTINGS,     WWT_IMGBTN,     SPR_IMG_SETTINGS},
+		{WID_TN_SAVE,         WWT_IMGBTN_2,   SPR_IMG_SAVE},
+		{WID_TN_SMALL_MAP,    WWT_IMGBTN,     SPR_IMG_SMALLMAP},
+		{WID_TN_TOWNS,        WWT_IMGBTN,     SPR_IMG_TOWN},
+		{WID_TN_SUBSIDIES,    WWT_IMGBTN,     SPR_IMG_SUBSIDIES},
+		{WID_TN_STATIONS,     WWT_IMGBTN,     SPR_IMG_COMPANY_LIST},
+		{WID_TN_FINANCES,     WWT_IMGBTN,     SPR_IMG_COMPANY_FINANCE},
+		{WID_TN_COMPANIES,    WWT_IMGBTN,     SPR_IMG_COMPANY_GENERAL},
+		{WID_TN_STORY,        WWT_IMGBTN,     SPR_IMG_STORY_BOOK},
+		{WID_TN_GOAL,         WWT_IMGBTN,     SPR_IMG_GOAL},
+		{WID_TN_GRAPHS,       WWT_IMGBTN,     SPR_IMG_GRAPHS},
+		{WID_TN_LEAGUE,       WWT_IMGBTN,     SPR_IMG_COMPANY_LEAGUE},
+		{WID_TN_INDUSTRIES,   WWT_IMGBTN,     SPR_IMG_INDUSTRY},
+		{WID_TN_TRAINS,       WWT_IMGBTN,     SPR_IMG_TRAINLIST},
+		{WID_TN_ROADVEHS,     WWT_IMGBTN,     SPR_IMG_TRUCKLIST},
+		{WID_TN_SHIPS,        WWT_IMGBTN,     SPR_IMG_SHIPLIST},
+		{WID_TN_AIRCRAFT,     WWT_IMGBTN,     SPR_IMG_AIRPLANESLIST},
+		{WID_TN_ZOOM_IN,      WWT_PUSHIMGBTN, SPR_IMG_ZOOMIN},
+		{WID_TN_ZOOM_OUT,     WWT_PUSHIMGBTN, SPR_IMG_ZOOMOUT},
+		{WID_TN_RAILS,        WWT_IMGBTN,     SPR_IMG_BUILDRAIL},
+		{WID_TN_ROADS,        WWT_IMGBTN,     SPR_IMG_BUILDROAD},
+		{WID_TN_TRAMS,        WWT_IMGBTN,     SPR_IMG_BUILDTRAMS},
+		{WID_TN_WATER,        WWT_IMGBTN,     SPR_IMG_BUILDWATER},
+		{WID_TN_AIR,          WWT_IMGBTN,     SPR_IMG_BUILDAIR},
+		{WID_TN_LANDSCAPE,    WWT_IMGBTN,     SPR_IMG_LANDSCAPING},
+		{WID_TN_MUSIC_SOUND,  WWT_IMGBTN,     SPR_IMG_MUSIC},
+		{WID_TN_MESSAGES,     WWT_IMGBTN,     SPR_IMG_MESSAGES},
+		{WID_TN_HELP,         WWT_IMGBTN,     SPR_IMG_QUERY},
+		{WID_TN_SWITCH_BAR,   WWT_IMGBTN,     SPR_IMG_SWITCH_TOOLBAR},
 	};
 
 	auto hor = std::make_unique<NWidgetMainToolbarContainer>();
-	for (WidgetID i = 0; i < WID_TN_END; i++) {
-		switch (i) {
+	for (const auto &[widget, tp, sprite] : toolbar_button_sprites) {
+		switch (widget) {
 			case WID_TN_SMALL_MAP:
 			case WID_TN_FINANCES:
 			case WID_TN_VEHICLE_START:
@@ -2222,7 +2205,7 @@ static std::unique_ptr<NWidgetBase> MakeMainToolbar()
 				hor->Add(std::make_unique<NWidgetSpacer>(0, 0));
 				break;
 		}
-		auto leaf = std::make_unique<NWidgetLeaf>(i == WID_TN_SAVE ? WWT_IMGBTN_2 : WWT_IMGBTN, COLOUR_GREY, i, WidgetData{.sprite = toolbar_button_sprites[i]}, STR_TOOLBAR_TOOLTIP_PAUSE_GAME + i);
+		auto leaf = std::make_unique<NWidgetLeaf>(tp, COLOUR_GREY, widget, WidgetData{.sprite = sprite}, STR_TOOLBAR_TOOLTIP_PAUSE_GAME + widget);
 		leaf->SetMinimalSize(20, 20);
 		hor->Add(std::move(leaf));
 	}
@@ -2230,7 +2213,7 @@ static std::unique_ptr<NWidgetBase> MakeMainToolbar()
 	return hor;
 }
 
-static constexpr NWidgetPart _nested_toolbar_normal_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_toolbar_normal_widgets = {
 	NWidgetFunction(MakeMainToolbar),
 };
 
@@ -2533,7 +2516,7 @@ struct ScenarioEditorToolbarWindow : Window {
 	}};
 };
 
-static constexpr NWidgetPart _nested_toolb_scen_inner_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_toolb_scen_inner_widgets = {
 	NWidget(WWT_IMGBTN, COLOUR_GREY, WID_TE_PAUSE), SetSpriteTip(SPR_IMG_PAUSE, STR_TOOLBAR_TOOLTIP_PAUSE_GAME),
 	NWidget(WWT_IMGBTN, COLOUR_GREY, WID_TE_FAST_FORWARD), SetSpriteTip(SPR_IMG_FASTFORWARD, STR_TOOLBAR_TOOLTIP_FORWARD),
 	NWidget(WWT_IMGBTN, COLOUR_GREY, WID_TE_SETTINGS), SetSpriteTip(SPR_IMG_SETTINGS, STR_TOOLBAR_TOOLTIP_OPTIONS),
@@ -2555,7 +2538,7 @@ static constexpr NWidgetPart _nested_toolb_scen_inner_widgets[] = {
 	NWidget(WWT_PUSHIMGBTN, COLOUR_GREY, WID_TE_ZOOM_OUT), SetSpriteTip(SPR_IMG_ZOOMOUT, STR_TOOLBAR_TOOLTIP_ZOOM_THE_VIEW_OUT),
 	NWidget(NWID_SPACER),
 	NWidget(WWT_PUSHIMGBTN, COLOUR_GREY, WID_TE_LAND_GENERATE), SetSpriteTip(SPR_IMG_LANDSCAPING, STR_SCENEDIT_TOOLBAR_LANDSCAPE_GENERATION_TOOLTIP),
-	NWidget(WWT_PUSHIMGBTN, COLOUR_GREY, WID_TE_TOWN_GENERATE), SetSpriteTip(SPR_IMG_TOWN, STR_SCENEDIT_TOOLBAR_TOWN_GENERATION_TOOLTIP),
+	NWidget(WWT_IMGBTN, COLOUR_GREY, WID_TE_TOWN_GENERATE), SetSpriteTip(SPR_IMG_TOWN, STR_SCENEDIT_TOOLBAR_TOWN_GENERATION_TOOLTIP),
 	NWidget(WWT_PUSHIMGBTN, COLOUR_GREY, WID_TE_INDUSTRY), SetSpriteTip(SPR_IMG_INDUSTRY, STR_SCENEDIT_TOOLBAR_INDUSTRY_GENERATION_TOOLTIP),
 	NWidget(WWT_IMGBTN, COLOUR_GREY, WID_TE_ROADS), SetSpriteTip(SPR_IMG_BUILDROAD, STR_SCENEDIT_TOOLBAR_ROAD_CONSTRUCTION_TOOLTIP),
 	NWidget(WWT_IMGBTN, COLOUR_GREY, WID_TE_TRAMS), SetSpriteTip(SPR_IMG_BUILDTRAMS, STR_SCENEDIT_TOOLBAR_TRAM_CONSTRUCTION_TOOLTIP),
@@ -2573,7 +2556,7 @@ static std::unique_ptr<NWidgetBase> MakeScenarioToolbar()
 	return MakeNWidgets(_nested_toolb_scen_inner_widgets, std::make_unique<NWidgetScenarioToolbarContainer>());
 }
 
-static constexpr NWidgetPart _nested_toolb_scen_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_toolb_scen_widgets = {
 	NWidgetFunction(MakeScenarioToolbar),
 };
 

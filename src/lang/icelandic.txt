@@ -14,7 +14,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -1700,7 +1700,7 @@ STR_CONFIG_SETTING_CITY_SIZE_MULTIPLIER_HELPTEXT                :Meðalstærð b
 
 ###length 3
 
-###length 3
+###length 4
 
 STR_CONFIG_SETTING_SOUND                                        :Hljóð
 STR_CONFIG_SETTING_INTERFACE                                    :Viðmót
@@ -2214,6 +2214,7 @@ STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Byggja l
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :Sjálfgefin stöð
 STR_STATION_CLASS_WAYP                                          :Millistöð
 
@@ -2450,7 +2451,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Tegund f
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Nafn flugvallar: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Nafn flugvallar: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Tekið á móti: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Tekið á móti: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_SPEED_LIMIT                      :{BLACK}Hámarkshraði járnbrautarlestar: {LTBLUE}{VELOCITY}
 
@@ -2630,6 +2631,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Suðvest
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Frjálsar
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Vatn
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Slembin
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Slembnar
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Forvaldar
 
@@ -2973,14 +2976,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Frábær
 STR_CARGO_RATING_OUTSTANDING                                    :Framúrskarandi
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Færa miðju aðal sjónarhorns á staðsetningu stöðvar. Ctrl+smelltu til að opna sýnisglugga yfir þessari stöð
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Breyta nafni stöðvar
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Sýna allar lestir sem hafa þessa stöð á sinni áætlun
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Sýna allar bifreiðir sem hafa þessa stöð á sinni áætlun
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Sýna allar flugvélar sem hafa þessa stöð á sinni áætlun
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Sýna öll skip sem hafa þessa stöð á sinni áætlun
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Endurnefna stöð/lestunarsvæði
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Loka flugvelli
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Koma í veg fyrir að flugvélar geti lent á þessum flugvelli
@@ -2988,11 +2989,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Koma í 
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Færa sjónarhorn á staðsetningu millistöðvar. Ctrl+Smelltu til að opna sýniglugg á þessa staðsetningu
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Breyta nafni á vegleiðara
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Færa sjónarhorn á staðsetningu bauju. Ctrl+Smelltu til að opna sýnisglugga á þessa staðsetningu.
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Breyta nafni bauju
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Breyta nafni millistöðvar
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}{COMPANY} Fjármál {BLACK}{COMPANY_NUM}
@@ -3505,7 +3504,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Sýna bu
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Heildarfarmur
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Sýna heildar burðargetu lestar, raðar eftir tegund farms
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Rými: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Rými: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Breyta)

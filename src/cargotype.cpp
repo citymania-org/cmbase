@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file cargotype.cpp Implementation of cargoes. */
@@ -268,9 +268,7 @@ std::optional<std::string> BuildCargoAcceptanceString(const CargoArray &acceptan
 {
 	std::string_view list_separator = GetListSeparator();
 
-	/* Cargo acceptance is displayed in a extra multiline */
 	std::stringstream line;
-	line << GetString(label);
 
 	bool found = false;
 	for (const CargoSpec *cs : _sorted_cargo_specs) {
@@ -289,7 +287,7 @@ std::optional<std::string> BuildCargoAcceptanceString(const CargoArray &acceptan
 		}
 	}
 
-	if (found) return line.str();
+	if (found) return GetString(label, line.str());
 
 	return std::nullopt;
 }

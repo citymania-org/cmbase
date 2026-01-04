@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file gfx_layout.cpp Handling of laying out text. */
@@ -58,7 +58,7 @@ Font::Font(FontSize size, TextColour colour) :
  * @note In case no ParagraphLayouter could be constructed, line.layout will be nullptr.
  * @param line The cache item to store our layouter in.
  * @param str The string to create a layouter for.
- * @param state The state of the font and color.
+ * @param state The state of the font and colour.
  * @tparam T The type of layouter we want.
  */
 template <typename T>

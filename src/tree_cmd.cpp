@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file tree_cmd.cpp Handling of tree tiles. */
@@ -32,17 +32,6 @@
 #include "table/clear_land.h"
 
 #include "safeguards.h"
-
-/**
- * List of tree placer algorithm.
- *
- * This enumeration defines all possible tree placer algorithm in the game.
- */
-enum TreePlacer : uint8_t {
-	TP_NONE,     ///< No tree placer algorithm
-	TP_ORIGINAL, ///< The original algorithm
-	TP_IMPROVED, ///< A 'improved' algorithm
-};
 
 /** Where to place trees while in-game? */
 enum ExtraTreePlacement : uint8_t {
@@ -167,14 +156,18 @@ static TreeType GetRandomTreeType(TileIndex tile, uint seed)
  *
  * @param tile The tile to make a tree-tile from
  * @param r The randomness value from a Random() value
+ * @param keep_density Whether to keep the existing ground density of the tile.
  */
-static void PlaceTree(TileIndex tile, uint32_t r)
+void PlaceTree(TileIndex tile, uint32_t r, bool keep_density)
 {
 	TreeType tree = GetRandomTreeType(tile, GB(r, 24, 8));
 
 	if (tree != TREE_INVALID) {
 		PlantTreesOnTile(tile, tree, GB(r, 22, 2), static_cast<TreeGrowthStage>(std::min<uint8_t>(GB(r, 16, 3), 6)));
 		MarkTileDirtyByTile(tile);
+
+		/* Maybe keep the existing ground density.*/
+		if (keep_density) return;
 
 		/* Rerandomize ground, if neither snow nor shore */
 		TreeGround ground = GetTreeGround(tile);
@@ -674,7 +667,7 @@ static void DrawTile_Trees(TileInfo *ti)
 	uint trees = GetTreeCount(ti->tile);
 
 	for (uint i = 0; i < trees; i++) {
-		SpriteID sprite = s[0].sprite + (i == trees - 1 ? static_cast<uint>(GetTreeGrowth(ti->tile)) : 3);
+		SpriteID sprite = s[0].sprite + (i == trees - 1 ? to_underlying(GetTreeGrowth(ti->tile)) : 3);
 		PaletteID pal = s[0].pal;
 
 		te[i].sprite = sprite;
@@ -810,11 +803,28 @@ static void TileLoopTreesAlps(TileIndex tile)
 	MarkTileDirtyByTile(tile);
 }
 
-static bool CanPlantExtraTrees(TileIndex tile)
+/*
+ * Check if trees on this tile are allowed to spread.
+ * If they are allowed to spread, they are also allowed to die.
+ * @param tile The tile to check.
+ * @return Whether trees on this tile can spread.
+ */
+static bool TreesOnTileCanSpread(TileIndex tile)
 {
-	return ((_settings_game.game_creation.landscape == LandscapeType::Tropic && GetTropicZone(tile) == TROPICZONE_RAINFOREST) ?
-		(_settings_game.construction.extra_tree_placement == ETP_SPREAD_ALL || _settings_game.construction.extra_tree_placement == ETP_SPREAD_RAINFOREST) :
-		_settings_game.construction.extra_tree_placement == ETP_SPREAD_ALL);
+	/* Desert and rainforest trees need special handling. */
+	if (_settings_game.game_creation.landscape == LandscapeType::Tropic) {
+		switch (GetTropicZone(tile)) {
+			case TROPICZONE_DESERT:
+				/* Cacti never spread. */
+				return false;
+			case TROPICZONE_RAINFOREST:
+				return (_settings_game.construction.extra_tree_placement == ETP_SPREAD_ALL || _settings_game.construction.extra_tree_placement == ETP_SPREAD_RAINFOREST);
+			default:
+				return _settings_game.construction.extra_tree_placement == ETP_SPREAD_ALL;
+		}
+	}
+
+	return (_settings_game.construction.extra_tree_placement == ETP_SPREAD_ALL);
 }
 
 static void TileLoop_Trees(TileIndex tile)
@@ -864,7 +874,7 @@ static void TileLoop_Trees(TileIndex tile)
 						break;
 
 					case 1: // add a tree
-						if (GetTreeCount(tile) < 4 && CanPlantExtraTrees(tile)) {
+						if (GetTreeCount(tile) < 4 && TreesOnTileCanSpread(tile)) {
 							AddTreeCount(tile, 1);
 							SetTreeGrowth(tile, TreeGrowthStage::Growing1);
 							break;
@@ -872,13 +882,12 @@ static void TileLoop_Trees(TileIndex tile)
 						[[fallthrough]];
 
 					case 2: { // add a neighbouring tree
-						if (!CanPlantExtraTrees(tile)) break;
+						if (!TreesOnTileCanSpread(tile)) break;
 
 						TreeType treetype = GetTreeType(tile);
 
 						tile += TileOffsByDir(static_cast<Direction>(Random() % DIR_END));
 
-						/* Cacti don't spread */
 						if (!CanPlantTreesOnTile(tile, false)) return;
 
 						/* Don't plant trees, if ground was freshly cleared */
@@ -896,7 +905,7 @@ static void TileLoop_Trees(TileIndex tile)
 			break;
 
 		case TreeGrowthStage::Dead: // final stage of tree destruction
-			if (!CanPlantExtraTrees(tile)) {
+			if (!TreesOnTileCanSpread(tile)) {
 				/* if trees can't spread just plant a new one to prevent deforestation */
 				SetTreeGrowth(tile, TreeGrowthStage::Growing1);
 			} else if (GetTreeCount(tile) > 1) {

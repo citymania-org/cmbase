@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /**
@@ -16,7 +16,6 @@
 #include "news_func.h"
 #include "newgrf_engine.h"
 #include "newgrf_sound.h"
-#include "spritecache.h"
 #include "error_func.h"
 #include "strings_func.h"
 #include "command_func.h"
@@ -131,12 +130,14 @@ static StationID FindNearestHangar(const Aircraft *v)
 	const Station *next_dest = nullptr;
 	if (max_range != 0) {
 		if (v->current_order.IsType(OT_GOTO_STATION) ||
-				(v->current_order.IsType(OT_GOTO_DEPOT) && (v->current_order.GetDepotActionType() & ODATFB_NEAREST_DEPOT) == 0)) {
+				(v->current_order.IsType(OT_GOTO_DEPOT) && !v->current_order.GetDepotActionType().Test(OrderDepotActionFlag::NearestDepot))) {
 			last_dest = Station::GetIfValid(v->last_station_visited);
 			next_dest = Station::GetIfValid(v->current_order.GetDestination().ToStationID());
 		} else {
 			last_dest = GetTargetAirportIfValid(v);
-			next_dest = Station::GetIfValid(v->GetNextStoppingStation().value);
+			std::vector<StationID> next_station;
+			v->GetNextStoppingStation(next_station);
+			if (!next_station.empty()) next_dest = Station::GetIfValid(next_station.back());
 		}
 	}
 
@@ -200,7 +201,7 @@ void GetRotorImage(const Aircraft *v, EngineImageType image_type, VehicleSpriteS
 static void GetAircraftIcon(EngineID engine, EngineImageType image_type, VehicleSpriteSeq *result)
 {
 	const Engine *e = Engine::Get(engine);
-	uint8_t spritenum = e->u.air.image_index;
+	uint8_t spritenum = e->VehInfo<AircraftVehicleInfo>().image_index;
 
 	if (IsCustomVehicleSpriteNum(spritenum)) {
 		GetCustomVehicleIcon(engine, DIR_W, image_type, result);
@@ -267,7 +268,7 @@ void GetAircraftSpriteSize(EngineID engine, uint &width, uint &height, int &xoff
  */
 CommandCost CmdBuildAircraft(DoCommandFlags flags, TileIndex tile, const Engine *e, Vehicle **ret)
 {
-	const AircraftVehicleInfo *avi = &e->u.air;
+	const AircraftVehicleInfo *avi = &e->VehInfo<AircraftVehicleInfo>();
 	const Station *st = Station::GetByTile(tile);
 
 	/* Prevent building aircraft types at places which can't handle them */
@@ -427,7 +428,7 @@ static void CheckIfAircraftNeedsService(Aircraft *v)
 
 	/* only goto depot if the target airport has a depot */
 	if (st->airport.HasHangar() && CanVehicleUseStation(v, st)) {
-		v->current_order.MakeGoToDepot(st->index, ODTFB_SERVICE);
+		v->current_order.MakeGoToDepot(st->index, OrderDepotTypeFlag::Service);
 		SetWindowWidgetDirty(WC_VEHICLE_VIEW, v->index, WID_VV_START_STOP);
 	} else if (v->current_order.IsType(OT_GOTO_DEPOT)) {
 		v->current_order.MakeDummy();
@@ -438,7 +439,7 @@ static void CheckIfAircraftNeedsService(Aircraft *v)
 Money Aircraft::GetRunningCost() const
 {
 	const Engine *e = this->GetEngine();
-	uint cost_factor = GetVehicleProperty(this, PROP_AIRCRAFT_RUNNING_COST_FACTOR, e->u.air.running_cost);
+	uint cost_factor = GetVehicleProperty(this, PROP_AIRCRAFT_RUNNING_COST_FACTOR, e->VehInfo<AircraftVehicleInfo>().running_cost);
 	return GetPrice(PR_RUNNING_AIRCRAFT, cost_factor, e->GetGRF());
 }
 
@@ -987,7 +988,7 @@ static bool AircraftController(Aircraft *v)
 	}
 
 	/* Get distance from destination pos to current pos. */
-	uint dist = abs(x + amd.x - v->x_pos) +  abs(y + amd.y - v->y_pos);
+	uint dist = abs(x + amd.x - v->x_pos) + abs(y + amd.y - v->y_pos);
 
 	/* Need exact position? */
 	if (!amd.flags.Test(AirportMovingDataFlag::ExactPosition) && dist <= (amd.flags.Test(AirportMovingDataFlag::SlowTurn) ? 8U : 4U)) return true;
@@ -1020,10 +1021,21 @@ static bool AircraftController(Aircraft *v)
 	uint speed_limit = SPEED_LIMIT_TAXI;
 	bool hard_limit = true;
 
-	if (amd.flags.Test(AirportMovingDataFlag::NoSpeedClamp)) speed_limit = SPEED_LIMIT_NONE;
-	if (amd.flags.Test(AirportMovingDataFlag::Hold)) { speed_limit = SPEED_LIMIT_HOLD;     hard_limit = false; }
-	if (amd.flags.Test(AirportMovingDataFlag::Land)) { speed_limit = SPEED_LIMIT_APPROACH; hard_limit = false; }
-	if (amd.flags.Test(AirportMovingDataFlag::Brake)) { speed_limit = SPEED_LIMIT_TAXI;     hard_limit = false; }
+	if (amd.flags.Test(AirportMovingDataFlag::NoSpeedClamp)) {
+		speed_limit = SPEED_LIMIT_NONE;
+	}
+	if (amd.flags.Test(AirportMovingDataFlag::Hold)) {
+		speed_limit = SPEED_LIMIT_HOLD;
+		hard_limit = false;
+	}
+	if (amd.flags.Test(AirportMovingDataFlag::Land)) {
+		speed_limit = SPEED_LIMIT_APPROACH;
+		hard_limit = false;
+	}
+	if (amd.flags.Test(AirportMovingDataFlag::Brake)) {
+		speed_limit = SPEED_LIMIT_TAXI;
+		hard_limit = false;
+	}
 
 	int count = UpdateAircraftSpeed(v, speed_limit, hard_limit);
 	if (count == 0) return false;
@@ -1180,7 +1192,7 @@ static bool HandleCrashedAircraft(Aircraft *v)
 	Station *st = GetTargetAirportIfValid(v);
 
 	/* make aircraft crash down to the ground */
-	if (v->crashed_counter < 500 && st == nullptr && ((v->crashed_counter % 3) == 0) ) {
+	if (v->crashed_counter < 500 && st == nullptr && ((v->crashed_counter % 3) == 0)) {
 		int z = GetSlopePixelZ(Clamp(v->x_pos, 0, Map::MaxX() * TILE_SIZE), Clamp(v->y_pos, 0, Map::MaxY() * TILE_SIZE));
 		v->z_pos -= 1;
 		if (v->z_pos <= z) {
@@ -1813,7 +1825,7 @@ static bool AirportMove(Aircraft *v, const AirportFTAClass *apc)
 {
 	/* error handling */
 	if (v->pos >= apc->nofelements) {
-		Debug(misc, 0, "[Ap] position {} is not valid for current airport. Max position is {}", v->pos, apc->nofelements-1);
+		Debug(misc, 0, "[Ap] position {} is not valid for current airport. Max position is {}", v->pos, apc->nofelements - 1);
 		assert(v->pos < apc->nofelements);
 	}
 
@@ -2175,7 +2187,7 @@ void UpdateAirplanesOnNewStation(const Station *st)
 		Order *o = &v->current_order;
 		/* The aircraft is heading to a hangar, but the new station doesn't have one,
 		 * or the aircraft can't land on the new station. Cancel current order. */
-		if (o->IsType(OT_GOTO_DEPOT) && !(o->GetDepotOrderType() & ODTFB_PART_OF_ORDERS) && o->GetDestination() == st->index &&
+		if (o->IsType(OT_GOTO_DEPOT) && !o->GetDepotOrderType().Test(OrderDepotTypeFlag::PartOfOrders) && o->GetDestination() == st->index &&
 				(!st->airport.HasHangar() || !CanVehicleUseStation(v, st))) {
 			o->MakeDummy();
 			SetWindowWidgetDirty(WC_VEHICLE_VIEW, v->index, WID_VV_START_STOP);

@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file gfx.cpp Handling of drawing text and other gfx related stuff. */
@@ -22,7 +22,6 @@
 #include "window_func.h"
 #include "newgrf_debug.h"
 #include "core/backup_type.hpp"
-#include "core/container_func.hpp"
 #include "core/geometry_func.hpp"
 #include "viewport_func.h"
 
@@ -341,6 +340,9 @@ static inline void GfxDoDrawLine(void *video, int x, int y, int x2, int y2, int 
 		grade_x /= 2;
 		margin  *= 2; // account for rounding errors
 	}
+
+	/* Prevent division by zero. */
+	if (grade_x == 0) grade_x = 1;
 
 	/* Imagine that the line is infinitely long and it intersects with
 	 * infinitely long left and right edges of the clipping rectangle.
@@ -1325,6 +1327,10 @@ void ScreenSizeChanged()
 
 	/* screen size changed and the old bitmap is invalid now, so we don't want to undraw it */
 	_cursor.visible = false;
+
+	if (VideoDriver::GetInstance() != nullptr) {
+		if (AdjustGUIZoom(true)) ReInitAllWindows(true);
+	}
 }
 
 void UndrawMouseCursor()
@@ -1659,15 +1665,15 @@ static void SetCursorSprite(CursorID cursor, PaletteID pal)
 
 static void SwitchAnimatedCursor()
 {
-	const AnimCursor *cur = _cursor.animate_cur;
-
-	if (cur == nullptr || cur->sprite == AnimCursor::LAST) cur = _cursor.animate_list;
+	if (_cursor.animate_cur == std::end(_cursor.animate_list)) {
+		_cursor.animate_cur = std::begin(_cursor.animate_list);
+	}
 
 	assert(!_cursor.sprites.empty());
-	SetCursorSprite(cur->sprite, _cursor.sprites[0].image.pal);
+	SetCursorSprite(_cursor.animate_cur->sprite, _cursor.sprites[0].image.pal);
 
-	_cursor.animate_timeout = cur->display_time;
-	_cursor.animate_cur     = cur + 1;
+	_cursor.animate_timeout = _cursor.animate_cur->display_time;
+	++_cursor.animate_cur;
 }
 
 void CursorTick()
@@ -1710,11 +1716,11 @@ void SetMouseCursor(CursorID sprite, PaletteID pal)
  * @param table Array of animation states.
  * @see SetMouseCursor
  */
-void SetAnimatedMouseCursor(const AnimCursor *table)
+void SetAnimatedMouseCursor(std::span<const AnimCursor> table)
 {
 	assert(!_cursor.sprites.empty());
 	_cursor.animate_list = table;
-	_cursor.animate_cur = nullptr;
+	_cursor.animate_cur = std::end(table);
 	_cursor.sprites[0].image.pal = PAL_NONE;
 	SwitchAnimatedCursor();
 }
@@ -1785,7 +1791,12 @@ void UpdateGUIZoom()
 {
 	/* Determine real GUI zoom to use. */
 	if (_gui_scale_cfg == -1) {
-		_gui_scale = VideoDriver::GetInstance()->GetSuggestedUIScale();
+		/* Minimum design size of the game is 640x480. */
+		float xs = _screen.width / 640.f;
+		float ys = _screen.height / 480.f;
+		int scale = std::min(xs, ys) * 100;
+		/* Round down scaling to 25% increments and clamp to limits. */
+		_gui_scale = Clamp((scale / 25) * 25, MIN_INTERFACE_SCALE, MAX_INTERFACE_SCALE);
 	} else {
 		_gui_scale = Clamp(_gui_scale_cfg, MIN_INTERFACE_SCALE, MAX_INTERFACE_SCALE);
 	}

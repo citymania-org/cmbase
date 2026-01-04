@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file font_win32.cpp Functions related to font handling on Win32. */
@@ -38,9 +38,8 @@ struct EFCParam {
 
 	bool Add(const std::wstring_view &font)
 	{
-		for (const auto &entry : this->fonts) {
-			if (font.compare(entry) == 0) return false;
-		}
+		auto it = std::ranges::find(this->fonts, font);
+		if (it != std::end(this->fonts)) return false;
 
 		this->fonts.emplace_back(font);
 
@@ -276,7 +275,7 @@ public:
 	* fallback search, use it. Otherwise, try to resolve it by font name.
 	* @param fs The font size to load.
 	*/
-	std::unique_ptr<FontCache> LoadFont(FontSize fs, FontType fonttype) override
+	std::unique_ptr<FontCache> LoadFont(FontSize fs, FontType fonttype) const override
 	{
 		if (fonttype != FontType::TrueType) return nullptr;
 
@@ -308,7 +307,7 @@ public:
 		return LoadWin32Font(fs, logfont, GetFontCacheFontSize(fs), font);
 	}
 
-	bool FindFallbackFont(FontCacheSettings *settings, const std::string &language_isocode, MissingGlyphSearcher *callback) override
+	bool FindFallbackFont(FontCacheSettings *settings, const std::string &language_isocode, MissingGlyphSearcher *callback) const override
 	{
 		Debug(fontcache, 1, "Trying fallback fonts");
 		EFCParam langInfo;

@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file squirrel.hpp defines the Squirrel class */
@@ -104,15 +104,21 @@ public:
 	 * Adds a const to the stack. Depending on the current state this means
 	 *  either a const to a class or to the global space.
 	 */
-	void AddConst(std::string_view var_name, int value);
+	void AddConst(std::string_view var_name, SQInteger value);
 
 	/**
 	 * Adds a const to the stack. Depending on the current state this means
 	 *  either a const to a class or to the global space.
 	 */
-	void AddConst(std::string_view var_name, uint value) { this->AddConst(var_name, (int)value); }
+	void AddConst(std::string_view var_name, uint value) { this->AddConst(var_name, (SQInteger)value); }
 
-	void AddConst(std::string_view var_name, const ConvertibleThroughBase auto &value) { this->AddConst(var_name, static_cast<int>(value.base())); }
+	/**
+	 * Adds a const to the stack. Depending on the current state this means
+	 *  either a const to a class or to the global space.
+	 */
+	void AddConst(std::string_view var_name, int value) { this->AddConst(var_name, (SQInteger)value); }
+
+	void AddConst(std::string_view var_name, const ConvertibleThroughBase auto &value) { this->AddConst(var_name, static_cast<SQInteger>(value.base())); }
 
 	/**
 	 * Adds a const to the stack. Depending on the current state this means

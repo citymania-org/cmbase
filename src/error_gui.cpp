@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file error_gui.cpp GUI related to errors. */
@@ -33,7 +33,7 @@
 
 #include "safeguards.h"
 
-static constexpr NWidgetPart _nested_errmsg_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_errmsg_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_RED),
 		NWidget(WWT_CAPTION, COLOUR_RED, WID_EM_CAPTION), SetStringTip(STR_ERROR_MESSAGE_CAPTION),
@@ -50,7 +50,7 @@ static WindowDesc _errmsg_desc(
 	_nested_errmsg_widgets
 );
 
-static constexpr NWidgetPart _nested_errmsg_face_widgets[] = {
+static constexpr std::initializer_list<NWidgetPart> _nested_errmsg_face_widgets = {
 	NWidget(NWID_HORIZONTAL),
 		NWidget(WWT_CLOSEBOX, COLOUR_RED),
 		NWidget(WWT_CAPTION, COLOUR_RED, WID_EM_CAPTION),
@@ -101,22 +101,17 @@ private:
 	uint height_summary = 0; ///< Height of the #summary_msg string in pixels in the #WID_EM_MESSAGE widget.
 	uint height_detailed = 0; ///< Height of the #detailed_msg string in pixels in the #WID_EM_MESSAGE widget.
 	uint height_extra = 0; ///< Height of the #extra_msg string in pixels in the #WID_EM_MESSAGE widget.
-	TimeoutTimer<TimerWindow> display_timeout;
+
+	TimeoutTimer<TimerWindow> display_timeout = {std::chrono::seconds(_settings_client.gui.errmsg_duration), [this]() {
+		this->Close();
+	}};
 
 public:
 	ErrmsgWindow(const ErrorMessageData &data) :
 		Window(data.HasFace() ? _errmsg_face_desc : _errmsg_desc),
-		ErrorMessageData(data),
-		display_timeout(std::chrono::seconds(_settings_client.gui.errmsg_duration), [this]() {
-			this->Close();
-		})
+		ErrorMessageData(data)
 	{
 		this->InitNested();
-
-		/* Only start the timeout if the message is not critical. */
-		if (!this->is_critical) {
-			this->display_timeout.Reset();
-		}
 	}
 
 	void UpdateWidgetSize(WidgetID widget, Dimension &size, [[maybe_unused]] const Dimension &padding, [[maybe_unused]] Dimension &fill, [[maybe_unused]] Dimension &resize) override
@@ -209,7 +204,7 @@ public:
 					/* Note: NewGRF supplied error message often do not start with a colour code, so default to white. */
 					Rect top_section = r.WithHeight(this->height_summary + extra, false);
 					Rect bottom_section = r.WithHeight(this->height_extra + extra, true);
-					Rect middle_section = { top_section.left, top_section.bottom, top_section.right, bottom_section.top };
+					Rect middle_section = top_section.WithY(top_section.bottom, bottom_section.top);
 					DrawStringMultiLineWithClipping(top_section, this->summary_msg.GetDecodedString(), TC_WHITE, SA_CENTER);
 					DrawStringMultiLineWithClipping(middle_section, this->detailed_msg.GetDecodedString(), TC_WHITE, SA_CENTER);
 					DrawStringMultiLineWithClipping(bottom_section, this->extra_msg.GetDecodedString(), TC_WHITE, SA_CENTER);
@@ -220,6 +215,17 @@ public:
 			default:
 				break;
 		}
+	}
+
+	void OnPaint() override
+	{
+		/* Start the timeout if not already started and the message is not critical. This is handled during OnPaint so that any delay between
+		 * creating the window and displaying it does not affect how long the message is visible. */
+		if (!this->is_critical && this->display_timeout.HasFired()) {
+			this->display_timeout.Reset();
+		}
+
+		this->Window::OnPaint();
 	}
 
 	void OnMouseLoop() override

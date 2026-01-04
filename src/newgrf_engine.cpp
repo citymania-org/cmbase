@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file newgrf_engine.cpp NewGRF handling of engines. */
@@ -565,7 +565,7 @@ static uint32_t VehicleGetVariable(Vehicle *v, const VehicleScopeResolver *objec
 					RailType rt = GetTileRailType(v->tile);
 					const RailTypeInfo *rti = GetRailTypeInfo(rt);
 					return (rti->flags.Test(RailTypeFlag::Catenary) ? 0x200 : 0) |
-						(HasPowerOnRail(Train::From(v)->railtype, rt) ? 0x100 : 0) |
+						(HasPowerOnRail(Train::From(v)->railtypes, rt) ? 0x100 : 0) |
 						GetReverseRailTypeTranslation(rt, object->ro.grffile);
 				}
 
@@ -732,7 +732,7 @@ static uint32_t VehicleGetVariable(Vehicle *v, const VehicleScopeResolver *objec
 				const Train *u = is_powered_wagon ? t->First() : t; // for powered wagons the engine defines the type of engine (i.e. railtype)
 				RailType railtype = GetRailType(v->tile);
 				bool powered = t->IsEngine() || is_powered_wagon;
-				bool has_power = HasPowerOnRail(u->railtype, railtype);
+				bool has_power = HasPowerOnRail(u->railtypes, railtype);
 
 				if (powered && has_power) SetBit(modflags, 5);
 				if (powered && !has_power) SetBit(modflags, 6);
@@ -915,7 +915,7 @@ static uint32_t VehicleGetVariable(Vehicle *v, const VehicleScopeResolver *objec
 			Train *t = Train::From(v);
 			switch (variable - 0x80) {
 				case 0x62: return t->track;
-				case 0x66: return t->railtype;
+				case 0x66: return t->railtypes.GetNthSetBit(0).value_or(RailType::INVALID_RAILTYPE);
 				case 0x73: return 0x80 + VEHICLE_LENGTH - t->gcache.cached_veh_length;
 				case 0x74: return t->gcache.cached_power;
 				case 0x75: return GB(t->gcache.cached_power,  8, 24);
@@ -1020,7 +1020,7 @@ static uint32_t VehicleGetVariable(Vehicle *v, const VehicleScopeResolver *objec
 	}
 
 	const Order &order = v->First()->current_order;
-	bool not_loading = (order.GetUnloadType() & OUFB_NO_UNLOAD) && (order.GetLoadType() & OLFB_NO_LOAD);
+	bool not_loading = order.GetUnloadType() == OrderUnloadType::NoUnload && order.GetLoadType() == OrderLoadType::NoLoad;
 	bool in_motion = !order.IsType(OT_LOADING) || not_loading;
 
 	uint totalsets = static_cast<uint>(in_motion ? group.loaded.size() : group.loading.size());
@@ -1138,7 +1138,7 @@ static void GetRotorOverrideSprite(EngineID engine, const struct Aircraft *v, En
 
 	/* Only valid for helicopters */
 	assert(e->type == VEH_AIRCRAFT);
-	assert(!(e->u.air.subtype & AIR_CTOL));
+	assert(!(e->VehInfo<AircraftVehicleInfo>().subtype & AIR_CTOL));
 
 	/* We differ from TTDPatch by resolving the sprite using the primary vehicle 'v', and not using the rotor vehicle 'v->Next()->Next()'.
 	 * TTDPatch copies some variables between the vehicles each time, to somehow synchronize the rotor vehicle with the primary vehicle.

@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file script_rail.hpp Everything to query and build rails. */
@@ -44,9 +44,8 @@ public:
 	/**
 	 * Types of rail known to the game.
 	 */
-	enum RailType : uint8_t {
-		/* Note: these values represent part of the in-game static values */
-		RAILTYPE_INVALID  = ::INVALID_RAILTYPE, ///< Invalid RailType.
+	enum RailType {
+		RAILTYPE_INVALID = -1, ///< Invalid RailType.
 	};
 
 	/**

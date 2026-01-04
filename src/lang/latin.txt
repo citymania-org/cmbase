@@ -15,7 +15,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -2013,7 +2013,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Unitates altitudinis: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Quandocumque altitudo monstratur, monstrabitur his unitatibus electis
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Anglicae (ft)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Metricae (m)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (m)
@@ -2570,6 +2570,7 @@ STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Struere 
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :Statio solita
 STR_STATION_CLASS_WAYP                                          :Interloci
 
@@ -2806,7 +2807,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Typus ae
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Nomen aeroportus: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Nomen tegulae aeroportus: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Onera accepta: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Onera accepta: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Typus ferriviae: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_RAIL_SPEED_LIMIT                      :{BLACK}Velocitas maxima ferriviae: {LTBLUE}{VELOCITY}
@@ -3000,6 +3001,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Africus
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Quilibet
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Aqua
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Fortuiti
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Fortuiti
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}Manu
 
@@ -3232,7 +3235,6 @@ STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Inscribe
 # Town directory window
 STR_TOWN_DIRECTORY_NONE                                         :{ORANGE}- Nulla -
 STR_TOWN_DIRECTORY_TOWN                                         :{ORANGE}{TOWN}{BLACK} ({COMMA})
-STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{YELLOW} (Urbs){BLACK} ({COMMA})
 STR_TOWN_DIRECTORY_LIST_TOOLTIP                                 :{BLACK}Nomina oppidorum - preme in nomen ut conspectus supra oppidum locetur. Ctrl+Preme ut novam fenestram conspectus supra oppidum aperiatur
 STR_TOWN_POPULATION                                             :{BLACK}Incolae mundi: {COMMA}
 
@@ -3404,14 +3406,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Praestans
 STR_CARGO_RATING_OUTSTANDING                                    :Optima
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Movere conspectum supra hanc stationem. Ctrl+Preme ut nova fenestra conspectus aperiatur supra stationem
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Mutare nomen stationis
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Monstrare omnia tramina quae hanc stationem in horario habent
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Monstrare omnia vehicula viaria quae hanc stationem in horario habent
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Monstrare omnia aeroplana quae hanc stationem in horario habent
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Monstrare omnes naves quae hanc stationem in horario habent
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Renominare stationem
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Claudere aeroportum
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Facere ut aeroplana non appellant in hoc aeroportu
@@ -3419,11 +3419,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Facere u
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Movere conspectum supra hunc interlocum. ut nova fenestra conspectus aperiatur supra interlocum
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Mutare nomen interloci
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Movere conspectum supra hoc signum monitorium. ut nova fenestra conspectus aperiatur supra signum monitorium
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Mutare nomen signi monitorii
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Recensere nomen interloci
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}{COMPANY} Res Fiscales {BLACK}{COMPANY_NUM}
@@ -3522,9 +3520,9 @@ STR_INDUSTRY_VIEW_LOCATION_TOOLTIP                              :{BLACK}Movere c
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Quantitas productionis: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}Haec industria mox claudetur!
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Postulat: {YELLOW}{STRING.acc}{STRING}
-STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Fabricat: {YELLOW}{STRING.acc}{STRING}
-STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :, {STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Postulat: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Fabricat: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :{STRING.acc}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}Postulat:
 
@@ -3980,7 +3978,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Monstrar
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Tota Onera
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Monstrare totam capacitatem hamaxostichi, per oneris typum
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Capacitas: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Capacitas: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Reficere)

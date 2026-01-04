@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file command.cpp Handling of NewGRF road stops. */
@@ -231,7 +231,7 @@ RoadStopResolverObject::RoadStopResolverObject(const RoadStopSpec *roadstopspec,
 		const Station *station = Station::From(st);
 		/* Pick the first cargo that we have waiting */
 		for (const auto &[cargo, spritegroup] : roadstopspec->grf_prop.spritegroups) {
-			if (cargo < NUM_CARGO && station->goods[cargo].HasData() && station->goods[cargo].GetData().cargo.TotalCount() > 0) {
+			if (cargo < NUM_CARGO && station->goods[cargo].TotalCount() > 0) {
 				ctype = cargo;
 				this->root_spritegroup = spritegroup;
 				break;
@@ -561,20 +561,22 @@ const RoadStopSpec *GetRoadStopSpec(TileIndex t)
 
 /**
  * Allocate a RoadStopSpec to a Station. This is called once per build operation.
- * @param statspec RoadStopSpec to allocate.
+ * @param spec RoadStopSpec to allocate.
  * @param st Station to allocate it to.
- * @param exec Whether to actually allocate the spec.
  * @return Index within the Station's road stop spec list, or std::nullopt if the allocation failed.
  */
-std::optional<uint8_t> AllocateSpecToRoadStop(const RoadStopSpec *statspec, BaseStation *st, bool exec)
+std::optional<uint8_t> AllocateSpecToRoadStop(const RoadStopSpec *spec, BaseStation *st)
 {
 	uint i;
 
-	if (statspec == nullptr || st == nullptr) return 0;
+	if (spec == nullptr) return 0;
+
+	/* If station doesn't exist yet then the first slot is available. */
+	if (st == nullptr) return 1;
 
 	/* Try to find the same spec and return that one */
 	for (i = 1; i < st->roadstop_speclist.size() && i < NUM_ROADSTOPSPECS_PER_STATION; i++) {
-		if (st->roadstop_speclist[i].spec == statspec) return i;
+		if (st->roadstop_speclist[i].spec == spec) return i;
 	}
 
 	/* Try to find an unused spec slot */
@@ -587,16 +589,25 @@ std::optional<uint8_t> AllocateSpecToRoadStop(const RoadStopSpec *statspec, Base
 		return std::nullopt;
 	}
 
-	if (exec) {
-		if (i >= st->roadstop_speclist.size()) st->roadstop_speclist.resize(i + 1);
-		st->roadstop_speclist[i].spec     = statspec;
-		st->roadstop_speclist[i].grfid    = statspec->grf_prop.grfid;
-		st->roadstop_speclist[i].localidx = statspec->grf_prop.local_id;
-
-		RoadStopUpdateCachedTriggers(st);
-	}
-
 	return i;
+}
+
+/**
+ * Assign a previously allocated RoadStopSpec specindex to a Station.
+ * @param spec RoadStopSpec to assign..
+ * @param st Station to allocate it to.
+ * @param specindex Spec index of allocation.
+ */
+void AssignSpecToRoadStop(const RoadStopSpec *spec, BaseStation *st, uint8_t specindex)
+{
+	if (specindex == 0) return;
+	if (specindex >= st->roadstop_speclist.size()) st->roadstop_speclist.resize(specindex + 1);
+
+	st->roadstop_speclist[specindex].spec = spec;
+	st->roadstop_speclist[specindex].grfid = spec->grf_prop.grfid;
+	st->roadstop_speclist[specindex].localidx = spec->grf_prop.local_id;
+
+	RoadStopUpdateCachedTriggers(st);
 }
 
 /**

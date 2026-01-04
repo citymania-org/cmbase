@@ -13,7 +13,7 @@
 # This file is part of OpenTTD.
 # OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 # OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+# See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
 
 
 ##id 0x0000
@@ -190,6 +190,20 @@ STR_COLOUR_WHITE                                                :Bán
 STR_COLOUR_RANDOM                                               :Randamach
 
 ###length 17
+STR_COLOUR_SECONDARY_DARK_BLUE                                  :Gorm Dorcha
+STR_COLOUR_SECONDARY_PALE_GREEN                                 :Liathuaine
+STR_COLOUR_SECONDARY_RED                                        :Dearg
+STR_COLOUR_SECONDARY_LIGHT_BLUE                                 :Bánghorm
+STR_COLOUR_SECONDARY_GREEN                                      :Uaine
+STR_COLOUR_SECONDARY_DARK_GREEN                                 :Ciaruaine
+STR_COLOUR_SECONDARY_BLUE                                       :Gorm
+STR_COLOUR_SECONDARY_CREAM                                      :Uachtar
+STR_COLOUR_SECONDARY_MAUVE                                      :Liathchorcra
+STR_COLOUR_SECONDARY_PURPLE                                     :Corcra
+STR_COLOUR_SECONDARY_ORANGE                                     :Oráiste
+STR_COLOUR_SECONDARY_BROWN                                      :Donn
+STR_COLOUR_SECONDARY_GREY                                       :Liath
+STR_COLOUR_SECONDARY_SAME_AS_PRIMARY                            :Mar an gcéanna leis an gceann príomhúil
 
 
 # Units used in OpenTTD
@@ -396,6 +410,8 @@ STR_SCENEDIT_FILE_MENU_QUIT_EDITOR                              :Fág eagarthói
 STR_SCENEDIT_FILE_MENU_SEPARATOR                                :
 STR_SCENEDIT_FILE_MENU_QUIT                                     :Scoir
 
+STR_SCENEDIT_TOWN_MENU_BUILD_TOWN                               :Cruthaigh bailte
+STR_SCENEDIT_TOWN_MENU_PACE_HOUSE                               :Cuir síos tithe
 
 # Settings menu
 STR_SETTINGS_MENU_GAME_OPTIONS                                  :Roghanna an chluiche
@@ -959,6 +975,13 @@ STR_GAME_OPTIONS_VIDEO_VSYNC_TOOLTIP                            :Cuir tic sa bho
 
 
 
+STR_GAME_OPTIONS_PARTICIPATE_SURVEY_FRAME                       :Suirbhé uathoibrithe
+STR_GAME_OPTIONS_PARTICIPATE_SURVEY                             :Glac páirt i suirbhé uathoibrithe
+STR_GAME_OPTIONS_PARTICIPATE_SURVEY_TOOLTIP                     :Má tá sé cumasaithe, déanfaidh OpenTTd suirbhé a sheoladh nuair a fhágfar cluiche
+STR_GAME_OPTIONS_PARTICIPATE_SURVEY_LINK                        :Maidir leis an suirbhé agus príobháideachas
+STR_GAME_OPTIONS_PARTICIPATE_SURVEY_LINK_TOOLTIP                :Osclóidh seo brabhsálaí ina mbeidh tuilleadh eolais faoin suirbhé uathoibrithe
+STR_GAME_OPTIONS_PARTICIPATE_SURVEY_PREVIEW                     :Réamhamharc ar thoradh an tsuirbhé
+STR_GAME_OPTIONS_PARTICIPATE_SURVEY_PREVIEW_TOOLTIP             :Taispeáin toradh an tsuirbhé ar an gcluiche reatha atá ar siúl
 
 
 STR_GAME_OPTIONS_REFRESH_RATE                                   :Ráta athnuachana na taispeána
@@ -994,6 +1017,8 @@ STR_CURRENCY_DECREASE_EXCHANGE_RATE_TOOLTIP                     :{BLACK}Laghdaig
 STR_CURRENCY_INCREASE_EXCHANGE_RATE_TOOLTIP                     :{BLACK}Méadaigh méid d'airgeadra ar Euro (€) amháin
 STR_CURRENCY_SET_EXCHANGE_RATE_TOOLTIP                          :{BLACK}Socraigh ráta malairte d'airgeadra ar Euro (€) amháin
 
+STR_CURRENCY_SEPARATOR                                          :{LTBLUE}Deighilteoir: {ORANGE}{STRING}
+STR_CURRENCY_SET_CUSTOM_CURRENCY_SEPARATOR_TOOLTIP              :{BLACK}Socraigh an deighilteoir dod' airgeadra
 
 STR_CURRENCY_PREFIX                                             :{LTBLUE}Réimír: {ORANGE}{STRING}
 STR_CURRENCY_SET_CUSTOM_CURRENCY_PREFIX_TOOLTIP                 :{BLACK}Socraigh an teaghrán réimíre dod' airgeadra
@@ -1913,7 +1938,7 @@ STR_CONFIG_SETTING_LOCALISATION_UNITS_FORCE_SI                  :SI (kN)
 
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT                    :Aonaid airde: {STRING}
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_HELPTEXT           :Aon áit a thaispeántar airde sa chomhéadan úsáideora, taispeain sna haonaid roghnaithe í
-###length 3
+###length 4
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_IMPERIAL           :Impiriúil (tr)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_METRIC             :Méadrach (m)
 STR_CONFIG_SETTING_LOCALISATION_UNITS_HEIGHT_SI                 :SI (m)
@@ -2538,8 +2563,12 @@ STR_STATION_BUILD_DRAG_DROP_TOOLTIP                             :{BLACK}Tóg st�
 
 
 
+
 STR_STATION_CLASS_DFLT                                          :Stáisiún réamhshocraithe
+STR_STATION_CLASS_DFLT_STATION                                  :Stáisiún réamhshocraithe
+STR_STATION_CLASS_DFLT_ROADSTOP                                 :Stad bóthair réamhshocraithe
 STR_STATION_CLASS_WAYP                                          :Pointí bealaigh
+STR_STATION_CLASS_WAYP_WAYPOINT                                 :Pointe bealaigh réamhshocraithe
 
 # Signal window
 STR_BUILD_SIGNAL_CAPTION                                        :{WHITE}Comharthaí a Roghnú
@@ -2791,7 +2820,7 @@ STR_LAND_AREA_INFORMATION_AIRPORT_CLASS                         :{BLACK}Aicme an
 STR_LAND_AREA_INFORMATION_AIRPORT_NAME                          :{BLACK}Ainm an aerfoirt: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_AIRPORTTILE_NAME                      :{BLACK}Ainm tíl aerfoirt: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_NEWGRF_NAME                           :{BLACK}NewGRF: {LTBLUE}{STRING}
-STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Lastas a ghlactar leis: {LTBLUE}
+STR_LAND_AREA_INFORMATION_CARGO_ACCEPTED                        :{BLACK}Lastas a ghlactar leis: {LTBLUE}{STRING}
 STR_LAND_AREA_INFORMATION_CARGO_EIGHTS                          :({COMMA}/8 {STRING})
 STR_LANG_AREA_INFORMATION_RAIL_TYPE                             :{BLACK}Cineál ráillí: {LTBLUE}{STRING}
 STR_LANG_AREA_INFORMATION_ROAD_TYPE                             :{BLACK}Cineál bóthair: {LTBLUE}{STRING}
@@ -3043,6 +3072,8 @@ STR_MAPGEN_SOUTHWEST                                            :{BLACK}Iardheis
 STR_MAPGEN_BORDER_FREEFORM                                      :{BLACK}Saorfhoirme
 STR_MAPGEN_BORDER_WATER                                         :{BLACK}Uisce
 STR_MAPGEN_BORDER_RANDOM                                        :{BLACK}Randamach
+
+###length 3
 STR_MAPGEN_BORDER_RANDOMIZE                                     :{BLACK}Randamach
 STR_MAPGEN_BORDER_MANUAL                                        :{BLACK}De láimh
 
@@ -3279,7 +3310,6 @@ STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Iontrái
 # Town directory window
 STR_TOWN_DIRECTORY_NONE                                         :{ORANGE}- Ceann ar bith -
 STR_TOWN_DIRECTORY_TOWN                                         :{ORANGE}{TOWN}{BLACK} ({COMMA})
-STR_TOWN_DIRECTORY_CITY                                         :{ORANGE}{TOWN}{YELLOW} (Cathair){BLACK} ({COMMA})
 STR_TOWN_DIRECTORY_LIST_TOOLTIP                                 :{BLACK}Ainmneacha bailte - cliceáil ar ainm le go mbeidh an baile i lár an scáileán. Osclaítear amharc nua ar shuíomh an bhaile le Ctrl+Cliceáil
 STR_TOWN_POPULATION                                             :{BLACK}Daonra domhanda: {COMMA}
 
@@ -3457,14 +3487,12 @@ STR_CARGO_RATING_EXCELLENT                                      :Ar fheabhas
 STR_CARGO_RATING_OUTSTANDING                                    :Go hiontach
 
 STR_STATION_VIEW_CENTER_TOOLTIP                                 :{BLACK}Láraigh an príomhamharc ar shuíomh an stáisiúin. Osclaítear amharc nua ar shuíomh an stáisiúin le Ctrl+Cliceáil
-STR_STATION_VIEW_RENAME_TOOLTIP                                 :{BLACK}Athraigh ainm an stásiúin
 
 STR_STATION_VIEW_SCHEDULED_TRAINS_TOOLTIP                       :{BLACK}Taispeáin gach traein a bhfuil an stáisiún seo ar a sceideal
 STR_STATION_VIEW_SCHEDULED_ROAD_VEHICLES_TOOLTIP                :{BLACK}Taispeáin gach feithicil bóthair a bhfuil an stáisiún seo ar a sceideal
 STR_STATION_VIEW_SCHEDULED_AIRCRAFT_TOOLTIP                     :{BLACK}Taispeáin gach aerárthach a bhfuil an stáisiún seo ar a sceideal
 STR_STATION_VIEW_SCHEDULED_SHIPS_TOOLTIP                        :{BLACK}Taispeáin gach long a bhfuil an stáisiún seo ar a sceideal
 
-STR_STATION_VIEW_RENAME_STATION_CAPTION                         :Athainmnigh stáisiún/limistéar lódála
 
 STR_STATION_VIEW_CLOSE_AIRPORT                                  :{BLACK}Dún an t-aerfort
 STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Cuir cosc ar aerárthaigh tuirlingt ag an aerfort seo
@@ -3472,11 +3500,9 @@ STR_STATION_VIEW_CLOSE_AIRPORT_TOOLTIP                          :{BLACK}Cuir cos
 # Waypoint/buoy view window
 STR_WAYPOINT_VIEW_CAPTION                                       :{WHITE}{WAYPOINT}
 STR_WAYPOINT_VIEW_CENTER_TOOLTIP                                :{BLACK}Láraigh an príomhamharc ar shuíomh an phointe bealaigh. Osclaítear amharc nua ar shuíomh an phointe bealaigh le Ctrl+Cliceáil
-STR_WAYPOINT_VIEW_CHANGE_WAYPOINT_NAME                          :{BLACK}Athraigh ainm an phointe bealaigh
 STR_BUOY_VIEW_CENTER_TOOLTIP                                    :{BLACK}Láraigh an príomhamharc ar shuíomh an bhaoi. Osclaítear amharc nua ar shuíomh an bhaoi le Ctrl+Cliceáil
 STR_BUOY_VIEW_RENAME_TOOLTIP                                    :{BLACK}Athraigh ainm an bhaoi
 
-STR_EDIT_WAYPOINT_NAME                                          :{WHITE}Cuir ainm an phointe bealaigh in eagar
 
 # Finances window
 STR_FINANCES_CAPTION                                            :{WHITE}Airgeadas {COMPANY} {BLACK}{COMPANY_NUM}
@@ -3568,12 +3594,12 @@ STR_COMPANY_INFRASTRUCTURE_VIEW_AIRPORTS                        :{WHITE}Aerfoirt
 
 # Industry directory
 STR_INDUSTRY_DIRECTORY_NONE                                     :{ORANGE}- Ceann ar bith -
-STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} (Iompraíodh {COMMA}%){BLACK}
+STR_INDUSTRY_DIRECTORY_ITEM_INFO                                :{BLACK}{CARGO_LONG}{STRING}{YELLOW} (Iompraíodh {COMMA}%)
 STR_INDUSTRY_DIRECTORY_ITEM_NOPROD                              :{ORANGE}{INDUSTRY}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING}
-STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {STRING}, {STRING}, {STRING} agus {NUM} sa bhreis...
+STR_INDUSTRY_DIRECTORY_ITEM_PROD1                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD2                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PROD3                               :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING}
+STR_INDUSTRY_DIRECTORY_ITEM_PRODMORE                            :{ORANGE}{INDUSTRY} {BLACK}{STRING}, {STRING}, {STRING} agus {NUM} sa bhreis...
 STR_INDUSTRY_DIRECTORY_LIST_TOOLTIP                             :{BLACK}Ainmneacha na dtionscal - cliceáil ar ainm chun an príomh-amharc a lárú ar thionscal. Osclaítear amharc nua ar shuíomh an tionscail le Ctrl+Cliceáil
 STR_INDUSTRY_DIRECTORY_ACCEPTED_CARGO_FILTER                    :{BLACK}Lastas a ghlactar leis: {SILVER}{STRING}
 STR_INDUSTRY_DIRECTORY_PRODUCED_CARGO_FILTER                    :{BLACK}Lastas a tháirgtear: {SILVER}{STRING}
@@ -3588,9 +3614,9 @@ STR_INDUSTRY_VIEW_LOCATION_TOOLTIP                              :{BLACK}Láraigh
 STR_INDUSTRY_VIEW_PRODUCTION_LEVEL                              :{BLACK}Leibhéal táirgeachta: {YELLOW}{COMMA}%
 STR_INDUSTRY_VIEW_INDUSTRY_ANNOUNCED_CLOSURE                    :{YELLOW}D'fhógair an tionscal go ndúnfaidh sé gan mhoill!
 
-STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Ag teastáil: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Táirgtear: {YELLOW}{STRING}{STRING}
-STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :, {STRING}{STRING}
+STR_INDUSTRY_VIEW_REQUIRES_N_CARGO                              :{BLACK}Ag teastáil: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_PRODUCES_N_CARGO                              :{BLACK}Táirgtear: {YELLOW}{STRING}
+STR_INDUSTRY_VIEW_CARGO_LIST_EXTENSION                          :{STRING}{STRING}
 
 STR_INDUSTRY_VIEW_REQUIRES                                      :{BLACK}Ag teastáil:
 
@@ -4038,6 +4064,7 @@ STR_VEHICLE_INFO_CAPACITY_CAPACITY                              :{BLACK}Toillead
 
 STR_VEHICLE_INFO_FEEDER_CARGO_VALUE                             :{BLACK}Creidmheasanna Aistrithe: {LTBLUE}{CURRENCY_LONG}
 
+STR_VEHICLE_DETAILS_LAST_SERVICE_DATE                           :An seirbhísiú deireanach: {LTBLUE}{DATE_LONG}
 
 STR_SERVICE_INTERVAL_DROPDOWN_TOOLTIP                           :{BLACK}Athraigh cineál eatramh seirbhísithe
 STR_VEHICLE_DETAILS_DEFAULT                                     :Réamhshocrú
@@ -4070,7 +4097,7 @@ STR_VEHICLE_DETAILS_TRAIN_CAPACITIES_TOOLTIP                    :{BLACK}Taispeá
 STR_VEHICLE_DETAIL_TAB_TOTAL_CARGO                              :{BLACK}Lastas Iomlán
 STR_VEHICLE_DETAILS_TRAIN_TOTAL_CARGO_TOOLTIP                   :{BLACK}Taispeántar toilleadh iomlán traenach, roinnte ina gcineálacha lastais
 
-STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Toilleadh: {LTBLUE}
+STR_VEHICLE_DETAILS_TRAIN_ARTICULATED_RV_CAPACITY               :{BLACK}Toilleadh: {LTBLUE}{STRING}
 
 # Vehicle refit
 STR_REFIT_CAPTION                                               :{WHITE}{VEHICLE} (Athfeistigh)
@@ -5302,6 +5329,10 @@ STR_TOWN_NAME                                                   :{TOWN}
 STR_VEHICLE_NAME                                                :{VEHICLE}
 STR_WAYPOINT_NAME                                               :{WAYPOINT}
 
+STR_CURRENCY_SHORT_KILO                                         :{NBSP}k
+STR_CURRENCY_SHORT_MEGA                                         :{NBSP}m
+STR_CURRENCY_SHORT_GIGA                                         :{NBSP}bn
+STR_CURRENCY_SHORT_TERA                                         :{NBSP}tn
 
 STR_JUST_CARGO                                                  :{CARGO_LONG}
 STR_JUST_CHECKMARK                                              :{CHECKMARK}

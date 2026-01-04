@@ -2,13 +2,14 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file heightmap.cpp Creating of maps from heightmaps. */
 
 #include "stdafx.h"
 #include "heightmap.h"
+#include "landscape.h"
 #include "clear_map.h"
 #include "strings_func.h"
 #include "void_map.h"
@@ -20,6 +21,10 @@
 #include "fileio_func.h"
 
 #include "table/strings.h"
+
+#ifdef WITH_PNG
+#include <png.h>
+#endif /* WITH_PNG */
 
 #include "safeguards.h"
 
@@ -70,8 +75,6 @@ static inline uint8_t RGBToGreyscale(uint8_t red, uint8_t green, uint8_t blue)
 
 
 #ifdef WITH_PNG
-
-#include <png.h>
 
 /**
  * The PNG Heightmap loader.
@@ -523,6 +526,10 @@ bool LoadHeightmap(DetailedFileType dft, std::string_view filename)
 	GreyscaleToMapHeights(x, y, map);
 
 	FixSlopes();
+
+	/* If all map borders are water, we will draw infinite water. */
+	_settings_game.construction.freeform_edges = !IsMapSurroundedByWater();
+
 	MarkWholeScreenDirty();
 
 	return true;

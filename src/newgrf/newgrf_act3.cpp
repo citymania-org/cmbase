@@ -2,7 +2,7 @@
  * This file is part of OpenTTD.
  * OpenTTD is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
  * OpenTTD is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <http://www.gnu.org/licenses/>.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with OpenTTD. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0>.
  */
 
 /** @file newgrf_act3.cpp NewGRF Action 0x03 handler. */
@@ -268,7 +268,8 @@ struct RailTypeMapSpriteGroupHandler : MapSpriteGroupHandler {
 	{
 		if (cid >= RTSG_END) return;
 
-		RailType railtype = local_id < RAILTYPE_END ? _cur_gps.grffile->railtype_map[local_id] : INVALID_RAILTYPE;
+		const auto &type_map = _cur_gps.grffile->railtype_map;
+		RailType railtype = local_id < std::size(type_map) ? type_map[local_id] : INVALID_RAILTYPE;
 		if (railtype == INVALID_RAILTYPE) return;
 
 		extern RailTypeInfo _railtypes[RAILTYPE_END];
@@ -286,8 +287,8 @@ struct RoadTypeMapSpriteGroupHandler : MapSpriteGroupHandler {
 	{
 		if (cid >= ROTSG_END) return;
 
-		std::array<RoadType, ROADTYPE_END> &type_map = (TRoadTramType == RTT_TRAM) ? _cur_gps.grffile->tramtype_map : _cur_gps.grffile->roadtype_map;
-		RoadType roadtype = local_id < ROADTYPE_END ? type_map[local_id] : INVALID_ROADTYPE;
+		const auto &type_map = (TRoadTramType == RTT_TRAM) ? _cur_gps.grffile->tramtype_map : _cur_gps.grffile->roadtype_map;
+		RoadType roadtype = local_id < std::size(type_map) ? type_map[local_id] : INVALID_ROADTYPE;
 		if (roadtype == INVALID_ROADTYPE) return;
 
 		extern RoadTypeInfo _roadtypes[ROADTYPE_END];
