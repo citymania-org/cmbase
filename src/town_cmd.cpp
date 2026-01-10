@@ -2977,7 +2977,7 @@ static bool TryBuildTownHouse(Town *t, TileIndex tile, TownExpandModes modes, bo
  */
 CommandCost CmdPlaceHouse(DoCommandFlags flags, TileIndex tile, HouseID house, bool is_protected, bool replace)
 {
-	if (_game_mode != GM_EDITOR && _settings_game.economy.place_houses == PH_FORBIDDEN) return CMD_ERROR;
+	if (_game_mode != GM_EDITOR && _settings_game.economy.place_houses == PlaceHouses::Forbidden) return CMD_ERROR;
 
 	if (Town::GetNumItems() == 0) return CommandCost(STR_ERROR_MUST_FOUND_TOWN_FIRST);
 
@@ -3024,7 +3024,7 @@ CommandCost CmdPlaceHouse(DoCommandFlags flags, TileIndex tile, HouseID house, b
 		}
 
 		Town *t = ClosestTownFromTile(tile, UINT_MAX);
-		bool house_completed = _settings_game.economy.place_houses == PH_ALLOWED_CONSTRUCTED;
+		bool house_completed = _settings_game.economy.place_houses == PlaceHouses::AllowedConstructed;
 		BuildTownHouse(t, tile, hs, house, Random(), house_completed, is_protected, false);
 	}
 
@@ -3046,7 +3046,7 @@ CommandCost CmdPlaceHouseArea(DoCommandFlags flags, TileIndex tile, TileIndex st
 {
 	if (start_tile >= Map::Size()) return CMD_ERROR;
 
-	if (_game_mode != GM_EDITOR && _settings_game.economy.place_houses == PH_FORBIDDEN) return CMD_ERROR;
+	if (_game_mode != GM_EDITOR && _settings_game.economy.place_houses == PlaceHouses::Forbidden) return CMD_ERROR;
 
 	if (Town::GetNumItems() == 0) return CommandCost(STR_ERROR_MUST_FOUND_TOWN_FIRST);
 
