@@ -276,7 +276,7 @@ void WriteEngineInfo(JsonWriter &j) {
             JKV(j, rvi->power);
             JKV(j, rvi->weight);
             JKV(j, rvi->running_cost);
-            JKV(j, rvi->running_cost_class);
+            JKV(j, to_underlying(rvi->running_cost_class));
             JKV(j, rvi->engclass);
             JKV(j, rvi->tractive_effort);
             JKV(j, rvi->air_drag);
