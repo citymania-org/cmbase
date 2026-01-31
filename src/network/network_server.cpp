@@ -1613,7 +1613,7 @@ static void NetworkAutoCleanCompanies()
 
 /**
  * Check whether a name is unique, and otherwise try to make it unique.
- * @param new_name The name to check/modify.
+ * @param name The name to check/modify.
  * @return True if an unique name was achieved.
  */
 bool NetworkMakeClientNameUnique(std::string &name)
