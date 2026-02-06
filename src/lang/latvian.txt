@@ -925,7 +925,7 @@ STR_NEWS_AIRCRAFT_IS_WAITING                                    :{WHITE}{VEHICLE
 
 # Order review system / warnings
 STR_NEWS_VEHICLE_HAS_TOO_FEW_ORDERS                             :{WHITE}{VEHICLE} sarakstā ir pārāk maz rīkojumu
-STR_NEWS_VEHICLE_HAS_VOID_ORDER                                 :{WHITE}{VEHICLE} ir nederīgs maršruts
+STR_NEWS_VEHICLE_HAS_VOID_ORDER                                 :{WHITE}{VEHICLE} ir nederīgs rīkojums
 STR_NEWS_VEHICLE_HAS_DUPLICATE_ENTRY                            :{WHITE}{VEHICLE} ir divi vienādi maršruti
 STR_NEWS_VEHICLE_HAS_INVALID_ENTRY                              :{WHITE}{VEHICLE} rīkojumā ir nederīga stacija
 STR_NEWS_PLANE_USES_TOO_SHORT_RUNWAY                            :{WHITE}{VEHICLE} ir norīkojums uz lidostu, kurai ir pārāk īss skrejceļš
@@ -1600,7 +1600,7 @@ STR_CONFIG_SETTING_LAND_GENERATOR_HELPTEXT                      :Sākotnējais �
 STR_CONFIG_SETTING_LAND_GENERATOR_ORIGINAL                      :Sākotnējais
 STR_CONFIG_SETTING_LAND_GENERATOR_TERRA_GENESIS                 :TerraGenesis
 
-STR_CONFIG_SETTING_TERRAIN_TYPE                                 :Reljefa veids: {STRING}
+STR_CONFIG_SETTING_TERRAIN_TYPE                                 :Maksimālā augstuma iepriekšiestatījums: {STRING}
 STR_CONFIG_SETTING_TERRAIN_TYPE_HELPTEXT                        :Izvēlieties ainavas pauguru un kalnu augstumu
 
 STR_CONFIG_SETTING_INDUSTRY_DENSITY                             :Industriju blīvums: {STRING}
@@ -1628,7 +1628,13 @@ STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_SMOOTH                  :Gluda
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_ROUGH                   :Nelīdzena
 STR_CONFIG_SETTING_ROUGHNESS_OF_TERRAIN_VERY_ROUGH              :Ļoti nelīdzena
 
+STR_CONFIG_SETTING_AVERAGE_HEIGHT                               :Vidējais augums: {STRING}
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_HELPTEXT                      :Izvēlieties vidējo zemes augstumu. “Automātiski” izmanto noklusējuma vērtību, pamatojoties uz izvēlēto klimatu: “Zemienes” subtropu klimatam, “Normāls” mērenajam un rotaļu klimatam, un “Plateaus” subarktiskajam klimatam.
 ###length 4
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_AUTO                          :Automātiska
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_LOWLANDS                      :Zemienes
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_NORMAL                        :Normāls
+STR_CONFIG_SETTING_AVERAGE_HEIGHT_PLATEAUS                      :Plato
 
 STR_CONFIG_SETTING_VARIETY                                      :Dažādības sadalījums: {STRING}
 STR_CONFIG_SETTING_VARIETY_HELPTEXT                             :Izvēlieties, vai kartē ir gan kalni, gan līdzenas vietas. Jo augstāka atšķirība, jo lielākas atšķirības kalnu un līdzenu apgabalu augstumā
@@ -2094,6 +2100,8 @@ STR_CONFIG_SETTING_LARGER_TOWNS_VALUE                           :1 pret {COMMA}
 STR_CONFIG_SETTING_LARGER_TOWNS_DISABLED                        :neviena
 STR_CONFIG_SETTING_CITY_SIZE_MULTIPLIER                         :Pilsētu sākuma lieluma reizinātājs: {STRING}
 STR_CONFIG_SETTING_CITY_SIZE_MULTIPLIER_HELPTEXT                :Pilsētu vidējais lielums attiecībā pret parastām apdzīvotām vietām spēles sākumā
+STR_CONFIG_SETTING_TOWN_MIN_DISTANCE                            :Minimālais attālums starp pilsētām: {STRING}
+STR_CONFIG_SETTING_TOWN_MIN_DISTANCE_HELPTEXT                   :Iestatiet minimālo attālumu starp pilsētām lauciņos kartes ģenerēšanai un nejaušai dibināšanai
 
 STR_CONFIG_SETTING_LINKGRAPH_RECALC_INTERVAL                    :Atjaunināt sadalījuma grafu ik pēc {STRING}
 STR_CONFIG_SETTING_LINKGRAPH_RECALC_INTERVAL_HELPTEXT           :Laiks starp turpmākajiem saišu grafa pārrēķiniem. Katrs pārrēķins aprēķina viena grafa komponentes plānus. Tas nozīmē, ka vērtība X šim iestatījumam nenozīmē, ka visa diagramma tiks atjaunināta ik pēc X sekundēm. Būs tikai daži komponenti. Jo īsāku to iestatīsit, jo vairāk CPU laika būs nepieciešams tā aprēķināšanai. Jo ilgāk to iestatīsit, jo ilgāks laiks paies, līdz sāksies kravu sadale jaunos maršrutos.
@@ -2854,20 +2862,38 @@ STR_PICKER_PREVIEW_SHRINK_TOOLTIP                               :Samaziniet prie
 STR_PICKER_PREVIEW_EXPAND                                       :+
 STR_PICKER_PREVIEW_EXPAND_TOOLTIP                               :Palieliniet priekšskatījuma attēlu augstumu. Ctrl+klikšķis, lai palielinātu līdz maksimālajam.
 
+STR_PICKER_DEFAULT_COLLECTION                                   :Noklusējuma izlase
+STR_PICKER_SELECT_COLLECTION_TOOLTIP                            :Izvēlieties izlasi
+STR_PICKER_COLLECTION_ADD                                       :Pievienot
+STR_PICKER_COLLECTION_ADD_TOOLTIP                               :Izveidot jaunu izlasi
+STR_PICKER_COLLECTION_RENAME                                    :Pārdēvēt
+STR_PICKER_COLLECTION_RENAME_TOOLTIP                            :Pārdēvēt izlasi
+STR_PICKER_COLLECTION_DELETE                                    :Dzēst
+STR_PICKER_COLLECTION_DELETE_TOOLTIP                            :Dzēst izlasi
 
+STR_PICKER_COLLECTION_RENAME_QUERY                              :Pārdēvēt šo izlasi
+STR_PICKER_COLLECTION_DELETE_QUERY                              :Dzēst izlasi
+STR_PICKER_COLLECTION_DELETE_QUERY_TEXT                         :{YELLOW}Vai tiešām vēlaties dzēst šo izlasi?
+STR_PICKER_COLLECTION_DELETE_QUERY_DISABLED_TEXT                :{YELLOW}Vai tiešām vēlaties dzēst šo izlasi? Tajā ir vienumi no atspējotiem NewGRF!
 
 STR_PICKER_STATION_CLASS_TOOLTIP                                :Izvēlieties rādāmo staciju klasi
 STR_PICKER_STATION_TYPE_TOOLTIP                                 :Izvēlieties izveidojamās stacijas veidu. Ctrl+klikšķis, lai pievienotu vai noņemtu saglabātos vienumus
+STR_PICKER_STATION_COLLECTION_TOOLTIP                           :Atlasiet staciju izlasi, ko parādīt
 STR_PICKER_WAYPOINT_CLASS_TOOLTIP                               :Izvēlieties rādāmo pieturas punkta klasi
 STR_PICKER_WAYPOINT_TYPE_TOOLTIP                                :Izvēlieties ceļa punktu, ko veidot. Ctrl+klikšķis, lai pievienotu vai noņemtu saglabātos vienumus
+STR_PICKER_WAYPOINT_COLLECTION_TOOLTIP                          :Atlasiet attēlojamo ceļa punktu izlasi
 STR_PICKER_ROADSTOP_BUS_CLASS_TOOLTIP                           :Izvēlieties parādāmās autoostas klasi
 STR_PICKER_ROADSTOP_BUS_TYPE_TOOLTIP                            :Izvēlieties būvējamās autoostas veidu. Ctrl+klikšķis, lai pievienotu vai noņemtu saglabātos vienumus
+STR_PICKER_ROADSTOP_BUS_COLLECTION_TOOLTIP                      :Atlasiet autobusu staciju izlasi, ko parādīt
 STR_PICKER_ROADSTOP_TRUCK_CLASS_TOOLTIP                         :Izvēlieties parādāmās kravas automašīnas stacijas klasi
 STR_PICKER_ROADSTOP_TRUCK_TYPE_TOOLTIP                          :Izvēlieties būvējamās kravas stacijas veidu. Ctrl+klikšķis, lai pievienotu vai noņemtu saglabātos vienumus
+STR_PICKER_ROADSTOP_TRUCK_COLLECTION_TOOLTIP                    :Atlasiet kravas automašīnu staciju izlasi, ko parādīt
 STR_PICKER_OBJECT_CLASS_TOOLTIP                                 :Atlasiet rādāmo objekta klasi
 STR_PICKER_OBJECT_TYPE_TOOLTIP                                  :Atlasiet veidojamā objekta veidu. Ctrl+klikšķis, lai pievienotu vai noņemtu saglabātos vienumus. Vilkt Ctrl+klikšķis, lai atlasītu apgabalu pa diagonāli. Nospiediet arī taustiņu Shift, lai rādītu tikai izmaksu tāmi, neveicot iegādi
+STR_PICKER_OBJECT_COLLECTION_TOOLTIP                            :Atlasiet parādāmo objektu izlasi
 STR_PICKER_HOUSE_CLASS_TOOLTIP                                  :Atlasiet pilsētas zonu, ko parādīt
 STR_PICKER_HOUSE_TYPE_TOOLTIP                                   :Izvēlieties būvējamās mājas veidu. Ctrl+klikšķis, lai pievienotu vai noņemtu saglabātos vienumus
+STR_PICKER_HOUSE_COLLECTION_TOOLTIP                             :Atlasiet māju izlasi, ko parādīt
 
 STR_HOUSE_PICKER_CAPTION                                        :Māju izvēle
 STR_HOUSE_PICKER_NAME                                           :{BLACK}Nosaukums: {GOLD}{STRING}
@@ -3393,7 +3419,8 @@ STR_MAPGEN_DESERT_COVERAGE                                      :{BLACK}Tuksneš
 STR_MAPGEN_DESERT_COVERAGE_UP_TOOLTIP                           :{BLACK}Palielināt tuksneša pārklājumu par desmit procentiem
 STR_MAPGEN_DESERT_COVERAGE_DOWN_TOOLTIP                         :{BLACK}Samazināt tuksneša pārklājumu par desmit procentiem
 STR_MAPGEN_DESERT_COVERAGE_TEXT                                 :{BLACK}{NUM}%
-STR_MAPGEN_TERRAIN_TYPE                                         :{BLACK}Apvidus reljefs:
+STR_MAPGEN_TERRAIN_TYPE                                         :Maksimālais augstums:
+STR_MAPGEN_AVERAGE_HEIGHT                                       :{BLACK}Vidējais augums:
 STR_MAPGEN_SEA_LEVEL                                            :{BLACK}Jūras līmenis:
 STR_MAPGEN_SEA_LEVEL_TOOLTIP                                    :{BLACK}Izvēlieties jūras līmeni
 STR_MAPGEN_QUANTITY_OF_RIVERS                                   :{BLACK}Upes:
@@ -3704,6 +3731,7 @@ STR_EDIT_SIGN_CAPTION                                           :{WHITE}Labot z�
 STR_EDIT_SIGN_LOCATION_TOOLTIP                                  :{BLACK}Centrējiet norādes atrašanās vietas galveno skatu. Ctrl+klikšķis atver jaunu skata zīmi uz zīmes atrašanās vietas
 STR_EDIT_SIGN_NEXT_SIGN_TOOLTIP                                 :{BLACK}Doties uz nākamo zīmi
 STR_EDIT_SIGN_PREVIOUS_SIGN_TOOLTIP                             :{BLACK}Doties uz iepriekšējo zīmi
+STR_EDIT_SIGN_TEXT_COLOUR_TOOLTIP                               :{BLACK}Zīmes teksta krāsa
 
 STR_EDIT_SIGN_SIGN_OSKTITLE                                     :{BLACK}Ievadīt zīmes nosaukumu
 
@@ -4373,8 +4401,15 @@ STR_DEPOT_SELL_CONFIRMATION_TEXT                                :{YELLOW}Jūs gr
 
 # Engine preview window
 STR_ENGINE_PREVIEW_CAPTION                                      :{WHITE}Ziņojums no transportlīdzekļu ražotāja
+STR_ENGINE_PREVIEW_CAPTION_COUNT                                :{WHITE}Ziņojums no transportlīdzekļa ražotāja ({COMMA} no {COMMA})
 STR_ENGINE_PREVIEW_MESSAGE                                      :{GOLD}Mēs tikko esam izstrādājuši jaunu transportlīdzekli - {STRING}. Vai esat ieinteresēts iegūt izņēmuma tiesības izmantot šo transportlīdzekli uz vienu gadu, lai mēs redzētu tā iespējas pirms padaram pieejamu visiem?
 
+STR_ENGINE_PREVIEW_PREVIOUS                                     :Iepriekšējais
+STR_ENGINE_PREVIEW_PREVIOUS_TOOLTIP                             :Klikšķināt, lai pārietu uz iepriekšējo jauno transportlīdzekli
+STR_ENGINE_PREVIEW_NEXT                                         :Nākamais
+STR_ENGINE_PREVIEW_NEXT_TOOLTIP                                 :Klikšķināt, lai pārietu uz nākamo jauno transportlīdzekli
+STR_ENGINE_PREVIEW_ENGINE_LIST                                  :{COMMA}: {ENGINE}
+STR_ENGINE_PREVIEW_ENGINE_LIST_TOOLTIP                          :Klikšķināt, lai pārietu uz jaunu transportlīdzekli
 
 STR_ENGINE_PREVIEW_RAILROAD_LOCOMOTIVE                          :dzelzceļa lokomotīve
 STR_ENGINE_PREVIEW_ELRAIL_LOCOMOTIVE                            :elektrificēta dzelzceļa lokomotīve
@@ -5081,6 +5116,7 @@ STR_ERROR_ALREADY_AT_SEA_LEVEL                                  :{WHITE}... jau 
 STR_ERROR_TOO_HIGH                                              :{WHITE}... pārāk augstu
 STR_ERROR_ALREADY_LEVELLED                                      :{WHITE}... jau ir līdzens
 STR_ERROR_BRIDGE_TOO_HIGH_AFTER_LOWER_LAND                      :{WHITE}Tilta otrs gals ir pārāk augstu.
+STR_ERROR_MUST_DEMOLISH_RIVER_FIRST                             :{WHITE}Vispirms jānojauc upe
 
 # Company related errors
 STR_ERROR_CAN_T_CHANGE_COMPANY_NAME                             :{WHITE}Uzņēmuma nosaukumu nevar mainīt...
