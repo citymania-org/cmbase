@@ -2148,7 +2148,7 @@ static void PerformNetworkAuthorizedKeyAction(std::string_view name, NetworkAuth
 				authorized_keys->Add(authorized_key);
 			} else {
 				AutoRestoreBackup backup(_current_company, company);
-				Command<Commands::CompanyAllowListControl>::Post(CALCA_ADD, authorized_key);
+				Command<Commands::CompanyAllowListControl>::Post(CompanyAllowListCtrlAction::AddKey, authorized_key);
 			}
 			IConsolePrint(CC_INFO, "Added {} to {}.", authorized_key, name);
 			return;
@@ -2163,7 +2163,7 @@ static void PerformNetworkAuthorizedKeyAction(std::string_view name, NetworkAuth
 				authorized_keys->Remove(authorized_key);
 			} else {
 				AutoRestoreBackup backup(_current_company, company);
-				Command<Commands::CompanyAllowListControl>::Post(CALCA_REMOVE, authorized_key);
+				Command<Commands::CompanyAllowListControl>::Post(CompanyAllowListCtrlAction::RemoveKey, authorized_key);
 			}
 			IConsolePrint(CC_INFO, "Removed {} from {}.", authorized_key, name);
 			return;
