@@ -24,9 +24,7 @@ protected:
 	std::optional<SQInteger> item_next{}; ///< The next item we will show, or std::nullopt if there are no more items to iterate over.
 
 public:
-	/**
-	 * Virtual dtor, needed to mute warnings.
-	 */
+	/** Ensure the destructor of the sub classes are called as well. */
 	virtual ~ScriptListSorter() = default;
 
 	/**
