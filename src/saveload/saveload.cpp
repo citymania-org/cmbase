@@ -3260,8 +3260,7 @@ static SaveOrLoadResult SaveFileToDisk(bool threaded, citymania::SavePreset pres
 		/* We don't want to shout when saving is just
 		 * cancelled due to a client disconnecting. */
 		if (_sl.error_str != STR_NETWORK_ERROR_LOSTCONNECTION) {
-			/* Skip the "colour" character */
-			Debug(sl, 0, "{}", GetSaveLoadErrorType().GetDecodedString().substr(3) + GetSaveLoadErrorMessage().GetDecodedString());
+			Debug(sl, 0, "{} {}", GetSaveLoadErrorType().GetDecodedString(), GetSaveLoadErrorMessage().GetDecodedString());
 			asfp = SaveFileError;
 		}
 
@@ -3585,8 +3584,7 @@ SaveOrLoadResult SaveOrLoad(std::string_view filename, SaveLoadOperation fop, De
 		/* This code may be executed both for old and new save games. */
 		ClearSaveLoadState();
 
-		/* Skip the "colour" character */
-		if (fop != SaveLoadOperation::Check) Debug(sl, 0, "{}", GetSaveLoadErrorType().GetDecodedString().substr(3) + GetSaveLoadErrorMessage().GetDecodedString());
+		if (fop != SaveLoadOperation::Check) Debug(sl, 0, "{} {}", GetSaveLoadErrorType().GetDecodedString(), GetSaveLoadErrorMessage().GetDecodedString());
 
 		/* A saver/loader exception!! reinitialize all variables to prevent crash! */
 		return (fop == SaveLoadOperation::Load) ? SL_REINIT : SL_ERROR;
