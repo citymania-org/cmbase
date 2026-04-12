@@ -230,12 +230,12 @@ void WritePaletteInfo(JsonWriter &j) {
     }
     j.end_list();
     j.begin_list_with_key("gradients");
-    for (auto i = 0; i < COLOUR_END; i++) {
-        if (i != 0) j.f << ",";
+    for (Colours colour = Colours::Begin; colour != Colours::End; colour++) {
+        if (colour != Colours::Begin) j.f << ",";
         j.f << std::endl << "[";
         for (auto k = 0; k < 8; k++) {
             if (k != 0) j.f << ", ";
-            j.f << GetColourGradient((Colours)i, (ColourShade)k).p << " ";
+            j.f << GetColourGradient(colour, (ColourShade)k).p << " ";
         }
         j.f << "]";
     }
