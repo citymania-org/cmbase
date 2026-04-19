@@ -246,7 +246,7 @@ void WritePaletteInfo(JsonWriter &j) {
 void WriteEngineInfo(JsonWriter &j) {
     j.begin_list_with_key("engines");
     for (const Engine *e : Engine::Iterate()) {
-        if (e->type != VEH_TRAIN) continue;
+        if (e->type != VehicleType::Train) continue;
         j.begin_dict();
         JKV(j, e->index.base());
         j.kv("name", e->name);
