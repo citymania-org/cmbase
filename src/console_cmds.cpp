@@ -669,7 +669,7 @@ static bool ConClearBuffer(std::span<std::string_view> argv)
 	}
 
 	IConsoleClearBuffer();
-	SetWindowDirty(WC_CONSOLE, 0);
+	SetWindowDirty(WindowClass::Console, 0);
 	return true;
 }
 

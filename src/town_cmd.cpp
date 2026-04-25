@@ -120,8 +120,8 @@ Town::~Town()
 
 	/* Delete town authority window
 	 * and remove from list of sorted towns */
-	CloseWindowById(WC_TOWN_VIEW, this->index);
-	CloseWindowById(WC_TOWN_CARGO_GRAPH, this->index);
+	CloseWindowById(WindowClass::TownView, this->index);
+	CloseWindowById(WindowClass::TownCargoGraph, this->index);
 
 #ifdef WITH_ASSERT
 	/* Check no industry is related to us. */
@@ -176,7 +176,7 @@ Town::~Town()
  */
 void Town::PostDestructor([[maybe_unused]] size_t index)
 {
-	InvalidateWindowData(WC_TOWN_DIRECTORY, 0, TDIWD_FORCE_REBUILD);
+	InvalidateWindowData(WindowClass::TownDirectory, 0, TDIWD_FORCE_REBUILD);
 	UpdateNearestTownForRoadTiles(false);
 
 	/* Give objects a new home! */
@@ -406,7 +406,7 @@ void Town::UpdateVirtCoord()
 
 	_viewport_sign_kdtree.Insert(ViewportSignKdtreeItem::MakeTown(this->index));
 
-	SetWindowDirty(WC_TOWN_VIEW, this->index);
+	SetWindowDirty(WindowClass::TownView, this->index);
 }
 
 /** Update the virtual coords needed to draw the town sign for all towns. */
@@ -435,10 +435,10 @@ static void ChangePopulation(Town *t, int mod)
 	t->cache.population += mod;
 	if (_generating_town) [[unlikely]] return;
 
-	InvalidateWindowData(WC_TOWN_VIEW, t->index); // Cargo requirements may appear/vanish for small populations
+	InvalidateWindowData(WindowClass::TownView, t->index); // Cargo requirements may appear/vanish for small populations
 	if (_settings_client.gui.population_in_label) t->UpdateVirtCoord();
 
-	InvalidateWindowData(WC_TOWN_DIRECTORY, 0, TDIWD_POPULATION_CHANGE);
+	InvalidateWindowData(WindowClass::TownDirectory, 0, TDIWD_POPULATION_CHANGE);
 }
 
 /**
@@ -2097,7 +2097,7 @@ static void DoCreateTown(Town *t, TileIndex tile, uint32_t townnameparts, TownSi
 	} while (--i);
 
 	t->UpdateVirtCoord();
-	InvalidateWindowData(WC_TOWN_DIRECTORY, 0, TDIWD_FORCE_REBUILD);
+	InvalidateWindowData(WindowClass::TownDirectory, 0, TDIWD_FORCE_REBUILD);
 
 	t->cache.num_houses -= x;
 	UpdateTownRadius(t);
@@ -3177,7 +3177,7 @@ CommandCost CmdRenameTown(DoCommandFlags flags, TownID town_id, const std::strin
 		}
 
 		t->UpdateVirtCoord();
-		InvalidateWindowData(WC_TOWN_DIRECTORY, 0, TDIWD_FORCE_RESORT);
+		InvalidateWindowData(WindowClass::TownDirectory, 0, TDIWD_FORCE_RESORT);
 		ClearAllStationCachedNames();
 		ClearAllIndustryCachedNames();
 		UpdateAllStationVirtCoords();
@@ -3222,7 +3222,7 @@ CommandCost CmdTownCargoGoal(DoCommandFlags flags, TownID town_id, TownAcceptanc
 	if (flags.Test(DoCommandFlag::Execute)) {
 		t->goal[tae] = goal;
 		UpdateTownGrowth(t);
-		InvalidateWindowData(WC_TOWN_VIEW, town_id);
+		InvalidateWindowData(WindowClass::TownView, town_id);
 	}
 
 	return CommandCost();
@@ -3244,7 +3244,7 @@ CommandCost CmdTownSetText(DoCommandFlags flags, TownID town_id, const EncodedSt
 	if (flags.Test(DoCommandFlag::Execute)) {
 		t->text.clear();
 		if (!text.empty()) t->text = text;
-		InvalidateWindowData(WC_TOWN_VIEW, town_id);
+		InvalidateWindowData(WindowClass::TownView, town_id);
 	}
 
 	return CommandCost();
@@ -3281,7 +3281,7 @@ CommandCost CmdTownGrowthRate(DoCommandFlags flags, TownID town_id, uint16_t gro
 			t->flags.Set(TownFlag::CustomGrowth);
 		}
 		UpdateTownGrowth(t);
-		InvalidateWindowData(WC_TOWN_VIEW, town_id);
+		InvalidateWindowData(WindowClass::TownView, town_id);
 	}
 
 	return CommandCost();
@@ -3307,7 +3307,7 @@ CommandCost CmdTownRating(DoCommandFlags flags, TownID town_id, CompanyID compan
 	int16_t new_rating = Clamp(rating, RATING_MINIMUM, RATING_MAXIMUM);
 	if (flags.Test(DoCommandFlag::Execute)) {
 		t->ratings[company_id] = new_rating;
-		InvalidateWindowData(WC_TOWN_AUTHORITY, town_id);
+		InvalidateWindowData(WindowClass::TownAuthority, town_id);
 	}
 
 	return CommandCost();
@@ -3636,7 +3636,7 @@ static CommandCost TownActionFundBuildings(Town *t, DoCommandFlags flags)
 		 */
 		t->grow_counter = std::min<uint16_t>(t->grow_counter, 2 * Ticks::TOWN_GROWTH_TICKS - (t->growth_rate - t->grow_counter) % Ticks::TOWN_GROWTH_TICKS);
 
-		SetWindowDirty(WC_TOWN_VIEW, t->index);
+		SetWindowDirty(WindowClass::TownView, t->index);
 	}
 	return CommandCost();
 }
@@ -3659,7 +3659,7 @@ static CommandCost TownActionBuyRights(Town *t, DoCommandFlags flags)
 
 		ModifyStationRatingAround(t->xy, _current_company, 130, 17);
 
-		SetWindowClassesDirty(WC_STATION_VIEW);
+		SetWindowClassesDirty(WindowClass::StationView);
 
 		/* Spawn news message */
 		auto cni = std::make_unique<CompanyNewsInformation>(STR_NEWS_EXCLUSIVE_RIGHTS_TITLE, Company::Get(_current_company));
@@ -3702,7 +3702,7 @@ static CommandCost TownActionBribe(Town *t, DoCommandFlags flags)
 			 */
 			if (t->ratings[_current_company] > RATING_BRIBE_DOWN_TO) {
 				t->ratings[_current_company] = RATING_BRIBE_DOWN_TO;
-				SetWindowDirty(WC_TOWN_AUTHORITY, t->index);
+				SetWindowDirty(WindowClass::TownAuthority, t->index);
 			}
 		} else {
 			ChangeTownRating(t, RATING_BRIBE_UP_STEP, RATING_BRIBE_MAXIMUM, DoCommandFlag::Execute);
@@ -3803,7 +3803,7 @@ CommandCost CmdDoTownAction(DoCommandFlags flags, TownID town_id, TownAction act
 	if (ret.Failed()) return ret;
 
 	if (flags.Test(DoCommandFlag::Execute)) {
-		SetWindowDirty(WC_TOWN_AUTHORITY, town_id);
+		SetWindowDirty(WindowClass::TownAuthority, town_id);
 	}
 
 	return cost;
@@ -3856,7 +3856,7 @@ static void UpdateTownRating(Town *t)
 		*it = Clamp(*it, RATING_MINIMUM, RATING_MAXIMUM);
 	}
 
-	SetWindowDirty(WC_TOWN_AUTHORITY, t->index);
+	SetWindowDirty(WindowClass::TownAuthority, t->index);
 }
 
 
@@ -3931,7 +3931,7 @@ static void UpdateTownGrowthRate(Town *t)
 	uint old_rate = t->growth_rate;
 	t->growth_rate = GetNormalGrowthRate(t);
 	UpdateTownGrowCounter(t, old_rate);
-	SetWindowDirty(WC_TOWN_VIEW, t->index);
+	SetWindowDirty(WindowClass::TownView, t->index);
 }
 
 /**
@@ -3943,7 +3943,7 @@ static void UpdateTownGrowth(Town *t)
 	UpdateTownGrowthRate(t);
 
 	t->flags.Reset(TownFlag::IsGrowing);
-	SetWindowDirty(WC_TOWN_VIEW, t->index);
+	SetWindowDirty(WindowClass::TownView, t->index);
 	t->cm.growing_by_chance = false;
 
 	if (_settings_game.economy.town_growth_rate == 0 && t->fund_buildings_months == 0) return;
@@ -3967,7 +3967,7 @@ static void UpdateTownGrowth(Town *t)
 
 	if (t->flags.Test(TownFlag::CustomGrowth)) {
 		if (t->growth_rate != TOWN_GROWTH_RATE_NONE) t->flags.Set(TownFlag::IsGrowing);
-		SetWindowDirty(WC_TOWN_VIEW, t->index);
+		SetWindowDirty(WindowClass::TownView, t->index);
 		return;
 	}
 
@@ -3977,7 +3977,7 @@ static void UpdateTownGrowth(Town *t)
 	}
 
 	t->flags.Set(TownFlag::IsGrowing);
-	SetWindowDirty(WC_TOWN_VIEW, t->index);
+	SetWindowDirty(WindowClass::TownView, t->index);
 }
 
 /**
@@ -4132,7 +4132,7 @@ void ChangeTownRating(Town *t, int add, int max, DoCommandFlags flags)
 	} else {
 		t->have_ratings.Set(_current_company);
 		t->ratings[_current_company] = rating;
-		SetWindowDirty(WC_TOWN_AUTHORITY, t->index);
+		SetWindowDirty(WindowClass::TownAuthority, t->index);
 	}
 }
 
@@ -4227,7 +4227,7 @@ static const IntervalTimer<TimerGameEconomy> _economy_towns_monthly({TimerGameEc
 		UpdateTownGrowth(t);
 		UpdateTownRating(t);
 
-		SetWindowDirty(WC_TOWN_VIEW, t->index);
+		SetWindowDirty(WindowClass::TownView, t->index);
 	}
 });
 

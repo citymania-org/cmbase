@@ -153,7 +153,7 @@ void ClientNetworkGameSocketHandler::ClientError(NetworkRecvStatus res)
 		this->CloseConnection(res);
 		_networking = false;
 
-		CloseWindowById(WC_NETWORK_STATUS_WINDOW, NetworkStatusWindowNumber::Join);
+		CloseWindowById(WindowClass::NetworkStatus, NetworkStatusWindowNumber::Join);
 		return;
 	}
 
@@ -183,7 +183,7 @@ void ClientNetworkGameSocketHandler::ClientError(NetworkRecvStatus res)
 		ClientNetworkEmergencySave();
 	}
 
-	CloseWindowById(WC_NETWORK_STATUS_WINDOW, NetworkStatusWindowNumber::Join);
+	CloseWindowById(WindowClass::NetworkStatus, NetworkStatusWindowNumber::Join);
 
 	if (_game_mode != GM_MENU) _switch_mode = SM_MENU;
 	_networking = false;
@@ -292,7 +292,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::SendJoin()
 	my_client->status = STATUS_JOIN;
 	Debug(net, 9, "Client::join_status = Authorizing");
 	_network_join_status = NetworkJoinStatus::Authorizing;
-	SetWindowDirty(WC_NETWORK_STATUS_WINDOW, NetworkStatusWindowNumber::Join);
+	SetWindowDirty(WindowClass::NetworkStatus, NetworkStatusWindowNumber::Join);
 
 	auto p = std::make_unique<Packet>(my_client, PacketGameType::ClientJoin);
 	p->Send_string(GetNetworkRevisionString());
@@ -589,7 +589,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerClientInfo(Packet
 		ci->client_name = std::move(name);
 		ci->public_key = std::move(public_key);
 
-		InvalidateWindowData(WC_CLIENT_LIST, 0);
+		InvalidateWindowData(WindowClass::NetworkClientList, 0);
 
 		return NETWORK_RECV_STATUS_OKAY;
 	}
@@ -609,7 +609,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerClientInfo(Packet
 	ci->client_name = std::move(name);
 	ci->public_key = std::move(public_key);
 
-	InvalidateWindowData(WC_CLIENT_LIST, 0);
+	InvalidateWindowData(WindowClass::NetworkClientList, 0);
 
 	return NETWORK_RECV_STATUS_OKAY;
 }
@@ -789,7 +789,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerWaitForMap(Packet
 	Debug(net, 9, "Client::join_status = Waiting");
 	_network_join_status = NetworkJoinStatus::Waiting;
 	_network_join_waiting = p.Recv_uint8();
-	SetWindowDirty(WC_NETWORK_STATUS_WINDOW, NetworkStatusWindowNumber::Join);
+	SetWindowDirty(WindowClass::NetworkStatus, NetworkStatusWindowNumber::Join);
 
 	return NETWORK_RECV_STATUS_OKAY;
 }
@@ -813,7 +813,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerMapBegin(Packet &
 
 	Debug(net, 9, "Client::join_status = Downloading");
 	_network_join_status = NetworkJoinStatus::Downloading;
-	SetWindowDirty(WC_NETWORK_STATUS_WINDOW, NetworkStatusWindowNumber::Join);
+	SetWindowDirty(WindowClass::NetworkStatus, NetworkStatusWindowNumber::Join);
 
 	return NETWORK_RECV_STATUS_OKAY;
 }
@@ -824,7 +824,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerMapSize(Packet &p
 	if (this->savegame == nullptr) return NETWORK_RECV_STATUS_MALFORMED_PACKET;
 
 	_network_join_bytes_total = p.Recv_uint32();
-	SetWindowDirty(WC_NETWORK_STATUS_WINDOW, NetworkStatusWindowNumber::Join);
+	SetWindowDirty(WindowClass::NetworkStatus, NetworkStatusWindowNumber::Join);
 
 	Debug(net, 9, "Client::ReceiveServerMapSize(): bytes_total={}", _network_join_bytes_total);
 
@@ -840,7 +840,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerMapData(Packet &p
 	this->savegame->AddPacket(p);
 
 	_network_join_bytes = static_cast<uint32_t>(this->savegame->buffer.size());
-	SetWindowDirty(WC_NETWORK_STATUS_WINDOW, NetworkStatusWindowNumber::Join);
+	SetWindowDirty(WindowClass::NetworkStatus, NetworkStatusWindowNumber::Join);
 
 	return NETWORK_RECV_STATUS_OKAY;
 }
@@ -854,7 +854,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerMapDone(Packet &)
 
 	Debug(net, 9, "Client::join_status = Processing");
 	_network_join_status = NetworkJoinStatus::Processing;
-	SetWindowDirty(WC_NETWORK_STATUS_WINDOW, NetworkStatusWindowNumber::Join);
+	SetWindowDirty(WindowClass::NetworkStatus, NetworkStatusWindowNumber::Join);
 
 	this->savegame->Reset();
 
@@ -1062,7 +1062,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerErrorQuit(Packet 
 		delete ci;
 	}
 
-	InvalidateWindowData(WC_CLIENT_LIST, 0);
+	InvalidateWindowData(WindowClass::NetworkClientList, 0);
 
 	return NETWORK_RECV_STATUS_OKAY;
 }
@@ -1083,7 +1083,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerQuit(Packet &p)
 		Debug(net, 1, "Unknown client ({}) is leaving the game", client_id);
 	}
 
-	InvalidateWindowData(WC_CLIENT_LIST, 0);
+	InvalidateWindowData(WindowClass::NetworkClientList, 0);
 
 	/* If we come here it means we could not locate the client.. strange :s */
 	return NETWORK_RECV_STATUS_OKAY;
@@ -1102,7 +1102,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerClientJoined(Pack
 		NetworkTextMessage(NetworkAction::ClientJoin, CC_DEFAULT, false, ci->client_name);
 	}
 
-	InvalidateWindowData(WC_CLIENT_LIST, 0);
+	InvalidateWindowData(WindowClass::NetworkClientList, 0);
 
 	return NETWORK_RECV_STATUS_OKAY;
 }
@@ -1194,7 +1194,7 @@ NetworkRecvStatus ClientNetworkGameSocketHandler::ReceiveServerConfigurationUpda
 	_network_server_max_companies = p.Recv_uint8();
 	_network_server_name = p.Recv_string(NETWORK_NAME_LENGTH);
 
-	InvalidateWindowData(WC_CLIENT_LIST, 0);
+	InvalidateWindowData(WindowClass::NetworkClientList, 0);
 
 	Debug(net, 9, "Client::ReceiveServerConfigurationUpdate(): max_companies={}", _network_server_max_companies);
 
@@ -1353,7 +1353,7 @@ void NetworkUpdateClientName(const std::string &client_name)
 			NetworkTextMessage(NetworkAction::ClientNameChange, CC_DEFAULT, false, ci->client_name, temporary_name);
 			ci->client_name = std::move(temporary_name);
 			NetworkUpdateClientInfo(CLIENT_ID_SERVER);
-			InvalidateWindowData(WC_CLIENT_LIST, 0);
+			InvalidateWindowData(WindowClass::NetworkClientList, 0);
 		}
 	}
 }
