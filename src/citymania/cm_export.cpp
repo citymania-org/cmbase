@@ -235,7 +235,7 @@ void WritePaletteInfo(JsonWriter &j) {
         j.f << std::endl << "[";
         for (auto k = 0; k < 8; k++) {
             if (k != 0) j.f << ", ";
-            j.f << GetColourGradient(colour, (ColourShade)k).p << " ";
+            j.f << GetColourGradient(colour, (Shade)k).p << " ";
         }
         j.f << "]";
     }
