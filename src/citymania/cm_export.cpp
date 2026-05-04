@@ -270,7 +270,7 @@ void WriteEngineInfo(JsonWriter &j) {
             const RailVehicleInfo *rvi = &e->VehInfo<RailVehicleInfo>();
             j.begin_dict_with_key("rail");
             JKV(j, rvi->image_index);
-            JKV(j, rvi->railveh_type);
+            JKV(j, to_underlying(rvi->railveh_type));
             JKV(j, rvi->railtypes.base());
             JKV(j, rvi->max_speed);
             JKV(j, rvi->power);
@@ -283,10 +283,10 @@ void WriteEngineInfo(JsonWriter &j) {
             JKV(j, rvi->capacity);
             SpriteID sprite = GetDefaultTrainSprite(e->original_image_index, DIR_W);
             JKV(j, sprite);
-            if (rvi->railveh_type == RAILVEH_MULTIHEAD) {
+            if (rvi->railveh_type == RailVehicleType::Multihead) {
                 j.kv("rev_sprite",
                      GetDefaultTrainSprite(e->original_image_index + 1, DIR_W));
-            } else if (rvi->railveh_type == RAILVEH_WAGON) {
+            } else if (rvi->railveh_type == RailVehicleType::Wagon) {
                 j.kv("full_sprite",
                      sprite + _wagon_full_adder[e->original_image_index]);
             }
