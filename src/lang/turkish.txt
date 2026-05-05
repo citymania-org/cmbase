@@ -2237,7 +2237,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :Temel Grafik k�
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :Temel Ses kümesi '{STRING}' görmezden geliniyor: bulunamadı
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :Temel Müzik kümesi '{STRING}' görmezden geliniyor: bulunamadı
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :video ayarlarında hata...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :uyumlu GPU bulunamadı. Donanım hızlandırma devre dışı bırakıldı
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :GPU sürücüsü oyunu çökertti. Donanım hızlandırma devre dışı bırakıldı

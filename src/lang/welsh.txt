@@ -2236,7 +2236,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :yn anwybyddu se
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :yn anwybyddu setiau Sain Sylfaenol '{STRING}': ni ganfuwyd
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :yn anwybyddu set Sain Sylfaenol '{STRING}': ni ganfuwyd
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Gwall gyda'r gosodiadau fideo...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... dim caledwedd graffeg cydnaws wedi ei ddarganfod. Analluogwyd cyflymu caledwedd
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :gyriant caledwedd graffig wedi chwalu'r gêm. Cyflymu caledwedd wedi'i analluogi

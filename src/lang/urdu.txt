@@ -1517,7 +1517,7 @@ STR_CONFIG_ERROR_INVALID_GRF_UNKNOWN                            :نا معلوم
 STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_LEVEL             :{WHITE}- - - کمپریشن کی سطح '{STRING}' درست نہیں ہے
 STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_ALGORITHM         :{WHITE} ۔ ۔ ۔ کھیل بچانے کا یہ فارمیٹ '{STRING}' دستیاب نہیں ہے۔ واپس '{STRING}' پر جا رہے ہیں
 
-# Video initalization errors
+# Video initialization errors
 
 # Intro window
 

@@ -2186,7 +2186,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... setu
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... setul de bază pentru sunete '{STRING}' este ignorat: nu a fost găsit
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... setul de bază pentru muzică '{STRING}' este ignorat: nu a fost găsit
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Eroare în setările video...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... GPU incompatibil. Accelerarea hardware este dezactivată
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}... Driverul GPU a dus la prăbușirea jocului. Accelerarea hardware a fost dezactivată

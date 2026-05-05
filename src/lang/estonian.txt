@@ -2222,7 +2222,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... eira
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... eiratakse põhihelide komplekti «{STRING}»: ei leitud
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... eiratakse põhimuusika komplekti «{STRING}»: ei leitud
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Videoseadete viga...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... ei leitud ühilduvat GPU-d. Riistvarakiirendus väljalülitatud
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}... Mäng seiskus graafikadraiveri pärast. Riistvarakiirendus lülitati välja

@@ -2237,7 +2237,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :a ignorar conju
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :a ignorar conjunto Base de Sons '{STRING}': não foi encontrado
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :a ignorar conjunto Musica Base '{STRING}': não foi encontrado
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :Erro com as definições gráficas...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :não foi encontrada nenhuma placa gráfica compatível. Aceleração por hardware desativada
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :O controlador gráfico interrompeu o jogo. Aceleração por hardware desativada

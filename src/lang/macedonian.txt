@@ -1161,7 +1161,7 @@ STR_CONFIG_ERROR_INVALID_GRF_UNKNOWN                            :непозна�
 STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_LEVEL             :{WHITE}... ниво на компресија '{STRING}' не е валидна
 STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_ALGORITHM         :{WHITE}... спаси играта формат '{STRING}' не е достапен. се врати на '{STRING}'
 
-# Video initalization errors
+# Video initialization errors
 
 # Intro window
 

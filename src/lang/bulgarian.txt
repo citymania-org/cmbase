@@ -2184,7 +2184,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... пр
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... пропуска набора от основни звуци '{STRING}': не е открит
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... пропруска набора от основни песни '{STRING}': не е открит
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Грешка с видео настройките...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... не е открит съвместим GPU. Хардуерното ускорение е деактивирано
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}... Графичният драйвер блокира играта. Хардуерното ускорение е изключено

@@ -1054,7 +1054,7 @@ STR_CONFIG_SETTING_STATUSBAR_POS                                :स्टेट
 
 # Config errors
 
-# Video initalization errors
+# Video initialization errors
 
 # Intro window
 

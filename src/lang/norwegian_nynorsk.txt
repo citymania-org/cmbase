@@ -1801,7 +1801,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... utel
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... utelèt lydsettet "{STRING}": ikkje funne
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... utelèt musikksettet "{STRING}": ikkje funne
 
-# Video initalization errors
+# Video initialization errors
 
 # Intro window
 

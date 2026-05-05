@@ -2223,7 +2223,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... igno
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... ignoriere Basissounds „{STRING}“: nicht gefunden
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... ignoriere Basismusikset „{STRING}“: nicht gefunden
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Fehler mit den Grafikeinstellungen ...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... keine kompatible GPU gefunden. Hardwarebeschleunigung deaktiviert
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}… GPU-Treiber brachte das Spiel zum Absturz. Hardwarebeschleunigung deaktiviert

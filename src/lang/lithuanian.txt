@@ -2333,7 +2333,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... nera
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... nerastas garsų rinkinys „{STRING}“
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... nerastas muzikos įrašų rinkinys „{STRING}“
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Vaizdo nuostatų klaida...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... nepavyko rasti tinkamos vaizdo plokštės. Aparatinis spartinimas buvo išjungtas
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}...Vaizdo plokštės tvarkyklė sulaužė žaidimą. Aparatinis spartinimas išjungtas

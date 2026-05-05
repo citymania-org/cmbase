@@ -734,7 +734,7 @@ STR_CONFIG_SETTING_REVERSE_AT_SIGNALS_HELPTEXT                  :यदि ट�
 
 # Config errors
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}वीडियो विन्यास में त्रुटि...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}...कोई संगत जीपीयू नहीं मिला। हार्डवेयर त्वरण अक्षम किया गया
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}... GPU ड्राइवर ने गेम को क्रैश कर दिया। हार्डवेयर त्वरण अक्षम किया गया

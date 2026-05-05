@@ -2236,7 +2236,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :ignorerar grund
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :ignorerar grundljudpaketet '{STRING}': hittades ej
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :ignorerar grundmusikpaket '{STRING}': hittades ej
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Fel med video inställningarna...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... Inget kompatibelt grafikkort hittat. Hårdvaruacceleration inaktiverad
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :GPU-drivrutinen kraschade spelet. Maskinvaruacceleration inaktiverad

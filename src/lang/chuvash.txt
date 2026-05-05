@@ -870,7 +870,7 @@ STR_CONFIG_SETTING_AI                                           :Ӑмӑртуҫ�
 
 # Config errors
 
-# Video initalization errors
+# Video initialization errors
 
 # Intro window
 

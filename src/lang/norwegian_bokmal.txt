@@ -2238,7 +2238,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :ignorerer Base 
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :ignorerer Base Sounds-sett '{STRING}': ikke funnet
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :ignorerer Base Music-sett '{STRING}': ikke funnet
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :Feil med skjerminstillingene...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :ingen kompatibel GPU funnet. Maskinvareakselerasjon deaktivert
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :GPU-driveren krasjet spillet. Maskinvareakselerasjon er deaktivert

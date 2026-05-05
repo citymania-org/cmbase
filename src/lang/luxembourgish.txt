@@ -2234,7 +2234,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :ignoréiren Bas
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... ignoréiren Basis Sound Set '{STRING}': net fonnt
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... ignoréiren Basis Musik Set '{STRING}': net fonnt
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Feeler an de Videoastellungen
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :... keng kompatibel GPU fonnt. Hardwarebeschleunegung deaktivéiert
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}... GPU driver huet d'Spill gecrasht. Hardwarebeschleunegung ausgeschalt

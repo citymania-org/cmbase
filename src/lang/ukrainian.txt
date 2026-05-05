@@ -2359,7 +2359,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... ба
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... базовий набір звуків '{STRING}' не знайдено
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... базовий набір музики '{STRING}' не знайдено
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Помилка з налаштуванням зображення...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... не знайдено сумісного графічного процесора. Відключено прискорення апаратного забезпечення
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}... драйвер графічного процесора спричинив виліт гри. Відключено прискорення апаратного забезпечення

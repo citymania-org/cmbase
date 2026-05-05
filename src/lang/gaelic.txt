@@ -2066,7 +2066,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... a' l
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... a' leigeil seachad an seata fuaime bunasach “{STRING}": cha deach a lorg
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... a' leigeil seachad an seata ciùil bunasach “{STRING}": cha deach a lorg
 
-# Video initalization errors
+# Video initialization errors
 
 # Intro window
 

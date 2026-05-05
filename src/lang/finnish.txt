@@ -2236,7 +2236,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :ohitetaan perus
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :ohitetaan perusäänipaketti ”{STRING}”: ei löydy
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :ohitetaan perusmusiikkipaketti ”{STRING}”: ei löydetty
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :Virhe näyttöasetuksissa…
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :yhteensopivaa grafiikkasuoritinta ei löytynyt. Laitteistokiihdytys on poistettu käytöstä
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :Näytönohjaimen ajuri kaatoi pelin. Laitteistokiihdytys on poistettu käytöstä

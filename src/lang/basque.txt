@@ -1785,7 +1785,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... jara
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... jaramonik ez egiten Soinu Paketeari '{STRING}': ez da aurkitu
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... jaramonik ez egiten musika paketeari'{STRING}': ez da aurkitu
 
-# Video initalization errors
+# Video initialization errors
 
 # Intro window
 

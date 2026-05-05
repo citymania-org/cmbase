@@ -2114,7 +2114,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... meng
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... mengabaikan set suara dasar '{STRING}': tidak ditemukan
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... mengabaikan set musik dasar '{STRING}': tidak ditemukan
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Kesalahan dengan pengaturan video...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... tidak ditemukan GPU yang kompatibel. Akselerasi perangkat keras dinonaktifkan
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}... Driver GPU membuat game crash. Akselerasi perangkat keras dinonaktifkan

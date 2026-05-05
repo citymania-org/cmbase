@@ -2228,7 +2228,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :kei te waiho i 
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :kei te waiho i te kohinga Oro Mātāmua ko "{STRING}": kāore i kitea
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :kei te waiho i te kohinga Pūoro Mātāmua ko "{STRING}": kāore i kitea
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :Hapa kei ngā tautuhinga ataata...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :kāore he pūtukatuka whakairoiro hototahi i kitea. Kua whakapokoa te whakahohoro ā pūmārō
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :I whakahingaia te kēmu e te pūtāhono pūtukatuka whakairoiro. Kua whakapokoa te whakahohoro ā pūmārō

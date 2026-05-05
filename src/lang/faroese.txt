@@ -1700,7 +1700,7 @@ STR_CONFIG_ERROR_INVALID_GRF_SYSTEM                             :system NewGRF
 STR_CONFIG_ERROR_INVALID_GRF_INCOMPATIBLE                       :ósambæriligur við hesa útgávuna av OpenTTD
 STR_CONFIG_ERROR_INVALID_GRF_UNKNOWN                            :ókendur
 
-# Video initalization errors
+# Video initialization errors
 
 # Intro window
 

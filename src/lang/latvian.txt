@@ -2232,7 +2232,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :{WHITE}... igno
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :{WHITE}... ignorē pamata skaņas kopu '{STRING}': nav atrasta
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :{WHITE}... ignorē pamata mūzikas kopu '{STRING}': nav atrasta
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :{WHITE}Kļūda ar video iestatījumiem
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :{WHITE}... nav atrasts saderīgs GPU. Aparatūras paātrinājums ir atspējots
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :{WHITE}... GPU dzinulis apturēja spēli. Aparatūras paātrinājums ir izslēgts

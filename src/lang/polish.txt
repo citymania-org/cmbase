@@ -2616,7 +2616,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :ignorowanie pod
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :ignorowanie podstawowego zestawu dźwięków „{STRING}”: nie odnaleziono
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :ignorowanie podstawowego zestawu muzyki „{STRING}”: nie odnaleziono
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :Błąd w ustawieniach obrazu...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :nie znaleziono kompatybilnego procesora graficznego. Przyspieszenie sprzętowe wyłączone.
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :sterownik GPU spowodował awarię gry. Wyłączono przyspieszenie sprzętowe

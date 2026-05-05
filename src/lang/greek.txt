@@ -2329,7 +2329,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :αγνόηση 
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :αγνόηση Βασικού Σετ Ήχων «{STRING}»: δεν βρέθηκε
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :αγνόηση Βασικού Σετ Μουσικής «{STRING}»: δεν βρέθηκε
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :Πρόβλημα με τις ρυθμίσεις της κάρτας οθόνης...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :δεν βρέθηκε συμβατή GPU. Η επιτάχυνση υλικού έχει απενεργοποιηθεί
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :Το πρόγραμμα οδήγησης της κάρτας γραφικών προκάλεσε πρόβλημα στο παιχνίδι. Η επιτάχυνση υλικού απενεργοποιήθηκε

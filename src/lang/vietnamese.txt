@@ -2236,7 +2236,7 @@ STR_CONFIG_ERROR_INVALID_BASE_GRAPHICS_NOT_FOUND                :từ chối gó
 STR_CONFIG_ERROR_INVALID_BASE_SOUNDS_NOT_FOUND                  :từ chối gói âm thanh chuẩn '{STRING}': không tìm thấy
 STR_CONFIG_ERROR_INVALID_BASE_MUSIC_NOT_FOUND                   :từ chối gói nhạc chuẩn '{STRING}': không tìm thấy
 
-# Video initalization errors
+# Video initialization errors
 STR_VIDEO_DRIVER_ERROR                                          :Lỗi ở thiết lập hình ảnh...
 STR_VIDEO_DRIVER_ERROR_NO_HARDWARE_ACCELERATION                 :không tìm thấy GPU tương thích. Tăng tốc phần cứng đã được tắt
 STR_VIDEO_DRIVER_ERROR_HARDWARE_ACCELERATION_CRASH              :Trình điều khiển GPU đã làm trò chơi bị lỗi. Tăng tốc phần cứng đã được tắt
