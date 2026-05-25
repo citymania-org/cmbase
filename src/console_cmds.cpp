@@ -150,13 +150,13 @@ static inline bool NetworkAvailable(bool echo)
  */
 static ConsoleHookResult ConHookServerOnly(bool echo)
 {
-	if (!NetworkAvailable(echo)) return CHR_DISALLOW;
+	if (!NetworkAvailable(echo)) return ConsoleHookResult::Disallow;
 
 	if (!_network_server) {
 		if (echo) IConsolePrint(CC_ERROR, "This command is only available to a network server.");
-		return CHR_DISALLOW;
+		return ConsoleHookResult::Disallow;
 	}
-	return CHR_ALLOW;
+	return ConsoleHookResult::Allow;
 }
 
 /**
@@ -165,13 +165,13 @@ static ConsoleHookResult ConHookServerOnly(bool echo)
  */
 static ConsoleHookResult ConHookClientOnly(bool echo)
 {
-	if (!NetworkAvailable(echo)) return CHR_DISALLOW;
+	if (!NetworkAvailable(echo)) return ConsoleHookResult::Disallow;
 
 	if (_network_server) {
 		if (echo) IConsolePrint(CC_ERROR, "This command is not available to a network server.");
-		return CHR_DISALLOW;
+		return ConsoleHookResult::Disallow;
 	}
-	return CHR_ALLOW;
+	return ConsoleHookResult::Allow;
 }
 
 /**
@@ -180,13 +180,13 @@ static ConsoleHookResult ConHookClientOnly(bool echo)
  */
 static ConsoleHookResult ConHookNeedNetwork(bool echo)
 {
-	if (!NetworkAvailable(echo)) return CHR_DISALLOW;
+	if (!NetworkAvailable(echo)) return ConsoleHookResult::Disallow;
 
 	if (!_networking || (!_network_server && !MyClient::IsConnected())) {
 		if (echo) IConsolePrint(CC_ERROR, "Not connected. This command is only available in multiplayer.");
-		return CHR_DISALLOW;
+		return ConsoleHookResult::Disallow;
 	}
-	return CHR_ALLOW;
+	return ConsoleHookResult::Allow;
 }
 
 /**
@@ -195,13 +195,13 @@ static ConsoleHookResult ConHookNeedNetwork(bool echo)
  */
 static ConsoleHookResult ConHookNeedNonDedicatedNetwork(bool echo)
 {
-	if (!NetworkAvailable(echo)) return CHR_DISALLOW;
+	if (!NetworkAvailable(echo)) return ConsoleHookResult::Disallow;
 
 	if (_network_dedicated) {
 		if (echo) IConsolePrint(CC_ERROR, "This command is not available to a dedicated network server.");
-		return CHR_DISALLOW;
+		return ConsoleHookResult::Disallow;
 	}
-	return CHR_ALLOW;
+	return ConsoleHookResult::Allow;
 }
 
 /**
@@ -212,9 +212,9 @@ static ConsoleHookResult ConHookNoNetwork(bool echo)
 {
 	if (_networking) {
 		if (echo) IConsolePrint(CC_ERROR, "This command is forbidden in multiplayer.");
-		return CHR_DISALLOW;
+		return ConsoleHookResult::Disallow;
 	}
-	return CHR_ALLOW;
+	return ConsoleHookResult::Allow;
 }
 
 /**
@@ -225,9 +225,9 @@ static ConsoleHookResult ConHookServerOrNoNetwork(bool echo)
 {
 	if (_networking && !_network_server) {
 		if (echo) IConsolePrint(CC_ERROR, "This command is only available to a network server.");
-		return CHR_DISALLOW;
+		return ConsoleHookResult::Disallow;
 	}
-	return CHR_ALLOW;
+	return ConsoleHookResult::Allow;
 }
 
 /**
@@ -239,11 +239,11 @@ static ConsoleHookResult ConHookNewGRFDeveloperTool(bool echo)
 	if (_settings_client.gui.newgrf_developer_tools) {
 		if (_game_mode == GM_MENU) {
 			if (echo) IConsolePrint(CC_ERROR, "This command is only available in-game and in the editor.");
-			return CHR_DISALLOW;
+			return ConsoleHookResult::Disallow;
 		}
 		return ConHookNoNetwork(echo);
 	}
-	return CHR_HIDE;
+	return ConsoleHookResult::Hide;
 }
 
 /**
@@ -1987,7 +1987,7 @@ static bool ConListCommands(std::span<std::string_view> argv)
 	for (auto &it : IConsole::Commands()) {
 		const IConsoleCmd *cmd = &it.second;
 		if (argv.size() <= 1|| cmd->name.find(argv[1]) != std::string::npos) {
-			if (cmd->hook == nullptr || cmd->hook(false) != CHR_HIDE) IConsolePrint(CC_DEFAULT, cmd->name);
+			if (cmd->hook == nullptr || cmd->hook(false) != ConsoleHookResult::Hide) IConsolePrint(CC_DEFAULT, cmd->name);
 		}
 	}
 
