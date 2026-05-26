@@ -2964,7 +2964,7 @@ static std::optional<SavePreset> ParseSavePreset(const std::string &str)
             if (level != Clamp<int>(level, slf.min_compression, slf.max_compression)) {
                 /* Invalid compression level, show the error and use default level */
                 ShowErrorMessage(GetEncodedString(STR_CONFIG_ERROR),
-                	GetEncodedString(STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_LEVEL, level_str), WL_CRITICAL);
+                	GetEncodedString(STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_LEVEL, level_str), WarningLevel::Critical);
                 return SavePreset{&slf, slf.default_compression};
             }
 
@@ -2972,7 +2972,7 @@ static std::optional<SavePreset> ParseSavePreset(const std::string &str)
         }
     }
     ShowErrorMessage(GetEncodedString(STR_CONFIG_ERROR),
-    	GetEncodedString(STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_ALGORITHM, str), WL_CRITICAL);
+    	GetEncodedString(STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_ALGORITHM, str), WarningLevel::Critical);
     return {};
 }
 
@@ -3065,7 +3065,7 @@ static std::pair<const SaveLoadFormat &, uint8_t> GetSavegameFormat(std::string_
 						ShowErrorMessage(
 							GetEncodedString(STR_CONFIG_ERROR),
 							GetEncodedString(STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_LEVEL, complevel),
-							WL_CRITICAL);
+							WarningLevel::Critical);
 					} else {
 						return {slf, *level};
 					}
@@ -3077,7 +3077,7 @@ static std::pair<const SaveLoadFormat &, uint8_t> GetSavegameFormat(std::string_
 		ShowErrorMessage(
 			GetEncodedString(STR_CONFIG_ERROR),
 			GetEncodedString(STR_CONFIG_ERROR_INVALID_SAVEGAME_COMPRESSION_ALGORITHM, name, def.name),
-			WL_CRITICAL);
+			WarningLevel::Critical);
 	}
 	return {def, def.default_compression};
 }
@@ -3183,7 +3183,7 @@ EncodedString GetSaveLoadErrorMessage()
 /** Show a gui message when saving has failed */
 static void SaveFileError()
 {
-	ShowErrorMessage(GetSaveLoadErrorType(), GetSaveLoadErrorMessage(), WL_ERROR);
+	ShowErrorMessage(GetSaveLoadErrorType(), GetSaveLoadErrorMessage(), WarningLevel::Error);
 	SaveFileDone();
 }
 
@@ -3470,7 +3470,7 @@ SaveLoadResult SaveOrLoad(std::string_view filename, SaveLoadOperation fop, Deta
 	/* An instance of saving is already active, so don't go saving again */
 	if (_sl.saveinprogress && fop == SaveLoadOperation::Save && dft == DetailedFileType::GameFile && threaded) {
 		/* if not an autosave, but a user action, show error message */
-		if (!_do_autosave) ShowErrorMessage(GetEncodedString(STR_ERROR_SAVE_STILL_IN_PROGRESS), {}, WL_ERROR);
+		if (!_do_autosave) ShowErrorMessage(GetEncodedString(STR_ERROR_SAVE_STILL_IN_PROGRESS), {}, WarningLevel::Error);
 		return SaveLoadResult::Ok;
 	}
 	WaitTillSaved();
@@ -3566,7 +3566,7 @@ void DoAutoOrNetsave(FiosNumberedSaveName &counter)
 
 	Debug(sl, 2, "Autosaving to '{}'", filename);
 	if (SaveOrLoad(filename, SaveLoadOperation::Save, DetailedFileType::GameFile, Subdirectory::Autosave) != SaveLoadResult::Ok) {
-		ShowErrorMessage(GetEncodedString(STR_ERROR_AUTOSAVE_FAILED), {}, WL_ERROR);
+		ShowErrorMessage(GetEncodedString(STR_ERROR_AUTOSAVE_FAILED), {}, WarningLevel::Error);
 	}
 }
 
