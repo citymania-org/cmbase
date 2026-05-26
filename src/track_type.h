@@ -96,6 +96,13 @@ enum Trackdir : uint8_t {
 DECLARE_INCREMENT_DECREMENT_OPERATORS(Trackdir)
 
 /**
+ * Array with \c Trackdir as index.
+ * @tparam T the type contained within the array.
+ */
+template <typename T>
+using TrackdirIndexArray = EnumIndexArray<T, Trackdir, TRACKDIR_END>;
+
+/**
  * Enumeration of bitmasks for the TrackDirs
  *
  * These are a combination of tracks and directions. Values are 0-5 in one
