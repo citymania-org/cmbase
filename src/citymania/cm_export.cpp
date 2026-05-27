@@ -281,11 +281,11 @@ void WriteEngineInfo(JsonWriter &j) {
             JKV(j, rvi->tractive_effort);
             JKV(j, rvi->air_drag);
             JKV(j, rvi->capacity);
-            SpriteID sprite = GetDefaultTrainSprite(e->original_image_index, DIR_W);
+            SpriteID sprite = GetDefaultTrainSprite(e->original_image_index, Direction::W);
             JKV(j, sprite);
             if (rvi->railveh_type == RailVehicleType::Multihead) {
                 j.kv("rev_sprite",
-                     GetDefaultTrainSprite(e->original_image_index + 1, DIR_W));
+                     GetDefaultTrainSprite(e->original_image_index + 1, Direction::W));
             } else if (rvi->railveh_type == RailVehicleType::Wagon) {
                 j.kv("full_sprite",
                      sprite + _wagon_full_adder[e->original_image_index]);
