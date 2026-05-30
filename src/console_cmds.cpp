@@ -470,7 +470,7 @@ static bool ConLoad(std::span<std::string_view> argv)
 	const FiosItem *item = _console_file_list_savegame.FindItem(file);
 	if (item != nullptr) {
 		if (item->type.abstract == AbstractFileType::Savegame) {
-			_switch_mode = SM_LOAD_GAME;
+			_switch_mode = SwitchMode::LoadGame;
 			_file_to_saveload.Set(*item);
 		} else {
 			IConsolePrint(CC_ERROR, "'{}' is not a savegame.", file);
@@ -497,7 +497,7 @@ static bool ConLoadScenario(std::span<std::string_view> argv)
 	const FiosItem *item = _console_file_list_scenario.FindItem(file);
 	if (item != nullptr) {
 		if (item->type.abstract == AbstractFileType::Scenario) {
-			_switch_mode = SM_LOAD_GAME;
+			_switch_mode = SwitchMode::LoadGame;
 			_file_to_saveload.Set(*item);
 		} else {
 			IConsolePrint(CC_ERROR, "'{}' is not a scenario.", file);
@@ -524,7 +524,7 @@ static bool ConLoadHeightmap(std::span<std::string_view> argv)
 	const FiosItem *item = _console_file_list_heightmap.FindItem(file);
 	if (item != nullptr) {
 		if (item->type.abstract == AbstractFileType::Heightmap) {
-			_switch_mode = SM_START_HEIGHTMAP;
+			_switch_mode = SwitchMode::StartHeightmap;
 			_file_to_saveload.Set(*item);
 		} else {
 			IConsolePrint(CC_ERROR, "'{}' is not a heightmap.", file);
@@ -1394,7 +1394,7 @@ static bool ConRestart(std::span<std::string_view> argv)
 	} else {
 		_settings_game.game_creation.map_x = Map::LogX();
 		_settings_game.game_creation.map_y = Map::LogY();
-		_switch_mode = SM_RESTARTGAME;
+		_switch_mode = SwitchMode::RestartGame;
 	}
 
 	return true;
@@ -1417,7 +1417,7 @@ static bool ConReload(std::span<std::string_view> argv)
 	/* Use a switch-mode to prevent copying over newgame settings to active settings. */
 	_settings_game.game_creation.map_x = Map::LogX();
 	_settings_game.game_creation.map_y = Map::LogY();
-	_switch_mode = SM_RELOADGAME;
+	_switch_mode = SwitchMode::ReloadGame;
 	return true;
 }
 
@@ -1932,7 +1932,7 @@ static bool ConPart(std::span<std::string_view> argv)
 		return false;
 	}
 
-	_switch_mode = SM_MENU;
+	_switch_mode = SwitchMode::Menu;
 	return true;
 }
 
