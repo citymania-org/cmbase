@@ -237,7 +237,7 @@ static ConsoleHookResult ConHookServerOrNoNetwork(bool echo)
 static ConsoleHookResult ConHookNewGRFDeveloperTool(bool echo)
 {
 	if (_settings_client.gui.newgrf_developer_tools) {
-		if (_game_mode == GM_MENU) {
+		if (_game_mode == GameMode::Menu) {
 			if (echo) IConsolePrint(CC_ERROR, "This command is only available in-game and in the editor.");
 			return ConsoleHookResult::Disallow;
 		}
@@ -273,7 +273,7 @@ static bool ConResetEnginePool(std::span<std::string_view> argv)
 		return true;
 	}
 
-	if (_game_mode == GM_MENU) {
+	if (_game_mode == GameMode::Menu) {
 		IConsolePrint(CC_ERROR, "This command is only available in-game and in the editor.");
 		return true;
 	}
@@ -841,7 +841,7 @@ static bool ConPauseGame(std::span<std::string_view> argv)
 		return true;
 	}
 
-	if (_game_mode == GM_MENU) {
+	if (_game_mode == GameMode::Menu) {
 		IConsolePrint(CC_ERROR, "This command is only available in-game and in the editor.");
 		return true;
 	}
@@ -864,7 +864,7 @@ static bool ConUnpauseGame(std::span<std::string_view> argv)
 		return true;
 	}
 
-	if (_game_mode == GM_MENU) {
+	if (_game_mode == GameMode::Menu) {
 		IConsolePrint(CC_ERROR, "This command is only available in-game and in the editor.");
 		return true;
 	}
@@ -1505,7 +1505,7 @@ static bool ConStartAI(std::span<std::string_view> argv)
 		return true;
 	}
 
-	if (_game_mode != GM_NORMAL) {
+	if (_game_mode != GameMode::Normal) {
 		IConsolePrint(CC_ERROR, "AIs can only be managed in a game.");
 		return true;
 	}
@@ -1579,7 +1579,7 @@ static bool ConReloadAI(std::span<std::string_view> argv)
 		return true;
 	}
 
-	if (_game_mode != GM_NORMAL) {
+	if (_game_mode != GameMode::Normal) {
 		IConsolePrint(CC_ERROR, "AIs can only be managed in a game.");
 		return true;
 	}
@@ -1623,7 +1623,7 @@ static bool ConStopAI(std::span<std::string_view> argv)
 		return true;
 	}
 
-	if (_game_mode != GM_NORMAL) {
+	if (_game_mode != GameMode::Normal) {
 		IConsolePrint(CC_ERROR, "AIs can only be managed in a game.");
 		return true;
 	}
@@ -1911,7 +1911,7 @@ static bool ConExit(std::span<std::string_view> argv)
 		return true;
 	}
 
-	if (_game_mode == GM_NORMAL && _settings_client.gui.autosave_on_exit) DoExitSave();
+	if (_game_mode == GameMode::Normal && _settings_client.gui.autosave_on_exit) DoExitSave();
 
 	_exit_game = true;
 	return true;
@@ -1925,7 +1925,7 @@ static bool ConPart(std::span<std::string_view> argv)
 		return true;
 	}
 
-	if (_game_mode != GM_NORMAL) return false;
+	if (_game_mode != GameMode::Normal) return false;
 
 	if (_network_dedicated) {
 		IConsolePrint(CC_ERROR, "A dedicated server can not leave the game.");
